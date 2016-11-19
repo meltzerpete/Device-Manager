@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Out</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="panel-group">
+
+      <div class="panel panel-danger">   <!--start panel-->
+
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            On-the-fly
+            <span class="pull-right glyphicon glyphicon-plus"></span>
+          </h3>
+        </div>
+
+      </div>    <!--end panel-->
+
+      <div class="panel panel-default">   <!--start panel-->
+
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            1: Borris Morris - PIC Board
+          </h3>
+        </div>
+
+        <div class="panel-body">   <!-- add ng-show here-->
+          <form>
+
+            <!--Information about the client (TOP)-->
+            <div class="row">
+              <h3 class="col-md-1">Client</h3>
+            </div>
+
+            <div class="row">   <!--cliet info here-->
+
+              <div class="row col-sm-12">
+                <div class="form-group">    <!--first client row-->
+
+                  <!--client name-->
+                  <label for="clientName" class="col-sm-2 col-xs-4 control-label">
+                    Name</label>
+                  <div class="col-sm-4 col-xs-8">
+                    <p>Borris Morris</p>
+                  </div>
+
+                  <!--client type i.e. student/staff-->
+                  <label for="clientType"
+                  class="col-sm-2 col-xs-4 control-label">Client Type</label>
+                  <div class="col-sm-4 col-xs-8">
+                    <p>Student</p>
+                  </div>
+
+                </div>    <!--end first client row-->
+              </div>
+
+              <div class="row col-sm-12">
+                <div class="form-group">    <!--second client row-->
+
+                  <!--client email-->
+                  <label for="clientEmail" class="col-sm-2 col-xs-4 control-label">
+                    Email</label>
+                  <div class="col-sm-4 col-xs-8">
+                    <p>borris@morris.com</p>
+                  </div>
+
+                  <!--client student number if applicable-->
+                  <label for="studentNumber" class="col-sm-2 col-xs-4 control-label">
+                    Student Number</label>
+                  <div class="col-sm-4 col-xs-8">
+                    <p>1718056</p>
+                  </div>
+
+                </div>    <!--end second client row-->
+              </div>
+
+            </div>    <!--end client info-->
+
+            <!--Information about the device (BOTTOM)-->
+            <div class="row">
+              <h3 class="col-md-1">Device</h3>
+            </div>
+
+            <div class="row">   <!--device info here-->
+
+              <div class="row col-sm-12">
+                <div class="form-group">    <!--first device row-->
+
+                  <!--device name-->
+                  <label for="deviceName" class="col-sm-2 col-xs-4 control-label">
+                    Name</label>
+                  <div class="col-sm-4 col-xs-8">
+                    <p>PIC Board</p>
+                  </div>
+
+                  <!--category-->
+                  <label for="categoryName"
+                  class="col-sm-2 col-xs-4 control-label">Device Category</label>
+                  <div class="col-sm-4 col-xs-8">
+                    <p>Electronics</p>
+                  </div>
+
+                </div>    <!--end first device row-->
+              </div>
+
+              <div class="row col-sm-12">
+                <div class="form-group">    <!--second device row-->
+
+                  <!--deviceID-->
+                  <label for="deviceID" class="col-sm-2 col-xs-4 control-label">
+                    Device ID</label>
+                  <div class="col-sm-4 col-xs-8">
+                    <p>271</p>
+                  </div>
+
+                  <!--device serial/IMEI-->
+                  <label for="studentNumber" class="col-sm-2 col-xs-4 control-label">
+                    Serial Number</label>
+                  <div class="col-sm-4 col-xs-8">
+                    <p>004A-2711</p>
+                  </div>
+
+                </div>    <!--end second device row-->
+              </div>
+
+              <div class="row col-sm-12">
+                <div class="form-group">    <!--third device row-->
+
+                  <!--device description-->
+                  <label for="deviceID" class="col-sm-2 col-xs-4 control-label">
+                    Description</label>
+                  <div class="col-sm-4 col-xs-8">
+                    <p>PIC Prototyping board for 18 pin PICs.</p>
+                  </div>
+
+                  <!--notes about the device-->
+                  <label for="studentNumber" class="col-sm-2 col-xs-4 control-label">
+                    Notes</label>
+                  <div class="col-sm-4 col-xs-8">
+                    <p>Power adapter missing.</p>
+                  </div>
+
+                </div>    <!--end third device row-->
+              </div>
+
+              <div class="row col-sm-12">
+                <div class="form-group">    <!--fourth device row-->
+
+                  <!--due date-->
+                  <label for="due" class="col-sm-2 col-xs-4 control-label">
+                    Due</label>
+                  <div class="col-sm-4 col-xs-8">
+                    <p>14/12/2016</p>
+                  </div>
+
+                </div>    <!--end fourth device row-->
+
+              </div>    <!--end device info-->
+
+            </div>
+
+            <div class="form-group pull-right">   <!--action buttons-->
+
+              <br />
+              
+              <button class="btn btn-danger">Remove</button>
+
+              <button class="btn btn-info">Edit</button>
+
+              <button class="btn btn-success">Sign Out</button>
+
+            </div>    <!--end action buttons-->
+
+          </form>   <!--end form-->
+
+        </div>    <!--end panel body-->
+
+      </div>    <!--end panel-->
+
+      <div class="panel panel-default">   <!--start panel-->
+        <div class="panel-heading">
+          <h3 class="panel-title">2: Mandy Mandigan - Android Tablet</h3>
+        </div>
+      </div>    <!--end panel-->
+
+      <div class="panel panel-default">   <!--start panel-->
+        <div class="panel-heading">
+          <h3 class="panel-title">3: Joseph Jobs - Projector</h3>
+        </div>
+      </div>    <!--end panel-->
+
+      <div class="panel panel-default">   <!--start panel-->
+        <div class="panel-heading">
+          <h3 class="panel-title">4: Ben Nevis - Arduino Uno</h3>
+        </div>
+      </div>    <!--end panel-->
+
+      <div class="panel panel-default">   <!--start panel-->
+        <div class="panel-heading">
+          <h3 class="panel-title">5: Susan Sprout - Samsung Laptop</h3>
+        </div>
+      </div>    <!--end panel-->
+
+    </div> <!--close panel-group-->
+
+  </div>
+</body>
+</html>
