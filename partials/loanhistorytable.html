@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loan History Table</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="container">
+    <!--your code goes in this container tag-->
+
+    <table class="table table-condensed table-hover">
+
+      <thead>   <!--table heading-->
+        <tr>
+          <th><small><span class="glyphicon glyphicon-sort">
+            </span></small> ID</th>   <!--deviceID-->
+
+          <th><small><span class="glyphicon glyphicon-sort">
+          </span></small> Type</th>   <!--typeName-->
+
+          <th class="hidden-xs"><small><span class="glyphicon glyphicon-sort">
+          </span></small> From</th>   <!--dateStarted-->
+
+          <th class="hidden-xs"><small><span class="glyphicon glyphicon-sort">
+          </span></small> Returned</th>   <!--returned-->
+
+          <th><small><span class="glyphicon glyphicon-sort">
+          </span></small> On Time</th>    <!--returned <= due ?-->
+        </tr>
+      </thead>    <!--end table heading-->
+
+      <tr>    <!--first row-->
+        <td><a href="#">176</a></td>
+        <td>Raspberry Pi 2</td>
+        <td class="hidden-xs">02/12/2016</td>
+        <td class="hidden-xs">08/12/2016</td>
+        <td><span class="text-success glyphicon glyphicon-ok"></span></td>
+      </tr>   <!--end row-->
+
+      <tr>    <!--first row-->
+        <td><a href="#">82</a></td>
+        <td>iPad 3</td>
+        <td class="hidden-xs">19/07/16</td>
+        <td class="hidden-xs">01/08/2016</td>
+        <td><span class="text-warning glyphicon glyphicon-remove"></span></td>
+      </tr>   <!--end row-->
+
+      <tr>    <!--first row-->
+        <td><a href="#">245</a></td>
+        <td>Odroid C1</td>
+        <td class="hidden-xs">12/04/16</td>
+        <td class="hidden-xs">18/05/2016</td>
+        <td><span class="text-success glyphicon glyphicon-ok"></span></td>
+      </tr>   <!--end row-->
+
+    </table>    <!--end table-->
+
+  </div>    <!--close container-->
+</body>
+</html>
