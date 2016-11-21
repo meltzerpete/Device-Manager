@@ -9,18 +9,63 @@
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-
   <title>
     Manage devices
   </title>
+  <style>
+  .just-padding {
+    padding: 15px;
+  }
+
+  .list-group.list-group-root {
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .list-group.list-group-root .list-group {
+    margin-bottom: 0;
+  }
+
+  .list-group.list-group-root .list-group-item {
+    border-radius: 0;
+    border-width: 1px 0 0 0;
+  }
+
+  .list-group.list-group-root > .list-group-item:first-child {
+    border-top-width: 0;
+  }
+
+  .list-group.list-group-root > .list-group > .list-group-item {
+    padding-left: 30px;
+  }
+
+  .list-group.list-group-root > .list-group > .list-group > .list-group-item {
+    padding-left: 45px;
+  }
+
+  .list-group-item .glyphicon {
+    margin-right: 5px;
+  }
+  </style>
+  <script language="javascript">
+  $(function() {
+
+    $('.list-group-item').on('click', function() {
+      $('.glyphicon', this)
+      .toggleClass('glyphicon-chevron-right')
+      .toggleClass('glyphicon-chevron-down');
+    });
+
+  });
+
+  </script>
 </head>
 <body>
   <div class="container">
     <div class="col-md-4">
       <div class="just-padding">
         <div class="list-group list-group-root well">
-            <h5><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> Select categories</h5>
+          <h5><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> Select categories</h5>
 
           <a href="#VR_device" class="list-group-item" data-toggle="collapse">
             <i class="glyphicon glyphicon-chevron-right"></i>VR device
@@ -141,6 +186,5 @@
       </div>
     </div>
   </div>
-
 </body>
 </html>
