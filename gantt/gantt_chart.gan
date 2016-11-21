@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="GC02 App Design" company="UCL TSG" webLink="http://" view-date="2016-10-24" view-index="0" gantt-divider-location="353" resource-divider-location="300" version="2.8.1" locale="en_GB">
+<?xml version="1.0" encoding="UTF-8"?><project name="GC02 App Design" company="UCL TSG" webLink="http://" view-date="2016-12-22" view-index="0" gantt-divider-location="353" resource-divider-location="300" version="2.8.1" locale="en_GB">
     <description/>
-    <view zooming-state="default:6" id="gantt-chart">
+    <view zooming-state="default:3" id="gantt-chart">
         <field id="tpd3" name="Name" width="199" order="0"/>
         <field id="tpd4" name="Begin date" width="75" order="1"/>
         <field id="tpd5" name="End date" width="75" order="2"/>
@@ -49,7 +49,6 @@
                 <depend id="274" type="2" difference="0" hardness="Strong"/>
             </task>
             <task id="274" name="Prototype complete" color="#00cc00" meeting="true" start="2016-12-02" duration="0" complete="0" expand="true">
-                <depend id="38" type="2" difference="0" hardness="Strong"/>
                 <depend id="768" type="2" difference="0" hardness="Strong"/>
             </task>
             <task id="768" name="User testing" color="#8cb6ce" meeting="false" start="2016-12-02" duration="1" complete="0" expand="true">
@@ -58,7 +57,9 @@
             <task id="769" name="Revise prototype" color="#8cb6ce" meeting="false" start="2016-12-03" duration="4" complete="0" expand="true">
                 <depend id="770" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="770" name="Prototype 2 complete" color="#00cc00" meeting="true" start="2016-12-07" duration="0" complete="0" expand="true"/>
+            <task id="770" name="Prototype 2 complete" color="#00cc00" meeting="true" start="2016-12-07" duration="0" complete="0" expand="true">
+                <depend id="38" type="2" difference="0" hardness="Strong"/>
+            </task>
             <task id="24" name="Prototype Demo" color="#ff0033" meeting="true" start="2016-12-08" duration="0" complete="0" expand="true"/>
             <task id="36" name="Implement database" color="#8cb6ce" meeting="false" start="2016-11-24" duration="3" complete="0" expand="true">
                 <depend id="38" type="2" difference="0" hardness="Strong"/>
@@ -66,16 +67,15 @@
             <task id="37" name="Build server side API" color="#8cb6ce" meeting="false" start="2016-11-27" duration="5" complete="0" expand="true">
                 <depend id="38" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="38" name="Connect front-end to API" color="#8cb6ce" meeting="false" start="2016-12-02" duration="5" complete="0" expand="true">
+            <task id="38" name="Connect front-end to API" color="#8cb6ce" meeting="false" start="2016-12-07" duration="5" complete="0" expand="true">
                 <depend id="39" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="39" name="Iterration 1 complete" color="#00cc00" meeting="true" start="2016-12-07" duration="0" complete="0" expand="true">
+            <task id="39" name="Iterration 1 complete" color="#00cc00" meeting="true" start="2016-12-12" duration="0" complete="0" expand="true">
                 <depend id="42" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="42" name="Implelement additional features" color="#8cb6ce" meeting="false" start="2016-12-07" duration="34" complete="0" expand="true"/>
+            <task id="42" name="Implelement additional features" color="#8cb6ce" meeting="false" start="2016-12-12" duration="29" complete="0" expand="true"/>
             <task id="22" name="Final Deadline" color="#ff0033" meeting="true" start="2017-01-10" duration="0" complete="0" expand="true"/>
         </task>
-        <task id="431" name="TODAY" color="#3333ff" meeting="true" start="2016-11-20" duration="0" complete="0" expand="true"/>
     </tasks>
     <resources/>
     <allocations/>
