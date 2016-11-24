@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="GC02 App Design" company="UCL TSG" webLink="http://" view-date="2016-12-22" view-index="0" gantt-divider-location="353" resource-divider-location="300" version="2.8.1" locale="en_GB">
+    <description/>
+    <view zooming-state="default:3" id="gantt-chart">
+        <field id="tpd3" name="Name" width="199" order="0"/>
+        <field id="tpd4" name="Begin date" width="75" order="1"/>
+        <field id="tpd5" name="End date" width="75" order="2"/>
+        <timeline><![CDATA[2,0]]></timeline>
+        <option id="color.recent"><![CDATA[#00cc00 #3333ff #ff0033]]></option>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Name" width="210" order="0"/>
+        <field id="1" name="Default role" width="86" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="0" mon="0" tue="0" wed="0" thu="0" fri="0" sat="0"/>
+            <only-show-weekends value="false"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="0" name="Project" color="#8cb6ce" meeting="false" start="2016-10-10" duration="92" complete="0" expand="true">
+            <task id="2" name="Design" color="#8cb6ce" meeting="false" start="2016-10-10" duration="26" complete="0" expand="true">
+                <depend id="17" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="17" name="Front-end Research" color="#8cb6ce" meeting="false" start="2016-11-05" duration="9" complete="0" expand="true">
+                <depend id="7" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="7" name="Front-end static prototype" color="#8cb6ce" meeting="false" start="2016-11-14" duration="11" complete="0" expand="true">
+                <depend id="30" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="30" name="Interactive prototype" color="#8cb6ce" meeting="false" start="2016-11-25" duration="7" complete="0" expand="true">
+                <depend id="274" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="274" name="Prototype complete" color="#00cc00" meeting="true" start="2016-12-02" duration="0" complete="0" expand="true">
+                <depend id="768" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="768" name="User testing" color="#8cb6ce" meeting="false" start="2016-12-02" duration="1" complete="0" expand="true">
+                <depend id="769" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="769" name="Revise prototype" color="#8cb6ce" meeting="false" start="2016-12-03" duration="4" complete="0" expand="true">
+                <depend id="770" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="770" name="Prototype 2 complete" color="#00cc00" meeting="true" start="2016-12-07" duration="0" complete="0" expand="true">
+                <depend id="38" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="24" name="Prototype Demo" color="#ff0033" meeting="true" start="2016-12-08" duration="0" complete="0" expand="true"/>
+            <task id="36" name="Implement database" color="#8cb6ce" meeting="false" start="2016-11-24" duration="3" complete="0" expand="true">
+                <depend id="38" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="37" name="Build server side API" color="#8cb6ce" meeting="false" start="2016-11-27" duration="5" complete="0" expand="true">
+                <depend id="38" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="38" name="Connect front-end to API" color="#8cb6ce" meeting="false" start="2016-12-07" duration="5" complete="0" expand="true">
+                <depend id="39" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="39" name="Iterration 1 complete" color="#00cc00" meeting="true" start="2016-12-12" duration="0" complete="0" expand="true">
+                <depend id="42" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="42" name="Implelement additional features" color="#8cb6ce" meeting="false" start="2016-12-12" duration="29" complete="0" expand="true"/>
+            <task id="22" name="Final Deadline" color="#ff0033" meeting="true" start="2017-01-10" duration="0" complete="0" expand="true"/>
+        </task>
+    </tasks>
+    <resources/>
+    <allocations/>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+    <roles>
+        <role id="1" name="Team Member"/>
+    </roles>
+</project>
