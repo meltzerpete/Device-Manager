@@ -1,10 +1,10 @@
 angular.module('deviceMgr', ['ngRoute'])
 
-.config( function($routeProvider){
+.config( function($routeProvider, $locationProvider){
 	$routeProvider
 	.when('/', {
 
-		templateUrl: 'assets/partials/loginpage.html'
+		templateUrl: 'assets/partials/index.html'
 	})
 	.when('/approved', {
 
@@ -17,6 +17,10 @@ angular.module('deviceMgr', ['ngRoute'])
 	.when('/clientDetails', {
 
 		templateUrl: 'assets/partials/clientDetails.html'
+	})
+	.when('/login', {
+
+		templateUrl: 'assets/partials/loginpage.html'
 	})
 	.when('/manage', {
 
@@ -33,5 +37,8 @@ angular.module('deviceMgr', ['ngRoute'])
 	.otherwise({
 		redirectTo: '/'
 	});
-//	$locationProvider.html5Mode(true);
+	$locationProvider.html5Mode({
+	  enabled: true,
+	  requireBase: false
+	});
 });
