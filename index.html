@@ -1,16 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-ng-app="deviceMgr">
 <head>
   <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Device Manager</title>
   <!-- Latest compiled and minified jQuery -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" crossorigin="anonymous"></script>
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <!-- Optional theme -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <!-- latest compiled and minified angular -->
+  <script type="text/javascript" src="assets/js/angular.min.js"></script>
+  <script type="text/javascript" src="assets/js/angular-route.min.js"></script>
+  <script type="text/javascript" src="assets/js/controller.js"></script>
 </head>
 
 <body>
@@ -40,30 +44,31 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mike Jones <span class="caret"></span></a>
+          <a href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mike Jones <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="#">Change Password</a></li>
             <li><a href="#">Admin Controls</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="/partials/loginpage.html">Logout</a></li>
+            <li><a href="/#/">Logout</a></li>
           </ul>
         </li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Manage <span class="caret"></span></a>
+          <a href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Manage <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/partials/profile.html">Users</a></li>
-            <li><a href="/partials/manage.html">Devices</a></li>
+            <li><a href="/#/profile">Users</a></li>
+            <li><a href="/#/manage">Devices</a></li>
             <li><a href="#">Groups</a></li>
             <li role="seperator" class="divider"></li>
-            <li><a href="/partials/client.html">View Client Page (testing only)</a></li>
+            <li><a href="/#/client">View Client Page (testing only)</a></li>
           </ul>
         </li>
-        <li class="active"><a href="/partials/requests.html">Pending <span class="badge">12</span><span class="sr-only">(current)</span></a></li>
-        <li><a href="/partials/approved.html">Approved <span class="badge">7</span></a></li>
+        <li class="active"><a href="/#/requests">Pending <span class="badge">12</span><span class="sr-only">(current)</span></a></li>
+        <li><a href="/#/approved">Approved <span class="badge">7</span></a></li>
         <li><a href="#">Current <span class="badge">18</span></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+<data-ng-view></data-ng-view>
 </body>
 </html>

@@ -1,0 +1,291 @@
+<div class="container">
+  <!--your code goes in this container tag-->
+  <br />
+  <br />
+
+
+  <div class="row">
+    <div class="col-md-3">    <!--tree view columns-->
+      <div>
+
+          <h3>Categories</h3>
+
+          <div class="list-group">
+
+            <button type="button" class="list-group-item tree1">
+              <span class="glyphicon glyphicon-chevron-right"></span>
+              <strong>VR Devices</strong>
+            </button>
+
+            <button type="button"  class="list-group-item tree1">
+              <span class="glyphicon glyphicon-chevron-down"></span>
+              <strong>Phones</strong>
+            </button>
+
+            <button type="button"  class="list-group-item tree2">
+              &nbsp&nbsp&nbsp&nbsp
+              <span class="glyphicon glyphicon-chevron-right"></span>
+              Apple
+            </button>
+
+            <button type="button"  class="list-group-item tree2">
+              &nbsp&nbsp&nbsp&nbsp
+              <span class="glyphicon glyphicon-chevron-right"></span>
+              Blackberry
+            </button>
+
+            <button type="button"  class="list-group-item tree2">
+              &nbsp&nbsp&nbsp&nbsp
+              <span class="glyphicon glyphicon-chevron-down"></span>
+              Samsung
+            </button>
+
+            <button type="button"  class="list-group-item tree3">
+              &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+              <span class="glyphicon glyphicon-minus"></span>
+              Galaxy Bomb 7
+            </button>
+
+            <button type="button"  class="list-group-item tree3">
+              &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+              <span class="glyphicon glyphicon-minus"></span>
+              Galaxy S7 Edge
+            </button>
+
+            <button type="button"  class="list-group-item tree1">
+              <span class="glyphicon glyphicon-chevron-right"></span>
+              <strong>Tablets</strong>
+            </button>
+
+        </div>
+
+      </div>    <!--close 'empty' div-->
+
+    </div>    <!--close tree view column (co-md-3)-->
+
+    <!--START TABLE-->
+
+    <div class="col-md-9">
+
+      <h3>Galaxy S7 Edge</h3>
+
+      <table class="table table-condensed table-hover">
+
+        <thead>   <!--table heading-->
+          <tr>
+            <th><small><span class="glyphicon glyphicon-sort"></span>
+            </small> ID</th>   <!--deviceID-->
+
+            <th><small><span class="glyphicon glyphicon-sort"></span>
+            </small> Serial</th>   <!--deviceSerial-->
+
+            <th><small><span class="glyphicon glyphicon-sort"></span>
+            </small> Loan Satus</th>
+
+            <th class="hidden-xs">Description</th>
+
+            <th class="hidden-xs">Notes</th>
+
+            <th></th>
+
+          </tr>
+        </thead>    <!--close table heading-->
+
+        <tr>    <!--first row-->
+          <td>102</td>
+          <td>2784-2093-2687</td>
+          <td>Available</td>
+          <td class="hidden-xs">
+            Model 2A.
+          </td>
+          <td class="hidden-xs">
+            Purchased Feb 2016. Headphones in box.
+          </td>
+          <td>
+              <button type="button" class="btn btn-xs btn-info pull-right">Details</button>
+          </td>
+        </tr>   <!--end first row-->
+
+        <tr>    <!--second row-->
+          <td>245</td>
+          <td>2836-3983-2936</td>
+          <td>Due: 18/12/2016</td>
+          <td class="hidden-xs"></td>
+          <td class="hidden-xs"></td>
+          <td>
+            <button type="button" class="btn btn-xs btn-info pull-right">Details</button>
+          </td>
+        </tr>   <!--end second row-->
+
+        <tr>    <!--third row-->
+          <td>246</td>
+          <td>0076-2736-9876</td>
+          <td>Available</td>
+          <td class="hidden-xs"></td>
+          <td class="hidden-xs"></td>
+          <td>
+            <button type="button" class="btn btn-xs btn-info pull-right">Details</button>
+          </td>
+        </tr>   <!--end third row-->
+
+      </table>
+
+    </div>    <!--close col-md-9-->
+
+  </div>    <!--close row-->
+
+  <!--FURTHER INFO HERE-->
+
+  <div class="row">   <!--extra info row-->
+
+    <div class="col-xs-12">
+
+      <div class="panel panel-default">   <!--start panel-->
+
+        <div class="panel-heading">   <!--panel heading-->
+          <h3 class="panel-title">
+            <strong>Device Information</strong>
+          </h3>
+        </div>
+
+        <div class="panel-body">
+
+          <form>
+
+            <div class="row">   <!--device row 1-->
+
+              <div class="col-xs-12 col-sm-6">   <!--span entire width for xs-->
+
+                <div class="form-group">
+
+                  <!--deviceType-->
+                  <label for="deviceType" class="col-xs-4 control-label">
+                    Type</label>
+                  <div class="col-xs-8">
+                    <p>Galaxy S7 Edge</p>
+                  </div>
+
+                </div>    <!--close form-group-->
+
+              </div>    <!--close col-->
+
+              <div class="col-xs-12 col-sm-6">   <!--span entire width for xs but half for sm-->
+
+                <div class="form-group">
+
+
+                  <!--Category - categoryPath + categoryName-->
+                  <label for="category"
+                  class="col-xs-4 control-label">Category</label>
+                  <div class="col-xs-8">
+                    <p>Phones/Samsung</p>
+                  </div>
+
+                </div>    <!--close form group-->
+              </div>    <!--close column span for xs-->
+            </div>    <!--close client row 1-->
+
+            <div class="row">   <!--device row 2-->
+
+              <div class="col-xs-12 col-sm-6">   <!--span entire width for xs-->
+
+                <div class="form-group">
+
+                  <!--deviceID-->
+                  <label for="deviceID" class="col-xs-4 control-label">
+                    ID</label>
+                  <div class="col-xs-8">
+                    <p>102</p>
+                  </div>
+
+                </div>    <!--close form-group-->
+
+              </div>    <!--close col-->
+
+              <div class="col-xs-12 col-sm-6">   <!--span entire width for xs but half for sm-->
+
+                <div class="form-group">
+
+                  <!--serial-->
+                  <label for="serial"
+                  class="col-xs-4 control-label">Serial</label>
+                  <div class="col-xs-8">
+                    <p>2784-2093-2687</p>
+                  </div>
+
+                </div>    <!--close form group-->
+              </div>    <!--close column span for xs-->
+            </div>    <!--close client row 2-->
+
+            <div class="row">   <!--device row 3-->
+
+              <div class="col-xs-12 col-sm-6">   <!--span entire width for xs but half for sm-->
+
+                <div class="form-group">
+
+                  <!--Loan status - Derived/Not editable-->
+                  <label for="loanStatus"
+                  class="col-xs-4 control-label">Loan Status</label>
+                  <div class="col-xs-8">
+                    <p>Off-loan</p>
+                  </div>
+
+                </div>    <!--close form group-->
+              </div>    <!--close column span for xs-->
+
+              <div class="col-xs-12 col-sm-6">   <!--span entire width for xs but half for sm-->
+
+                <div class="form-group">
+
+                  <!--defaultLoanTime-->
+                  <label for="defaultLoanTime"
+                  class="col-xs-4 control-label">Default Length</label>
+                  <div class="col-xs-8">
+                    <p>28 days</p>
+                  </div>
+
+                </div>    <!--close form group-->
+              </div>    <!--close column span for xs-->
+
+            </div>    <!--close client row 3-->
+
+
+            <div class="row">   <!--device row 6-->
+
+              <div class="col-xs-12 col-sm-6">   <!--span entire width for xs-->
+
+                <div class="form-group">
+
+                  <!--description-->
+                  <label for="description" class="col-xs-4 control-label">
+                    Description</label>
+                  <div class="col-xs-8">
+                    <p>Model 2A.</p>
+                  </div>
+
+                </div>    <!--close form-group-->
+
+              </div>    <!--close col-->
+
+            </div>    <!--close client row 6-->
+
+          </form>
+
+          <div class="row">
+            <div class="col-xs-12">
+              <span class="pull-right">
+                <button type="button" class="btn btn-sm btn-danger">Cancel</button>
+                <a type="button" href="/partials/clientDetails.html" class="btn btn-sm btn-success">Request</a>
+              </span>
+            </div>
+          </div>
+
+        </div>    <!--close panel body-->
+
+      </div>    <!--close panel-->
+
+    </div>    <!--close col-xs-12-->
+
+  </div>    <!--close extra info row-->
+
+</div>    <!--close container-->
