@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-ng-app="deviceMgr">
+<html lang="en" data-ng-app="deviceMgr" data-ng-controller="appCtl">
 <head>
   <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Device Manager</title>
@@ -46,25 +46,25 @@
         <li class="dropdown">
           <a href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mike Jones <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/">Change Password</a></li>
-            <li><a href="/">Admin Controls</a></li>
+            <li data-ng-class="pageClass('/')"><a href="/">Change Password</a></li>
+            <li data-ng-class="pageClass('/')"><a href="/">Admin Controls</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="/login">Logout</a></li>
+            <li data-ng-class="pageClass('/login')"><a href="/login">Logout</a></li>
           </ul>
         </li>
         <li class="dropdown">
           <a href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Manage <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/clientSearch">Users</a></li>
-            <li><a href="/manage">Devices</a></li>
-            <li><a href="/">Groups</a></li>
+            <li data-ng-class="pageClass('/clientSearch')"><a href="/clientSearch">Users</a></li>
+            <li data-ng-class="pageClass('/manage')"><a href="/manage">Devices</a></li>
+            <li data-ng-class="pageClass('/')"><a href="/">Groups</a></li>
             <li role="seperator" class="divider"></li>
-            <li><a href="/client">View Client Page (testing only)</a></li>
+            <li data-ng-class="pageClass('/client')"><a href="/client">View Client Page (testing only)</a></li>
           </ul>
         </li>
-        <li class="active"><a href="/requests">Pending <span class="badge">12</span><span class="sr-only">(current)</span></a></li>
-        <li><a href="/approved">Approved <span class="badge">7</span></a></li>
-        <li><a href="/currentLoans">Current <span class="badge">18</span></a></li>
+        <li data-ng-class="pageClass('/requests')"><a href="/requests">Pending <span class="badge">12</span><span class="sr-only">(current)</span></a></li>
+        <li data-ng-class="pageClass('/approved')"><a href="/approved">Approved <span class="badge">7</span></a></li>
+        <li data-ng-class="pageClass('/currentLoans')"><a href="/currentLoans">Current <span class="badge">18</span></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
