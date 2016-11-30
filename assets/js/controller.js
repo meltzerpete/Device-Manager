@@ -49,4 +49,13 @@ angular.module('deviceMgr', ['ngRoute'])
 	  enabled: true,
 	  requireBase: false
 	});
+})
+
+.controller('appCtl', function($scope, $location){
+	// $scope.startSearch = function(){
+	// 	$location.path('/');
+	// };
+	$scope.pageClass = function(path){
+		return (path == $location.path()) ? 'active' : '';
+	};
 });
