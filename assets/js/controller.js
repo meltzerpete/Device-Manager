@@ -14,6 +14,10 @@ angular.module('deviceMgr', ['ngRoute'])
 
 		templateUrl: 'assets/partials/client.html'
 	})
+	.when('/clientSearch', {
+
+		templateUrl: 'assets/partials/clientSearch.html'
+	})
 	.when('/clientDetails', {
 
 		templateUrl: 'assets/partials/clientDetails.html'
