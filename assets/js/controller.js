@@ -4,7 +4,7 @@ angular.module('deviceMgr', ['ngRoute'])
 	$routeProvider
 	.when('/', {
 
-		templateUrl: 'assets/partials/index.html'
+		templateUrl: 'assets/partials/dashboard.html'
 	})
 	.when('/approved', {
 
@@ -21,6 +21,10 @@ angular.module('deviceMgr', ['ngRoute'])
 	.when('/clientDetails', {
 
 		templateUrl: 'assets/partials/clientDetails.html'
+	})
+	.when('/currentLoans', {
+
+		templateUrl: 'assets/partials/currentLoans.html'
 	})
 	.when('/login', {
 
