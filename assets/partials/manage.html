@@ -8,69 +8,70 @@
 
           <div class="list-group">
 
+            <!--parent category-->
             <button type="button"  class="list-group-item tree1">
               <span class="glyphicon glyphicon-plus"></span>
-              <strong>Add Parent Category</strong>
+              <strong><em>Add Parent Category</em></strong>
             </button>
 
-            <button type="button" class="list-group-item tree1">
-              <span class="glyphicon glyphicon-chevron-right"></span>
-              <strong>VR Devices</strong>
-            </button>
+            <!--ng-repeat parent categories-->
 
-            <button type="button"  class="list-group-item tree1">
-              <span class="glyphicon glyphicon-chevron-down"></span>
-              <strong>Phones</strong>
-            </button>
+            <span data-ng-repeat="category in categories | filter: {parentCategoryID: null}">
+              <button type="button" class="list-group-item tree1"
+              data-ng-click="setActiveParent(category.categoryID)">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <strong>{{category.categoryName}}</strong>
+              </button>
 
-            <button type="button"  class="list-group-item tree2">
-              &nbsp&nbsp&nbsp&nbsp
-              <span class="glyphicon glyphicon-plus"></span>
-              Add Child Category
-            </button>
+              <!-- CHILD CATEGORIES -->
+              <!-- <div ng-show="activeParent == category.categoryID"> -->
+              <span ng-show="checkActiveParent(category.categoryID)">
 
-            <button type="button"  class="list-group-item tree2">
-              &nbsp&nbsp&nbsp&nbsp
-              <span class="glyphicon glyphicon-chevron-right"></span>
-              Apple
-            </button>
+                <button type="button"  class="list-group-item tree2">
+                  &nbsp&nbsp&nbsp&nbsp
+                  <span class="glyphicon glyphicon-plus"></span>
+                  <em>Add Child Category</em>
+                </button>
 
-            <button type="button"  class="list-group-item tree2">
-              &nbsp&nbsp&nbsp&nbsp
-              <span class="glyphicon glyphicon-chevron-right"></span>
-              Blackberry
-            </button>
+                <!--child ng-repeat-->
+                <span data-ng-repeat="subcategory in categories
+                | filter: {parentCategoryID: category.categoryID}">
 
-            <button type="button"  class="list-group-item tree2">
-              &nbsp&nbsp&nbsp&nbsp
-              <span class="glyphicon glyphicon-chevron-down"></span>
-              Samsung
-            </button>
+                  <button type="button"  class="list-group-item tree2"
+                  data-ng-click="setActiveSub(subcategory.categoryID)">
+                    &nbsp&nbsp&nbsp&nbsp
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    {{subcategory.categoryName}}
+                  </button>
 
-            <button type="button"  class="list-group-item tree3">
-              &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-              <span class="glyphicon glyphicon-plus"></span>
-              Add Type
-            </button>
+                  <!-- TYPES -->
+                  <span data-ng-show="checkActiveSub(subcategory.categoryID)">
 
-            <button type="button"  class="list-group-item tree3">
-              &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-              <span class="glyphicon glyphicon-minus"></span>
-              Galaxy Bomb 7
-            </button>
+                    <button type="button"  class="list-group-item tree3">
+                      &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                      <span class="glyphicon glyphicon-plus"></span>
+                      <em>Add Type</em>
+                    </button>
 
-            <button type="button"  class="list-group-item tree3">
-              &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-              <span class="glyphicon glyphicon-minus"></span>
-              Galaxy S7 Edge
-            </button>
+                    <!-- ng-repeat types -->
 
-            <button type="button"  class="list-group-item tree1">
-              <span class="glyphicon glyphicon-chevron-right"></span>
-              <strong>Tablets</strong>
-            </button>
+                    <button type="button"  class="list-group-item tree3"
+                    data-ng-repeat="type in types | filter: {categoryID: subcategory.categoryID}"
+                    data-ng-click="setActiveType(type.typeID)">
+                      &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                      <span class="glyphicon glyphicon-play"></span>
+                      {{type.typeName}}
+                    </button>
 
-        </div>
+                  </span>    <!-- END TYPES -->
+
+                </span>    <!-- END CHILD NG-REPEAT -->
+
+              </span>    <!-- END CHILD CATEGORIES -->
+
+            </span>    <!-- END PARENT NG-REPEAT -->
+
+        </div>    <!--close list-group-->
 
       </div>    <!--close 'empty' div-->
 
@@ -80,7 +81,12 @@
 
     <div class="col-md-9">
 
-      <h3>Galaxy S7 Edge</h3>
+      <h3>{{activeParent.categoryName || "All Categories"}}
+        /
+        {{activeSub.categoryName || "All Sub-categories"}}
+        /
+        {{activeType.typeName || "All Types"}}
+      </h3>
 
       <table class="table table-condensed table-hover">
 
@@ -104,45 +110,28 @@
           </tr>
         </thead>    <!--close table heading-->
 
-        <tr>    <!--first row-->
-          <td>102</td>
-          <td>2784-2093-2687</td>
-          <td>Off-loan</td>
-          <td class="hidden-xs">
-            Model 2A.
-          </td>
-          <td class="hidden-xs">
-            Purchased Feb 2016. Headphones in box.
-          </td>
-          <td>
-              <button type="button" class="btn btn-xs btn-info pull-right">Info</button>
-          </td>
-        </tr>   <!--end first row-->
+        <!--NG_REPEAT-->
 
-        <tr>    <!--second row-->
-          <td>245</td>
-          <td>2836-3983-2936</td>
-          <td>Due: 18/12/2016</td>
-          <td class="hidden-xs"></td>
-          <td class="hidden-xs"></td>
+        <!--repeat row-->
+        <tr data-ng-repeat="device in devices | filter: search"
+        data-ng-show="(activeParent === null) ? true : checkActiveParent(getParentCategory(device.typeID).categoryID)
+        && (activeSub === null) ? true : checkActiveSub(getSubCategory(device.typeID).categoryID)
+        && (activeType === null) ? true : checkActiveType(device.typeID)">
+          <td>{{device.deviceID}}</td>
+          <td>{{device.serial}}</td>
+          <td>{{getLoanStatus(device)}}</td>
+          <td class="hidden-xs">{{device.description}}</td>
+          <td class="hidden-xs">{{device.notes}}</td>
           <td>
-            <button type="button" class="btn btn-xs btn-info pull-right">Info</button>
+            <button type="button" class="btn btn-xs btn-info pull-right"
+            data-ng-click="setActiveDevice(device.deviceID)">Info</button>
           </td>
-        </tr>   <!--end second row-->
+        </tr>   <!--end repeat row-->
 
-        <tr>    <!--third row-->
-          <td>246</td>
-          <td>0076-2736-9876</td>
-          <td>Available</td>
-          <td class="hidden-xs"></td>
-          <td class="hidden-xs"></td>
-          <td>
-            <button type="button" class="btn btn-xs btn-info pull-right">Info</button>
-          </td>
-        </tr>   <!--end third row-->
 
         <tr>
-          <td><button type="button" class="btn btn-sm btn-success">
+          <td><button type="button" class="btn btn-sm btn-success"
+            data-ng-show="(activeType === null) ? false : true">
             Add New</button></td>
           <td></td>
           <td></td>
@@ -159,7 +148,8 @@
 
   <!--FURTHER INFO HERE-->
 
-  <div class="row">   <!--extra info row-->
+  <div class="row"
+  data-ng-show="activeDevice === null ? false : true">   <!--extra info row-->
 
     <div class="col-xs-12">
 
@@ -167,7 +157,9 @@
 
         <div class="panel-heading">   <!--panel heading-->
           <h3 class="panel-title">
-            <strong>Device Information</strong>
+            <strong>Device Information:
+              {{activeDevice === null ? "" : getType(activeDevice.deviceID).typeName}}
+            </strong>
           </h3>
         </div>
 
@@ -185,7 +177,8 @@
                   <label for="deviceType" class="col-xs-4 control-label">
                     Type</label>
                   <div class="col-xs-8">
-                    <p>Galaxy S7 Edge</p>
+                    <p>{{activeDevice === null ? "" :
+                      getType(activeDevice.deviceID).typeName}}</p>
                   </div>
 
                 </div>    <!--close form-group-->
@@ -201,7 +194,13 @@
                   <label for="category"
                   class="col-xs-4 control-label">Category</label>
                   <div class="col-xs-8">
-                    <p>Phones/Samsung</p>
+                    <p>{{activeDevice === null ? "" :
+                      getParentCategory(getType(activeDevice.deviceID).typeID).categoryName}}
+                      /
+                      {{activeDevice === null ? "" :
+                      getSubCategory(getType(activeDevice.deviceID).typeID).categoryName}}
+                      /
+                    </p>
                   </div>
 
                 </div>    <!--close form group-->
@@ -218,7 +217,7 @@
                   <label for="deviceID" class="col-xs-4 control-label">
                     ID</label>
                   <div class="col-xs-8">
-                    <p>102</p>
+                    <p>{{activeDevice.deviceID}}</p>
                   </div>
 
                 </div>    <!--close form-group-->
@@ -233,7 +232,7 @@
                   <label for="serial"
                   class="col-xs-4 control-label">Serial</label>
                   <div class="col-xs-8">
-                    <p>2784-2093-2687</p>
+                    <p>{{activeDevice.serial}}</p>
                   </div>
 
                 </div>    <!--close form group-->
@@ -250,7 +249,7 @@
                   <label for="isWorking" class="col-xs-4 control-label">
                     Device Status</label>
                   <div class="col-xs-8">
-                    <p>Needs Repair</p>
+                    <p>{{activeDevice.isWorking ? "Working" : "Needs Repair"}}</p>
                   </div>
 
                 </div>    <!--close form-group-->
@@ -265,7 +264,7 @@
                   <label for="loanStatus"
                   class="col-xs-4 control-label">Loan Status</label>
                   <div class="col-xs-8">
-                    <p>Off-loan</p>
+                    <p>{{activeDevice === null ? "" : getLoanStatus(activeDevice)}}</p>
                   </div>
 
                 </div>    <!--close form group-->
@@ -282,7 +281,7 @@
                   <label for="visible" class="col-xs-4 control-label">
                     Visible</label>
                   <div class="col-xs-8">
-                    <p>False</p>
+                    <p>{{activeDevice.visible ? "Yes" : "No"}}</p>
                   </div>
 
                 </div>    <!--close form-group-->
@@ -297,7 +296,7 @@
                   <label for="defaultLoanTime"
                   class="col-xs-4 control-label">Default Length</label>
                   <div class="col-xs-8">
-                    <p>28 days</p>
+                    <p>{{activeDevice.defaultLoanTime}} days</p>
                   </div>
 
                 </div>    <!--close form group-->
@@ -314,7 +313,7 @@
                   <label for="dateOfPurchase" class="col-xs-4 control-label">
                     Date of Purchase</label>
                   <div class="col-xs-8">
-                    <p>02/04/16</p>
+                    <p>{{activeDevice.dateOfPurchase}}</p>
                   </div>
 
                 </div>    <!--close form-group-->
@@ -329,7 +328,7 @@
                   <label for="dateOutOfService"
                   class="col-xs-4 control-label">Date Out of Service</label>
                   <div class="col-xs-8">
-                    <p></p>
+                    <p>{{activeDevice.dateOutOfService}}</p>
                   </div>
 
                 </div>    <!--close form group-->
@@ -346,7 +345,7 @@
                   <label for="description" class="col-xs-4 control-label">
                     Description</label>
                   <div class="col-xs-8">
-                    <p>Model 2A.</p>
+                    <p>{{activeDevice.description}}</p>
                   </div>
 
                 </div>    <!--close form-group-->
@@ -361,7 +360,7 @@
                   <label for="notes"
                   class="col-xs-4 control-label">Notes</label>
                   <div class="col-xs-8">
-                    <p>Purchased Feb 2016. Headphones in box.</p>
+                    <p>{{activeDevice.notes}}</p>
                   </div>
 
                 </div>    <!--close form group-->

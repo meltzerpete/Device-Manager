@@ -15,6 +15,7 @@
   <script type="text/javascript" src="assets/js/angular.min.js"></script>
   <script type="text/javascript" src="assets/js/angular-route.min.js"></script>
   <script type="text/javascript" src="assets/js/controller.js"></script>
+  <script type="text/javascript" src="assets/js/factories.js"></script>
 </head>
 
 <body>
@@ -22,32 +23,33 @@
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
 
-      <a class="navbar-brand" href="/">Device Manager</a>
+      <a class="navbar-brand" href="/dashboard">Device Manager</a>
     </div>
 
     <form class="navbar-form navbar-right">
       <div class="form-group">
-        <input type="text" class="form-control" placeholder="Search">
+        <input type="text" class="form-control" placeholder="Search"
+        data-ng-model="search">
       </div>
     </form>
 
 
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <div class="collapse navbar-collapse" id="nav-collapse">
       <ul class="nav navbar-nav">
         <li class="dropdown">
           <a href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mike Jones <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li data-ng-class="pageClass('/')"><a href="/">Change Password</a></li>
-            <li data-ng-class="pageClass('/')"><a href="/">Admin Controls</a></li>
+            <li data-ng-class="pageClass('/')"><a href="/dashboard">Change Password</a></li>
+            <li data-ng-class="pageClass('/')"><a href="/dashboard">Admin Controls</a></li>
             <li role="separator" class="divider"></li>
             <li data-ng-class="pageClass('/login')"><a href="/login">Logout</a></li>
           </ul>
@@ -57,7 +59,7 @@
           <ul class="dropdown-menu">
             <li data-ng-class="pageClass('/clientSearch')"><a href="/clientSearch">Users</a></li>
             <li data-ng-class="pageClass('/manage')"><a href="/manage">Devices</a></li>
-            <li data-ng-class="pageClass('/')"><a href="/">Groups</a></li>
+            <li data-ng-class="pageClass('/')"><a href="/dashboard">Groups</a></li>
             <li role="seperator" class="divider"></li>
             <li data-ng-class="pageClass('/client')"><a href="/client">View Client Page (testing only)</a></li>
           </ul>
