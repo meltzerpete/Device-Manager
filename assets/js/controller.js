@@ -10,6 +10,10 @@ deviceMgr.config( function($routeProvider, $locationProvider){
 
 		templateUrl: 'assets/partials/approved.html'
 	})
+	.when('/changepassword', {
+
+		templateUrl: 'assets/partials/changepassword.html'
+	})
 	.when('/client', {
 
 		templateUrl: 'assets/partials/client.html'
@@ -30,6 +34,10 @@ deviceMgr.config( function($routeProvider, $locationProvider){
 
 		templateUrl: 'assets/partials/dashboard.html'
 	})
+	.when('/deviceDetails/:id', {
+		controller: 'deviceCtl',
+		templateUrl: 'assets/partials/deviceDetails.html'
+	})
 	.when('/login', {
 
 		templateUrl: 'assets/partials/loginpage.html'
@@ -47,11 +55,11 @@ deviceMgr.config( function($routeProvider, $locationProvider){
 		templateUrl: 'assets/partials/requests.html'
 	})
 	.otherwise({
-		redirectTo: 'assets/partials/dashboard.html'
+		redirectTo: '/'
 	});
 	$locationProvider.html5Mode({
 	  enabled: true,
-	  requireBase: false
+	  requireBase: true
 	});
 });
 
@@ -61,16 +69,32 @@ deviceMgr.controller('appCtl', function($scope, $location){
 	};
 });
 
-deviceMgr.controller('deviceCtl', function($scope, devices, categories, types) {
+deviceMgr.controller('deviceCtl', function($scope, $routeParams, $rootScope, $location, devices, categories, types) {
 	$scope.devices = devices.get();
 	$scope.categories = categories.get();
 	$scope.types = types.get();
+
+	//function to get loan status
+	$scope.getLoanStatus = function(device) {
+		if (device.dateOutOfService !== null) {
+			return "Out of service";
+		} else if (device.availableFrom === null) {
+			return "Available now";
+		} else if (device.availableFrom !== null) {
+			return `Available from: ${device.availableFrom}`;
+		}
+	};
+
+	//add derived loan status to each device object
+	$scope.devices.forEach(function (device) {
+		device.loanStatus = $scope.getLoanStatus(device);
+	});
 
 	//set actives to null
 	$scope.activeParent = null;
 	$scope.activeSub = null;
 	$scope.activeType = null;
-	$scope.activeDevice = null;
+	$scope.activeDevice = $rootScope === null ? null : $rootScope.activeDevice;
 
 	//parent category functions
 	$scope.getParentCategory = function(typeID) {
@@ -117,7 +141,7 @@ deviceMgr.controller('deviceCtl', function($scope, devices, categories, types) {
 
 	$scope.setActiveType = function(typeID) {
 		$scope.activeType = (typeID === null) ? null : types.find(typeID);
-		console.log("type: " + $scope.activeType);
+		//console.log("type: " + $scope.activeType);
 		$scope.setActiveDevice(null);
 	};
 
@@ -132,18 +156,10 @@ deviceMgr.controller('deviceCtl', function($scope, devices, categories, types) {
 
 	//functions for device
 	$scope.setActiveDevice = function(deviceID) {
-		$scope.activeDevice = (deviceID === null) ? null : devices.find(deviceID);
+		$scope.activeDevice = devices.find(deviceID);
 	};
 
-	//function to get loan status
-	$scope.getLoanStatus = function(device) {
-		if (device.dateOutOfService !== null) {
-			return "Out of service";
-		} else if (device.availableFrom === null) {
-			return "Available now";
-		} else if (device.availableFrom !== null) {
-			return `Available from: ${device.availableFrom}`;
-		}
-	};
+	$scope.activeDevice = devices.find(parseInt($routeParams.id));
+
 
 });

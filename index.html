@@ -16,6 +16,7 @@
   <script type="text/javascript" src="assets/js/angular-route.min.js"></script>
   <script type="text/javascript" src="assets/js/controller.js"></script>
   <script type="text/javascript" src="assets/js/factories.js"></script>
+  <base href="/">
 </head>
 
 <body>
@@ -30,7 +31,7 @@
         <span class="icon-bar"></span>
       </button>
 
-      <a class="navbar-brand" href="/dashboard">Device Manager</a>
+      <a class="navbar-brand" href="/">Device Manager</a>
     </div>
 
     <form class="navbar-form navbar-right">
@@ -48,8 +49,8 @@
         <li class="dropdown">
           <a href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mike Jones <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li data-ng-class="pageClass('/')"><a href="/dashboard">Change Password</a></li>
-            <li data-ng-class="pageClass('/')"><a href="/dashboard">Admin Controls</a></li>
+            <li data-ng-class="pageClass('/changepassword')"><a href="/changepassword">Change Password</a></li>
+            <li data-ng-class="pageClass('/')"><a href="/">Admin Controls</a></li>
             <li role="separator" class="divider"></li>
             <li data-ng-class="pageClass('/login')"><a href="/login">Logout</a></li>
           </ul>
@@ -59,7 +60,7 @@
           <ul class="dropdown-menu">
             <li data-ng-class="pageClass('/clientSearch')"><a href="/clientSearch">Users</a></li>
             <li data-ng-class="pageClass('/manage')"><a href="/manage">Devices</a></li>
-            <li data-ng-class="pageClass('/')"><a href="/dashboard">Groups</a></li>
+            <li data-ng-class="pageClass('/')"><a href="/">Groups</a></li>
             <li role="seperator" class="divider"></li>
             <li data-ng-class="pageClass('/client')"><a href="/client">View Client Page (testing only)</a></li>
           </ul>
