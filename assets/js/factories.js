@@ -74,6 +74,10 @@ deviceMgr.factory('devices', function devicesFactory(){
 		find: function(deviceID) {
 			index = devices.findIndex(function(x) { return x.deviceID === deviceID; });
 			return devices[index];
+		},
+		remove: function(deviceID) {
+			index = devices.findIndex(function(x) { return x.deviceID === deviceID; });
+			devices.splice(index, 1);
 		}
 	};
 });

@@ -102,4 +102,10 @@ deviceMgr.controller('deviceCtl', function($scope, $routeParams, devices, catego
 
 	$scope.activeDevice = devices.find(parseInt($routeParams.id));
 
+	$scope.removeDevice = function(deviceID) {
+		$scope.setActiveDevice(deviceID > 0 ? deviceID - 1 : deviceID + 1);
+		devices.remove(deviceID);
+		$scope.back();
+	};
+
 });

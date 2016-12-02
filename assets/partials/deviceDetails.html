@@ -219,7 +219,8 @@
               <span class="pull-right">
                 <button type="button" class="btn btn-sm btn-info"
                 data-ng-click="back()">Back</button>
-                <button type="button" class="btn btn-sm btn-danger">Delete</button>
+                <button type="button" class="btn btn-sm btn-danger"
+                data-ng-click="removeDevice(activeDevice.deviceID)">Delete</button>
                 <a type="button" href="/editDeviceDetails/{{activeDevice.deviceID}}" class="btn btn-sm btn-warning">Edit</a>
               </span>
             </div>
