@@ -63,13 +63,17 @@ deviceMgr.config( function($routeProvider, $locationProvider){
 	});
 });
 
-deviceMgr.controller('appCtl', function($scope, $location){
+deviceMgr.controller('appCtl', function($scope, $location, $window){
 	$scope.pageClass = function(path){
 		return (path == $location.path()) ? 'active' : '';
 	};
+
+	$scope.back = function() {
+		$window.history.back();
+	};
 });
 
-deviceMgr.controller('deviceCtl', function($scope, $routeParams, $rootScope, $location, devices, categories, types) {
+deviceMgr.controller('deviceCtl', function($scope, $routeParams, devices, categories, types) {
 	$scope.devices = devices.get();
 	$scope.categories = categories.get();
 	$scope.types = types.get();
@@ -94,7 +98,7 @@ deviceMgr.controller('deviceCtl', function($scope, $routeParams, $rootScope, $lo
 	$scope.activeParent = null;
 	$scope.activeSub = null;
 	$scope.activeType = null;
-	$scope.activeDevice = $rootScope === null ? null : $rootScope.activeDevice;
+	$scope.activeDevice = null;
 
 	//parent category functions
 	$scope.getParentCategory = function(typeID) {
@@ -160,6 +164,5 @@ deviceMgr.controller('deviceCtl', function($scope, $routeParams, $rootScope, $lo
 	};
 
 	$scope.activeDevice = devices.find(parseInt($routeParams.id));
-
 
 });

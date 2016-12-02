@@ -123,21 +123,27 @@
           <td class="hidden-xs">{{device.description}}</td>
           <td class="hidden-xs">{{device.notes}}</td>
           <td>
-            <a type="button" href="/deviceDetails/{{device.deviceID}}" class="btn btn-xs btn-info pull-right"
-            data-ng-click="">Info</a>
+            <span class="pull-right text-right">
+              <a type="button" class="btn btn-xs btn-warning" style="margin-bottom: 2px; margin-top: 2px;"
+              data-ng-click="">Clone</a>
+              <a type="button" href="/deviceDetails/{{device.deviceID}}" style="margin-bottom: 2px; margin-top: 2px;"
+              class="btn btn-xs btn-info"
+              data-ng-click="">Info</a>
+            </span>
+
           </td>
         </tr>   <!--end repeat row-->
 
 
         <tr>
-          <td><button type="button" class="btn btn-sm btn-success"
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td><button type="button" class="btn btn-xs btn-success pull-right"
             data-ng-show="(activeType === null) ? false : true">
             Add New</button></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
         </tr>
 
       </table>

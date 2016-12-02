@@ -1,19 +1,17 @@
 <div class="container">
-  <div class="row">   <!--extra info row-->
 
-    <div class="col-xs-12">
+        <div class="page-header">   <!--panel heading-->
+          <h2>
+            {{getParentCategory(getType(activeDevice.deviceID).typeID).categoryName}}
+              /
+              {{getSubCategory(getType(activeDevice.deviceID).typeID).categoryName}}
+              /
+              {{getType(activeDevice.deviceID).typeName}}
+          </h2>
 
-      <div class="panel panel-default">   <!--start panel-->
-
-        <div class="panel-heading">   <!--panel heading-->
-          <h3 class="panel-title">
-            <strong>Device Information:
-              {{activeDevice === null ? "" : getType(activeDevice.deviceID).typeName}}
-            </strong>
-          </h3>
         </div>
 
-        <div class="panel-body">
+
 
           <form>
 
@@ -27,8 +25,7 @@
                   <label for="deviceType" class="col-xs-4 control-label">
                     Type</label>
                   <div class="col-xs-8">
-                    <p>{{activeDevice === null ? "" :
-                      getType(activeDevice.deviceID).typeName}}</p>
+                    <p>{{getType(activeDevice.deviceID).typeName}}</p>
                   </div>
 
                 </div>    <!--close form-group-->
@@ -44,11 +41,9 @@
                   <label for="category"
                   class="col-xs-4 control-label">Category</label>
                   <div class="col-xs-8">
-                    <p>{{activeDevice === null ? "" :
-                      getParentCategory(getType(activeDevice.deviceID).typeID).categoryName}}
+                    <p>{{getParentCategory(getType(activeDevice.deviceID).typeID).categoryName}}
                       /
-                      {{activeDevice === null ? "" :
-                      getSubCategory(getType(activeDevice.deviceID).typeID).categoryName}}
+                      {{getSubCategory(getType(activeDevice.deviceID).typeID).categoryName}}
                       /
                     </p>
                   </div>
@@ -114,7 +109,7 @@
                   <label for="loanStatus"
                   class="col-xs-4 control-label">Loan Status</label>
                   <div class="col-xs-8">
-                    <p>{{activeDevice === null ? "" : getLoanStatus(activeDevice)}}</p>
+                    <p>{{getLoanStatus(activeDevice)}}</p>
                   </div>
 
                 </div>    <!--close form group-->
@@ -222,18 +217,12 @@
           <div class="row">
             <div class="col-xs-12">
               <span class="pull-right">
+                <button type="button" class="btn btn-sm btn-info"
+                data-ng-click="back()">Back</button>
                 <button type="button" class="btn btn-sm btn-danger">Delete</button>
-                <button type="button" class="btn btn-sm btn-warning">Clone</button>
-                <button type="button" class="btn btn-sm btn-info">Edit</button>
+                <button type="button" class="btn btn-sm btn-warning">Edit</button>
               </span>
             </div>
           </div>
 
-        </div>    <!--close panel body-->
-
-      </div>    <!--close panel-->
-
-    </div>    <!--close col-xs-12-->
-
-  </div>    <!--close extra info row-->
 </div>
