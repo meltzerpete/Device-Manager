@@ -38,17 +38,9 @@ deviceMgr.controller('deviceCtl', function($scope, $routeParams, devices, catego
 	};
 
 	$scope.setActiveParent = function(categoryID) {
-		$scope.activeParent = categories.find(categoryID);
-		$scope.setActiveSub(null);
-	};
 
-	$scope.checkActiveParent = function(categoryID) {
-		if ($scope.activeParent === null) {
-			return false;
-		}
-		else {
-			return (categoryID === $scope.activeParent.categoryID) ? true : false;
-		}
+		$scope.activeParent = (categoryID === null) ? null : categories.find(categoryID);
+		$scope.setActiveSub(null);
 	};
 
 	//subCategory functions
@@ -59,15 +51,6 @@ deviceMgr.controller('deviceCtl', function($scope, $routeParams, devices, catego
 	$scope.setActiveSub = function(categoryID) {
 		$scope.activeSub = (categoryID === null) ? null : categories.find(categoryID);
 		$scope.setActiveType(null);
-	};
-
-	$scope.checkActiveSub = function(categoryID) {
-		if ($scope.activeSub === null) {
-			return false;
-		}
-		else {
-			return (categoryID === $scope.activeSub.categoryID) ? true : false;
-		}
 	};
 
 	//type functions
