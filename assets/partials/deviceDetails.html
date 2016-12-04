@@ -2,11 +2,11 @@
 
         <div class="page-header">   <!--panel heading-->
           <h2>
-            {{getParentCategory(getType(activeDevice.deviceID).typeID).categoryName}}
+            {{activeDevice.parentCategory.categoryName}}
               /
-              {{getSubCategory(getType(activeDevice.deviceID).typeID).categoryName}}
+              {{activeDevice.subCategory.categoryName}}
               /
-              {{getType(activeDevice.deviceID).typeName}}
+              {{activeDevice.type.typeName}}
           </h2>
 
         </div>
@@ -25,7 +25,7 @@
                   <label for="deviceType" class="col-xs-4 control-label">
                     Type</label>
                   <div class="col-xs-8">
-                    <p>{{getType(activeDevice.deviceID).typeName}}</p>
+                    <p>{{activeDevice.type.typeName}}</p>
                   </div>
 
                 </div>    <!--close form-group-->
@@ -41,9 +41,9 @@
                   <label for="category"
                   class="col-xs-4 control-label">Category</label>
                   <div class="col-xs-8">
-                    <p>{{getParentCategory(getType(activeDevice.deviceID).typeID).categoryName}}
+                    <p>{{activeDevice.parentCategory.categoryName}}
                       /
-                      {{getSubCategory(getType(activeDevice.deviceID).typeID).categoryName}}
+                      {{activeDevice.subCategory.categoryName}}
                       /
                     </p>
                   </div>
@@ -109,7 +109,7 @@
                   <label for="loanStatus"
                   class="col-xs-4 control-label">Loan Status</label>
                   <div class="col-xs-8">
-                    <p>{{getLoanStatus(activeDevice)}}</p>
+                    <p>{{activeDevice.loanStatus}}</p>
                   </div>
 
                 </div>    <!--close form group-->

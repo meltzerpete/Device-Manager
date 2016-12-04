@@ -34,18 +34,18 @@
                 </button>
 
                 <!--child ng-repeat-->
-                <span data-ng-repeat="subcategory in categories
+                <span data-ng-repeat="subCategory in categories
                 | filter: {parentCategoryID: category.categoryID}">
 
                   <button type="button"  class="list-group-item tree2"
-                  data-ng-click="setActiveSub(subcategory.categoryID)">
+                  data-ng-click="setActiveSub(subCategory.categoryID)">
                     &nbsp&nbsp&nbsp&nbsp
                     <span class="glyphicon glyphicon-chevron-right"></span>
-                    {{subcategory.categoryName}}
+                    {{subCategory.categoryName}}
                   </button>
 
                   <!-- TYPES -->
-                  <span data-ng-show="checkActiveSub(subcategory.categoryID)">
+                  <span data-ng-show="checkActiveSub(subCategory.categoryID)">
 
                     <button type="button"  class="list-group-item tree3">
                       &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
@@ -56,7 +56,7 @@
                     <!-- ng-repeat types -->
 
                     <button type="button"  class="list-group-item tree3"
-                    data-ng-repeat="type in types | filter: {categoryID: subcategory.categoryID}"
+                    data-ng-repeat="type in types | filter: {categoryID: subCategory.categoryID}"
                     data-ng-click="setActiveType(type.typeID)">
                       &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                       <span class="glyphicon glyphicon-play"></span>
@@ -92,6 +92,20 @@
 
         <thead>   <!--table heading-->
           <tr>
+            <th class="hidden-xs" ng-show="!activeParent">
+              <small><span class="glyphicon glyphicon-sort"></span>
+              </small> Category
+            </th>   <!--ParentCategory-->
+
+            <th class="hidden-xs" ng-show="!activeSub">
+              <small><span class="glyphicon glyphicon-sort"></span>
+              </small> Sub-category
+            </th>   <!--subCategory-->
+
+            <th class="hidden-xs" ng-show="!activeType">
+              <small><span class="glyphicon glyphicon-sort"></span>
+            </small> Type</th>   <!--Type-->
+
             <th><small><span class="glyphicon glyphicon-sort"></span>
             </small> ID</th>   <!--deviceID-->
 
@@ -114,9 +128,15 @@
 
         <!--repeat row-->
         <tr data-ng-repeat="device in devices | filter: search"
-        data-ng-show="(activeParent === null) ? true : checkActiveParent(getParentCategory(device.typeID).categoryID)
-        && (activeSub === null) ? true : checkActiveSub(getSubCategory(device.typeID).categoryID)
-        && (activeType === null) ? true : checkActiveType(device.typeID)">
+        data-ng-show="(activeParent === null) ? true : activeParent === device.parentCategory
+        && (activeSub === null) ? true : activeSub === device.subCategory
+        && (activeType === null) ? true : activeType === device.type">
+          <td class="hidden-xs" ng-show="!activeParent">
+            {{device.parentCategory.categoryName}}</td>
+          <td class="hidden-xs" ng-show="!activeSub">
+            {{device.subCategory.categoryName}}</td>
+          <td class="hidden-xs" ng-show="!activeType">
+            {{device.type.typeName}}</td>
           <td>{{device.deviceID}}</td>
           <td>{{device.serial}}</td>
           <td>{{device.loanStatus}}</td>

@@ -26,11 +26,6 @@ deviceMgr.controller('deviceCtl', function($scope, $routeParams, devices, catego
 		}
 	};
 
-	//add derived loan status to each device object
-	$scope.devices.forEach(function (device) {
-		device.loanStatus = $scope.getLoanStatus(device);
-	});
-
 	//set actives to null
 	$scope.activeParent = null;
 	$scope.activeSub = null;
@@ -39,7 +34,7 @@ deviceMgr.controller('deviceCtl', function($scope, $routeParams, devices, catego
 
 	//parent category functions
 	$scope.getParentCategory = function(typeID) {
-		return categories.find($scope.getSubCategory(typeID).parentCategoryID);
+		return categories.find($scope.getsubCategory(typeID).parentCategoryID);
 	};
 
 	$scope.setActiveParent = function(categoryID) {
@@ -56,8 +51,8 @@ deviceMgr.controller('deviceCtl', function($scope, $routeParams, devices, catego
 		}
 	};
 
-	//subcategory functions
-	$scope.getSubCategory = function(typeID) {
+	//subCategory functions
+	$scope.getsubCategory = function(typeID) {
 		return categories.find(types.find(typeID).categoryID);
 	};
 
@@ -107,5 +102,13 @@ deviceMgr.controller('deviceCtl', function($scope, $routeParams, devices, catego
 		devices.remove(deviceID);
 		$scope.back();
 	};
+
+	//add derived loan status to each device object
+	$scope.devices.forEach(function (device) {
+		device.loanStatus = $scope.getLoanStatus(device);
+		device.type = $scope.getType(device.deviceID);
+		device.subCategory = $scope.getsubCategory(device.typeID);
+		device.parentCategory = $scope.getParentCategory(device.typeID);
+	});
 
 });
