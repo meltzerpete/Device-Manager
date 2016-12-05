@@ -136,9 +136,28 @@ deviceMgr.factory('categories', function categoriesFactory(){
 	  }
 	];
 	return {
+		addParent: function(parentCategoryName) {
+			var parent = {
+				categoryID: categories.length,
+				categoryName: parentCategoryName,
+				parentCategoryID: null
+			};
+			categories.push(parent);
+		},
+
+		addSub: function(subCategoryName, parentID) {
+			var sub = {
+				categoryID: categories.length,
+				categoryName: subCategoryName,
+				parentCategoryID: parentID
+			};
+			categories.push(sub);
+		},
+
 		get: function() {
 			return categories;
 		},
+
 		//function to return single category
 		find: function(categoryID) {
 			index = categories.findIndex(function(x) { return x.categoryID === categoryID; });
@@ -201,9 +220,19 @@ deviceMgr.factory('types', function typesFactory(){
 	  }
 	];
 	return {
+		add: function(typeName, categoryID) {
+			var type = {
+				typeID: types.length,
+				typeName: typeName,
+				categoryID: categoryID
+			};
+			types.push(type);
+		},
+
 		get: function() {
 			return types;
 		},
+
 		//function to return single type
 		find: function(typeID) {
 			//index = types.findIndex(x => x.typeID == typeID);

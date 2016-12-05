@@ -1,4 +1,4 @@
-var deviceMgr = angular.module('deviceMgr', ['ngRoute']);
+var deviceMgr = angular.module('deviceMgr', ['ngRoute', 'ngSanitize', 'mgcrea.ngStrap']);
 
 deviceMgr.controller('appCtl', function($scope, $location, $window){
 	$scope.pageClass = function(path){
@@ -10,7 +10,7 @@ deviceMgr.controller('appCtl', function($scope, $location, $window){
 	};
 });
 
-deviceMgr.controller('deviceCtl', function($scope, $routeParams, devices, categories, types) {
+deviceMgr.controller('deviceCtl', function($scope, $routeParams, $modal, devices, categories, types) {
 	$scope.devices = devices.get();
 	$scope.categories = categories.get();
 	$scope.types = types.get();
@@ -93,5 +93,17 @@ deviceMgr.controller('deviceCtl', function($scope, $routeParams, devices, catego
 		device.subCategory = $scope.getsubCategory(device.typeID);
 		device.parentCategory = $scope.getParentCategory(device.typeID);
 	});
+
+	$scope.addCat = function(addedCategory, addedSub, addedType) {
+		if (addedCategory) {
+			categories.addParent(addedCategory);
+		}
+		else if (addedSub) {
+			categories.addSub(addedSub, $scope.activeParent.categoryID);
+		}
+		else if (addedType) {
+			types.add(addedType, $scope.activeSub.categoryID);
+		}
+	};
 
 });
