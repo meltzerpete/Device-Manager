@@ -1,5 +1,6 @@
 var deviceMgr = angular.module('deviceMgr', ['ngRoute', 'ngSanitize', 'mgcrea.ngStrap']);
 
+//MAIN APP CONTROLLER
 deviceMgr.controller('appCtl', function($scope, $location, $window){
 	$scope.pageClass = function(path){
 		return (path == $location.path()) ? 'active' : '';
@@ -10,6 +11,7 @@ deviceMgr.controller('appCtl', function($scope, $location, $window){
 	};
 });
 
+//DEVICES CONTROLLER
 deviceMgr.controller('deviceCtl', function($scope, $routeParams, $modal, devices, categories, types) {
 	$scope.devices = devices.get();
 	$scope.categories = categories.get();
@@ -105,8 +107,31 @@ deviceMgr.controller('deviceCtl', function($scope, $routeParams, $modal, devices
 		}
 	};
 
+	$scope.clone = function(deviceToClone) {
+		var newDevice = {
+			//copy all properties except deviceID
+	    description : deviceToClone.description,
+	    availableFrom : deviceToClone.availableFrom,
+	    dateOfPurchase : deviceToClone.dateOfPurchase,
+	    dateOutOfService : deviceToClone.dateOutOfService,
+	    defaultLoanTime : deviceToClone.defaultLoanTime,
+	    isWorking : deviceToClone.isWorking,
+	    notes : deviceToClone.notes,
+	    serial : deviceToClone.serial,
+	    visible : deviceToClone.visible,
+	    typeID : deviceToClone.typeID,
+			//properties for current view
+			loanStatus : deviceToClone.loanStatus,
+			type : deviceToClone.type,
+			subCategory : deviceToClone.subCategory,
+			parentCategory : deviceToClone.parentCategory
+	  };
+		devices.addDevice(newDevice);
+	};
+
 });
 
+//ADD NEW DEVICE CONTROLLER
 deviceMgr.controller('newDeviceCtl', function($scope, $routeParams, devices, categories, types) {
 	$scope.devices = devices.get();
 	$scope.categories = categories.get();
