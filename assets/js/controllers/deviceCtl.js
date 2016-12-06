@@ -106,7 +106,7 @@ deviceMgr.controller('deviceCtl', function($scope, $routeParams, $modal, devices
 	    defaultLoanTime : deviceToClone.defaultLoanTime,
 	    isWorking : deviceToClone.isWorking,
 	    notes : deviceToClone.notes,
-	    serial : deviceToClone.serial,
+	    serial : null,
 	    visible : deviceToClone.visible,
 	    typeID : deviceToClone.typeID,
 			//properties for current view
@@ -116,6 +116,11 @@ deviceMgr.controller('deviceCtl', function($scope, $routeParams, $modal, devices
 			parentCategory : deviceToClone.parentCategory
 	  };
 		devices.addDevice(newDevice);
+	};
+
+	//function for switching in and out of edit mode
+	$scope.edit = function (value) {
+	$scope.editable = value;
 	};
 
 });

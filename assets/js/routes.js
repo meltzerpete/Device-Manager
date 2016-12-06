@@ -46,10 +46,6 @@ deviceMgr.config( function($routeProvider, $locationProvider){
 		controller: 'deviceCtl',
 		templateUrl: 'assets/partials/deviceDetails.html'
 	})
-	.when('/editDeviceDetails/:id', {
-		controller: 'deviceCtl',
-		templateUrl: 'assets/partials/editDeviceDetails.html'
-	})
 	.when('/login', {
 
 		templateUrl: 'assets/partials/loginpage.html'

@@ -8,7 +8,7 @@ var deviceMgr = angular.module('deviceMgr');
 
 	//function for switching in and out of edit mode
 	$scope.edit = function (value) {
-		$scope.editable = value;
+	$scope.editable = value;
 	};
 
 });
