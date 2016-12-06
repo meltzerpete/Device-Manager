@@ -15,16 +15,20 @@ deviceMgr.config( function($routeProvider, $locationProvider){
 		templateUrl: 'assets/partials/changepassword.html'
 	})
 	.when('/client', {
-
+		controller: 'deviceCtl',
 		templateUrl: 'assets/partials/client.html'
 	})
 	.when('/clientSearch', {
 		controller: 'clientSearchCtl',
 		templateUrl: 'assets/partials/clientSearch.html'
 	})
-	.when('/clientDetails', {
-
+	.when('/clientDetails/:id', {
+		controller: 'clientDetailsCtl',
 		templateUrl: 'assets/partials/clientDetails.html'
+	})
+	.when('/clientDeviceDetails/:id', {
+		controller: 'deviceCtl',
+		templateUrl: 'assets/partials/clientDeviceDetails.html'
 	})
 	.when('/clientProfile/:id', {
 		controller: 'clientProfileCtl',

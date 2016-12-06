@@ -5,4 +5,10 @@ var deviceMgr = angular.module('deviceMgr');
 
 	//get device
 	$scope.activeClient = clients.find(parseInt($routeParams.id));
+
+	//function for switching in and out of edit mode
+	$scope.edit = function (value) {
+		$scope.editable = value;
+	};
+
 });

@@ -4,7 +4,7 @@ deviceMgr.factory('clients', function devicesFactory(){
 	var clients = [
 		{
 	    clientID : 0,
-	    clientFistName : "lizhi",
+	    clientFirstName : "lizhi",
 	    clientLastName : "Lu",
 	    clientCourse: null,
 	    clientSupervisor: null,
@@ -14,7 +14,7 @@ deviceMgr.factory('clients', function devicesFactory(){
 	  },
 	  {
 	    clientID : 1,
-	    clientFistName : "Peter",
+	    clientFirstName : "Peter",
 	    clientLastName : "Melzer",
 	    clientCourse:"MSc CS",
 	    clientSupervisor:"Jo Hubbs",
@@ -24,7 +24,7 @@ deviceMgr.factory('clients', function devicesFactory(){
 	  },
 	  {
 	    clientID : 2,
-	    clientFistName : "Zhenning",
+	    clientFirstName : "Zhenning",
 	    clientLastName : "Lou",
 	    clientCourse: null,
 	    clientSupervisor: null,
