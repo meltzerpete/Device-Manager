@@ -13,52 +13,49 @@
 
         <thead>   <!--table heading-->
           <tr>
-            <th><small><span class="glyphicon glyphicon-sort"></span>
-            </small> ID</th>   <!--deviceID-->
+            <th>
+              <a data-ng-click="sortfield =
+                (sortfield === 'clientID') ?
+                '-clientID' : 'clientID'">
+                ID
+              </a>
+            </th>   <!--deviceID-->
 
-            <th><small><span class="glyphicon glyphicon-sort"></span>
-            </small> Name</th>   <!--clientFirstName + clientLastName-->
+            <th>
+              <a data-ng-click="sortfield =
+                (sortfield === 'clientLastName') ?
+                '-clientLastName' : 'clientLastName'">
+                Name
+              </a>
+            </th>   <!--clientFirstName + clientLastName-->
 
-            <th><small><span class="glyphicon glyphicon-sort"></span>
-            </small> Type</th>    <!--clientType-->
+            <th>
+              <a data-ng-click="sortfield =
+                (sortfield === 'clientType') ?
+                '-clientType' : 'clientType'">
+                Type
+              </a>
+            </th>    <!--clientType-->
 
-            <th class="hidden-xs"><small><span class="glyphicon glyphicon-sort"></span>
-            </small> Email Address</th>    <!--clientEmail-->
+            <th class="hidden-xs">Email Address</th>    <!--clientEmail-->
 
             <th></th>
 
           </tr>
         </thead>    <!--close table heading-->
 
-        <tr>    <!--first row-->
-          <td>001</td>
-          <td>Borris Morris</td>
-          <td>Postgraduate</td>
-          <td class="hidden-xs">borris@morris.com</td>
+        <tr data-ng-repeat="client in clients
+          | filter: search
+          | orderBy: sortfield">    <!--first row-->
+          <td>{{client.clientID}}</td>
+          <td>{{client.clientFistName}} {{client.clientLastName}}</td>
+          <td>{{client.clientType}}</td>
+          <td class="hidden-xs">{{client.clientEmail}}</td>
           <td>
-              <a type="button" href="/profile" class="btn btn-xs btn-info pull-right">Info</a>
+              <a type="button" href="/clientProfile/{{client.clientID}}" class="btn btn-xs btn-info pull-right">Details</a>
           </td>
-        </tr>   <!--end first row-->
+        </tr>   <!--end row-->
 
-        <tr>    <!--second row-->
-          <td>002</td>
-          <td>Ben Johnson</td>
-          <td>External</td>
-          <td class="hidden-xs">ben@johnson.net</td>
-          <td>
-              <button type="button" class="btn btn-xs btn-info pull-right">Info</button>
-          </td>
-        </tr>   <!--end second row-->
-
-        <tr>    <!--third row-->
-          <td>003</td>
-          <td>Mandy Mandigan</td>
-          <td>UCL Staff</td>
-          <td class="hidden-xs">mandymandigan@hotmail.com</td>
-          <td>
-              <a type="button" class="btn btn-xs btn-info pull-right">Info</a>
-          </td>
-        </tr>   <!--end third row-->
 
       </table>
 

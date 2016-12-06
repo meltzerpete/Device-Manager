@@ -19,12 +19,16 @@ deviceMgr.config( function($routeProvider, $locationProvider){
 		templateUrl: 'assets/partials/client.html'
 	})
 	.when('/clientSearch', {
-
+		controller: 'clientSearchCtl',
 		templateUrl: 'assets/partials/clientSearch.html'
 	})
 	.when('/clientDetails', {
 
 		templateUrl: 'assets/partials/clientDetails.html'
+	})
+	.when('/clientProfile/:id', {
+		controller: 'clientProfileCtl',
+		templateUrl: 'assets/partials/clientProfile.html'
 	})
 	.when('/currentLoans', {
 
@@ -53,10 +57,6 @@ deviceMgr.config( function($routeProvider, $locationProvider){
 	.when('/newDevice/:id', {
 		controller : 'newDeviceCtl',
 		templateUrl: 'assets/partials/newDevice.html'
-	})
-	.when('/profile', {
-
-		templateUrl: 'assets/partials/profile.html'
 	})
 	.when('/requests', {
 

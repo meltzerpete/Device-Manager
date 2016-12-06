@@ -28,9 +28,18 @@
 
 
   <!-- Controllers, routes and factories -->
-  <script type="text/javascript" src="assets/js/controllers.js"></script>
+  <script type="text/javascript" src="assets/js/controllers/appCtl.js"></script>
+  <script type="text/javascript" src="assets/js/controllers/deviceCtl.js"></script>
+  <script type="text/javascript" src="assets/js/controllers/newDeviceCtl.js"></script>
+  <script type="text/javascript" src="assets/js/controllers/clientProfileCtl.js"></script>
+  <script type="text/javascript" src="assets/js/controllers/clientSearchCtl.js"></script>
+
   <script type="text/javascript" src="assets/js/routes.js"></script>
-  <script type="text/javascript" src="assets/js/factories.js"></script>
+
+  <script type="text/javascript" src="assets/js/factories/categoriesFactory.js"></script>
+  <script type="text/javascript" src="assets/js/factories/clientsFactory.js"></script>
+  <script type="text/javascript" src="assets/js/factories/devicesFactory.js"></script>
+  <script type="text/javascript" src="assets/js/factories/typesFactory.js"></script>
   <base href="/">
 </head>
 
@@ -51,7 +60,7 @@
 
     <form class="navbar-form navbar-right">
       <div class="form-group">
-        <input type="text" class="form-control" placeholder="Search"
+        <input type="text" class="form-control" id="searchInput"
         data-ng-model="search">
       </div>
     </form>

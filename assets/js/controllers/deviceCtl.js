@@ -1,15 +1,4 @@
-var deviceMgr = angular.module('deviceMgr', ['ngRoute', 'ngSanitize', 'mgcrea.ngStrap']);
-
-//MAIN APP CONTROLLER
-deviceMgr.controller('appCtl', function($scope, $location, $window){
-	$scope.pageClass = function(path){
-		return (path == $location.path()) ? 'active' : '';
-	};
-
-	$scope.back = function() {
-		$window.history.back();
-	};
-});
+var deviceMgr = angular.module('deviceMgr');
 
 //DEVICES CONTROLLER
 deviceMgr.controller('deviceCtl', function($scope, $routeParams, $modal, devices, categories, types) {
@@ -111,7 +100,7 @@ deviceMgr.controller('deviceCtl', function($scope, $routeParams, $modal, devices
 		var newDevice = {
 			//copy all properties except deviceID
 	    description : deviceToClone.description,
-	    availableFrom : deviceToClone.availableFrom,
+	    availableFrom : null,
 	    dateOfPurchase : deviceToClone.dateOfPurchase,
 	    dateOutOfService : deviceToClone.dateOutOfService,
 	    defaultLoanTime : deviceToClone.defaultLoanTime,
@@ -121,44 +110,12 @@ deviceMgr.controller('deviceCtl', function($scope, $routeParams, $modal, devices
 	    visible : deviceToClone.visible,
 	    typeID : deviceToClone.typeID,
 			//properties for current view
-			loanStatus : deviceToClone.loanStatus,
+			loanStatus : "Available Now",
 			type : deviceToClone.type,
 			subCategory : deviceToClone.subCategory,
 			parentCategory : deviceToClone.parentCategory
 	  };
 		devices.addDevice(newDevice);
-	};
-
-});
-
-//ADD NEW DEVICE CONTROLLER
-deviceMgr.controller('newDeviceCtl', function($scope, $routeParams, devices, categories, types) {
-	$scope.devices = devices.get();
-	$scope.categories = categories.get();
-	$scope.types = types.get();
-
-	// $scope.activeDevice = null;
-
-	$scope.getParentCategory = function(typeID) {
-		return categories.find($scope.getsubCategory(typeID).parentCategoryID);
-	};
-
-	$scope.getsubCategory = function(typeID) {
-		return categories.find(types.find(typeID).categoryID);
-	};
-
-	$scope.activeType = types.find(parseInt($routeParams.id));
-
-	$scope.activeType.subCategory = $scope.getsubCategory($scope.activeType.typeID);
-	$scope.activeType.parentCategory = $scope.getParentCategory($scope.activeType.subCategory.categoryID);
-
-	$scope.add = function() {
-		$scope.activeDevice.availableFrom = null;
-		$scope.activeDevice.dateOutOfService = null;
-		$scope.activeDevice.typeID = $scope.activeType.typeID;
-		devices.addDevice($scope.activeDevice);
-
-		$scope.back();
 	};
 
 });

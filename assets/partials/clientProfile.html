@@ -18,14 +18,14 @@
             <label for="clientName" class="col-sm-2 col-xs-4 control-label">
               Name</label>
             <div class="col-sm-4 col-xs-8">
-              <p>Borris Morris</p>
+              <p>{{activeClient.clientFistName}} {{activeClient.clientLastName}}</p>
             </div>
 
             <!--clientType i.e. student/staff-->
             <label for="clientType"
             class="col-sm-2 col-xs-4 control-label">Client Type</label>
             <div class="col-sm-4 col-xs-8">
-              <p>Student</p>
+              <p>{{activeClient.clientType}}</p>
             </div>
 
           </div>    <!--close form group-->
@@ -42,14 +42,14 @@
             <label for="clientEmail" class="col-sm-2 col-xs-4 control-label">
               Email</label>
             <div class="col-sm-4 col-xs-8">
-              <p>borris@morris.com</p>
+              <p>{{activeClient.clientEmail}}</p>
             </div>
 
             <!--clientStudentNumber if applicable-->
             <label for="studentNumber" class="col-sm-2 col-xs-4 control-label">
               Student Number</label>
             <div class="col-sm-4 col-xs-8">
-              <p>1718056</p>
+              <p>{{activeClient.clientStudentNo}}</p>
             </div>
 
           </div>    <!--close form group-->
@@ -66,14 +66,14 @@
             <label for="studentNumber" class="col-sm-2 col-xs-4 control-label">
               Course</label>
             <div class="col-sm-4 col-xs-8">
-              <p>MEng CS</p>
+              <p>{{activeClient.clientCourse}}</p>
             </div>
 
             <!--clientSupervisor if applicable-->
             <label for="studentNumber" class="col-sm-2 col-xs-4 control-label">
               Supervisor</label>
             <div class="col-sm-4 col-xs-8">
-              <p>Dr. Abbott</p>
+              <p>{{activeClient.clientSupervisor}}</p>
             </div>
 
           </div>    <!--close form group-->
@@ -91,8 +91,7 @@
               Group(s)</label>
             <div class="col-sm-4 col-xs-8">
               <dl style="list-style-type:none">
-                <li>COMPGC14-LaunchPad</li>
-                <li>COMPGC28-Project</li>
+                <li>TODO!!!</li>
               </dl>
             </div>
 
@@ -103,7 +102,9 @@
       <div class="row">
         <div class="col-xs-12">
           <span class="pull-right">
-            <button type="button" class="btn btn-sm btn-info">Edit</button>
+            <button type="button" class="btn btn-sm btn-info"
+              data-ng-click="back()">Back</button>
+            <button type="button" class="btn btn-sm btn-warning">Edit</button>
           </span>
         </div>
       </div>
