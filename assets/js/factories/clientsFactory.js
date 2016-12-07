@@ -4,36 +4,61 @@ deviceMgr.factory('clients', function devicesFactory(){
 	var clients = [
 		{
 	    clientID : 0,
-	    clientFirstName : "lizhi",
-	    clientLastName : "Lu",
+	    clientFirstName : "John",
+	    clientLastName : "Stokes",
 	    clientCourse: null,
 	    clientSupervisor: null,
 	    clientType:"UCL Staff",
 	    clientStudentNo: null,
-	    clientEmail:"lizhilu@ucl.ac.uk"
+	    clientEmail:"john.stokes@ucl.ac.uk"
 	  },
 	  {
 	    clientID : 1,
-	    clientFirstName : "Peter",
-	    clientLastName : "Melzer",
+	    clientFirstName : "Sue",
+	    clientLastName : "Dayly",
 	    clientCourse:"MSc CS",
 	    clientSupervisor:"Jo Hubbs",
 	    clientType:"UCL Postgraduate",
 	    clientStudentNo: 16092222,
-	    clientEmail:"melzzer.peter@ucl.ac.uk"
+	    clientEmail:"sue.dayly@ucl.ac.uk"
 	  },
 	  {
 	    clientID : 2,
-	    clientFirstName : "Zhenning",
-	    clientLastName : "Lou",
+	    clientFirstName : "Arthur",
+	    clientLastName : "Wang",
 	    clientCourse: null,
 	    clientSupervisor: null,
 	    clientType:"External",
 	    clientStudentNo: null,
-	    clientEmail:"zhenninglou@homtail.com"
+	    clientEmail:"arthurwang@hotmail.com"
+	  },
+	  {
+	    clientID : 3,
+	    clientFirstName : "John",
+	    clientLastName : "Lally",
+	    clientCourse: "BSc Systems Engineering",
+	    clientSupervisor: null,
+	    clientType:"UCL Undergraduate",
+	    clientStudentNo: 24528878,
+	    clientEmail:"john.lally@ucl.ac.uk"
+	  },
+	  {
+	    clientID : 4,
+	    clientFirstName : "Lauren",
+	    clientLastName : "Wright",
+	    clientCourse: "MSc CS",
+	    clientSupervisor: null,
+	    clientType:"UCL Postgraduate",
+	    clientStudentNo: 129899,
+	    clientEmail:"lauren.wright@ucl.ac.uk"
 	  }
 	];
 	return {
+		add: function(client) {
+			client.clientID = clients.length;
+			clients.push(client);
+		},
+
 		get: function() {
 			return clients;
 		},

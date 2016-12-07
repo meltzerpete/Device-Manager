@@ -20,7 +20,7 @@
   <script type="text/javascript" src="assets/js/angular.min.js"></script>
   <script type="text/javascript" src="assets/js/angular-route.min.js"></script>
   <script type="text/javascript" src="assets/js/angular-sanitize.min.js"></script>
-  <script src="assets/js/angular-animate.min.js"></script>
+  <script type="text/javascript" src="assets/js/angular-animate.min.js"></script>
 
   <!-- angular-strap -->
   <script src="assets/js/angular-strap.min.js"></script>
@@ -34,12 +34,15 @@
   <script type="text/javascript" src="assets/js/controllers/clientDetailsCtl.js"></script>
   <script type="text/javascript" src="assets/js/controllers/clientProfileCtl.js"></script>
   <script type="text/javascript" src="assets/js/controllers/clientSearchCtl.js"></script>
+  <script type="text/javascript" src="assets/js/controllers/loansCtl.js"></script>
 
   <script type="text/javascript" src="assets/js/routes.js"></script>
 
   <script type="text/javascript" src="assets/js/factories/categoriesFactory.js"></script>
   <script type="text/javascript" src="assets/js/factories/clientsFactory.js"></script>
   <script type="text/javascript" src="assets/js/factories/devicesFactory.js"></script>
+  <script type="text/javascript" src="assets/js/factories/loansFactory.js"></script>
+  <script type="text/javascript" src="assets/js/factories/staffFactory.js"></script>
   <script type="text/javascript" src="assets/js/factories/typesFactory.js"></script>
   <base href="/">
 </head>
@@ -72,7 +75,11 @@
     <div class="collapse navbar-collapse" id="nav-collapse">
       <ul class="nav navbar-nav">
         <li class="dropdown">
-          <a href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mike Jones <span class="caret"></span></a>
+          <a href class="dropdown-toggle" data-toggle="dropdown" role="button"
+            aria-haspopup="true" aria-expanded="false">
+            {{currentUser.staffFirstName}} {{currentUser.staffLastName}}
+            <span class="caret"></span>
+          </a>
           <ul class="dropdown-menu">
             <li data-ng-class="pageClass('/changepassword')"><a href="/changepassword">Change Password</a></li>
             <li data-ng-class="pageClass('/')"><a href="/">Admin Controls</a></li>
@@ -90,9 +97,9 @@
             <li data-ng-class="pageClass('/client')"><a href="/client">View Client Page (testing only)</a></li>
           </ul>
         </li>
-        <li data-ng-class="pageClass('/requests')"><a href="/requests">Pending <span class="badge">12</span><span class="sr-only">(current)</span></a></li>
-        <li data-ng-class="pageClass('/approved')"><a href="/approved">Approved <span class="badge">7</span></a></li>
-        <li data-ng-class="pageClass('/currentLoans')"><a href="/currentLoans">Current <span class="badge">18</span></a></li>
+        <li data-ng-class="pageClass('/requests')"><a href="/requests">Requests <span class="badge">{{requestsNo}}</span><span class="sr-only">(current)</span></a></li>
+        <li data-ng-class="pageClass('/approved')"><a href="/approved">Approved <span class="badge">{{approvedNo}}</span></a></li>
+        <li data-ng-class="pageClass('/currentLoans')"><a href="/currentLoans">Current <span class="badge">{{currentNo}}</span></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

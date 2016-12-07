@@ -11,11 +11,22 @@
 
   <form class="form-horizontal">
 
+    <!--Requested return date-->
+    <div class="form-group">
+      <label for="length" class="col-sm-2 control-label">Return Date</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" data-ng-model="selectedDate"
+          name="date" bs-datepicker data-date-format="dd/MM/y"
+          data-min-date="{{parseDate(device.availableFrom)}}">
+      </div>
+    </div>
+
     <!--First name-->
     <div class="form-group">
       <label for="ClientFirstName" class="col-sm-2 control-label">First Name</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="ClientFirstName" placeholder="First Name">
+        <input type="text" class="form-control" placeholder="First Name"
+          data-ng-model="client.clientFirstName">
       </div>
     </div>
 
@@ -23,7 +34,8 @@
     <div class="form-group">
       <label for="ClientLastName" class="col-sm-2 control-label">Last Name</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="ClientLastName" placeholder="Last Name">
+        <input type="text" class="form-control" placeholder="Last Name"
+          data-ng-model="client.clientLastName">
       </div>
     </div>
 
@@ -31,7 +43,8 @@
     <div class="form-group">
       <label for="ClientStudentNo" class="col-sm-2 control-label">Student Number</label>
       <div class="col-sm-10">
-        <input type="tel" class="form-control" id="ClientStudentNo" placeholder="Student Number">
+        <input type="tel" class="form-control" placeholder="Student Number"
+          data-ng-model="client.clientStudentNo">
       </div>
     </div>
 
@@ -39,7 +52,8 @@
     <div class="form-group">
       <label for="clientEmail" class="col-sm-2 control-label">Email</label>
       <div class="col-sm-10">
-        <input type="email" class="form-control" id="clientEmail" placeholder="Email">
+        <input type="email" class="form-control" placeholder="Email"
+          data-ng-model="client.clientEmail">
       </div>
     </div>
 
@@ -47,7 +61,8 @@
     <div class="form-group">
       <label for="ClientCourse" class="col-sm-2 control-label">Course</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="ClientCourse" placeholder="Course">
+        <input type="text" class="form-control" placeholder="Course"
+          data-ng-model="client.clientCourse">
       </div>
     </div>
 
@@ -55,7 +70,8 @@
     <div class="form-group">
       <label for="ClientSupervisor" class="col-sm-2 control-label">Supervisor</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="ClientSupervisor" placeholder="Course Supervisor">
+        <input type="text" class="form-control" placeholder="Course Supervisor"
+          data-ng-model="client.clientSupervisor">
       </div>
     </div>
 
@@ -63,7 +79,7 @@
     <div class="form-group">
       <label for="ClientType" class="col-sm-2 control-label">Status</label>
       <div class="col-sm-10">
-        <select class="form-control">
+        <select class="form-control" data-ng-model="client.clientType">
           <option>UCL Undergraduate</option>
           <option>UCL Postgraduate</option>
           <option>UCL Staff</option>
@@ -75,8 +91,10 @@
     <div class="form-group">
       <div class="col-xs-12">
         <span class="pull-right">
-          <button type="submit" class="btn btn-sm btn-danger">Back</button>
-          <button type="submit" class="btn btn-sm btn-success">Submit</button>
+          <button type="submit" data-ng-click="back()"
+            class="btn btn-sm btn-danger">Back</button>
+          <button type="submit" data-ng-click="makeRequest()"
+            class="btn btn-sm btn-success">Submit</button>
         </span>
       </div>
     </div>

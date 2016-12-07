@@ -1,7 +1,22 @@
 var deviceMgr = angular.module('deviceMgr', ['ngRoute', 'ngSanitize', 'mgcrea.ngStrap']);
 
 //MAIN APP CONTROLLER
-deviceMgr.controller('appCtl', function($scope, $location, $window){
+deviceMgr.controller('appCtl', function($scope, $rootScope, $location, $window, staff, loans){
+
+	//member of staff currently logged in
+	//TODO must change this when log in system implemented
+	$scope.currentUser = staff.find(0);
+
+	//numbers for tabs at top of navbar
+	$rootScope.updateNav = function() {
+		$rootScope.requestsNo = loans.getRequestsNo();
+		$rootScope.approvedNo = loans.getApprovedNo();
+		$rootScope.currentNo = loans.getCurrentNo();
+		//add others here
+	};
+
+	//call the update function when first loaded
+	$rootScope.updateNav();
 
 	//Function to change search placeholder depending on current view
 	$scope.$on("$routeChangeSuccess", function() {

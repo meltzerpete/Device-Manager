@@ -7,7 +7,7 @@ deviceMgr.config( function($routeProvider, $locationProvider){
 		templateUrl: 'assets/partials/dashboard.html'
 	})
 	.when('/approved', {
-
+		controller: 'loansCtl',
 		templateUrl: 'assets/partials/approved.html'
 	})
 	.when('/changepassword', {
@@ -35,7 +35,7 @@ deviceMgr.config( function($routeProvider, $locationProvider){
 		templateUrl: 'assets/partials/clientProfile.html'
 	})
 	.when('/currentLoans', {
-
+		controller: 'loansCtl',
 		templateUrl: 'assets/partials/currentLoans.html'
 	})
 	.when('/dashboard', {
@@ -59,7 +59,7 @@ deviceMgr.config( function($routeProvider, $locationProvider){
 		templateUrl: 'assets/partials/newDevice.html'
 	})
 	.when('/requests', {
-
+		controller: 'loansCtl',
 		templateUrl: 'assets/partials/requests.html'
 	})
 	.otherwise({

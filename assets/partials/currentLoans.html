@@ -1,242 +1,225 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Current Loan</title>
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <!-- Optional theme -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-</head>
+<div class="container">
 
-<body>
-  <div class="container">
+  <div class="panel-group">
 
-    <div class="panel-group">
+    <div data-ng-repeat="loan in loans
+      | filter: {current: true}
+      | orderBy: 'due'"
+      class="panel"
+      data-ng-class="
+      loan.overdue ? 'panel-danger' :
+      'panel-default'">   <!--start panel-->
 
-      <div class="panel panel-danger">   <!--start panel-->
-
-        <div class="panel-heading">
-          <h3 class="panel-title pull-left">
-            1: Borris Morris - PIC Board
-          </h3>
-          <div class="panel-title pull-right">2 days 3 hours 10 mins 3 sec</div>
-          <div class="clearfix"></div>
-        </div>
-
-        <div class="panel-body">   <!--TODO: add ng-show here-->
-          <form>
-
-            <!--Information about the client (TOP)-->
-            <div class="row">
-              <h3 class="col-md-1">Client</h3>
-            </div>
-
-            <!--CLIENT INFO HERE-->
-            <div class="row">   <!--cliet row-->
-
-              <div class="col-xs-12 col-md-6">
-                <div class="form-group">
-
-                  <!--client name-->
-                  <label for="clientName" class="col-xs-4 control-label">
-                    Name</label>
-                  <div class="col-xs-8">
-                    <p>Borris Morris</p>
-                  </div>
-
-                </div>    <!--close form-group-->
-              </div>    <!--close col-xs-12 col-md-6-->
-
-              <div class="col-xs-12 col-md-6">
-                <div class="form-group">
-
-                  <!--client type i.e. student/staff-->
-                  <label for="clientType"
-                  class="col-xs-4 control-label">Client Type</label>
-                  <div class="col-xs-8">
-                    <p>Student</p>
-                  </div>
-
-                </div>    <!--close form-group-->
-              </div>    <!--close col-xs-12 col-md-6-->
-
-              <div class="col-xs-12 col-md-6">
-                <div class="form-group">
-
-                  <!--client email-->
-                  <label for="clientEmail" class="col-xs-4 control-label">
-                    Email</label>
-                  <div class="col-xs-8">
-                    <p>borris@morris.com</p>
-                  </div>
-
-                </div>    <!--close form-group-->
-              </div>    <!--close col-xs-12 col-md-6-->
-
-              <div class="col-xs-12 col-md-6">
-                <div class="form-group">
-
-                  <!--client student number if applicable-->
-                  <label for="studentNumber" class="col-xs-4 control-label">
-                    Student Number</label>
-                  <div class="col-xs-8">
-                    <p>1718056</p>
-                  </div>
-
-                </div>    <!--close form-group-->
-              </div>    <!--close col-xs-12 col-md-6-->
-
-            </div>    <!--end client row-->
-
-            <!--Information about the device (BOTTOM)-->
-            <div class="row">
-              <h3 class="col-md-1">Device</h3>
-            </div>
-
-            <!--DEVICE INFO HERE-->
-            <div class="row">   <!--device row-->
-
-              <div class="col-xs-12 col-md-6">
-                <div class="form-group">
-
-                  <!--device name-->
-                  <label for="deviceName" class="col-xs-4 control-label">
-                    Name</label>
-                  <div class="col-xs-8">
-                    <p>PIC Board</p>
-                  </div>
-
-                </div>    <!--close form-group-->
-              </div>    <!--close col-xs-12 col-md-6-->
-
-              <div class="col-xs-12 col-md-6">
-                <div class="form-group">
-
-                  <!--category-->
-                  <label for="categoryName"
-                  class="col-xs-4 control-label">Device Category</label>
-                  <div class="col-xs-8">
-                    <p>Electronics</p>
-                  </div>
-
-                </div>    <!--close form-group-->
-              </div>    <!--close col-xs-12 col-md-6-->
-
-              <div class="col-xs-12 col-md-6">
-                <div class="form-group">
-
-                  <!--deviceID-->
-                  <label for="deviceID" class="col-xs-4 control-label">
-                    Device ID</label>
-                  <div class="col-xs-8">
-                    <p>271</p>
-                  </div>
-
-                </div>    <!--close form-group-->
-              </div>    <!--close col-xs-12 col-md-6-->
-
-              <div class="col-xs-12 col-md-6">
-                <div class="form-group">
-
-                  <!--device serial/IMEI-->
-                  <label for="studentNumber" class="col-xs-4 control-label">
-                    Serial Number</label>
-                  <div class="col-xs-8">
-                    <p>004A-2711</p>
-                  </div>
-
-                </div>    <!--close form-group-->
-              </div>    <!--close col-xs-12 col-md-6-->
-
-              <div class="col-xs-12 col-md-6">
-                <div class="form-group">
-
-                  <!--device description-->
-                  <label for="deviceID" class="col-xs-4 control-label">
-                    Description</label>
-                  <div class="col-xs-8">
-                    <p>PIC Prototyping board for 18 pin PICs.</p>
-                  </div>
-
-                </div>    <!--close form-group-->
-              </div>    <!--close col-xs-12 col-md-6-->
-
-              <div class="col-xs-12 col-md-6">
-                <div class="form-group">
-
-                  <!--notes about the device-->
-                  <label for="studentNumber" class="col-xs-4 control-label">
-                    Notes</label>
-                  <div class="col-xs-8">
-                    <p>Power adapter missing.</p>
-                  </div>
-
-                </div>    <!--close form-group-->
-              </div>    <!--close col-xs-12 col-md-6-->
-
-              <div class="col-xs-12 col-md-6">
-                <div class="form-group">
-
-                  <!--due date-->
-                  <label for="due" class="col-xs-4 control-label">
-                    Due</label>
-                  <div class="col-xs-8">
-                    <p>14/12/2016</p>
-                  </div>
-
-                </div>    <!--close form-group-->
-              </div>    <!--close col-xs-12 col-md-6-->
-
-            </div>    <!--close device row-->
-
-            <div class="form-group pull-right">   <!--action buttons-->
-
-              <br />
-
-              <button type="button" class="btn btn-sm btn-danger">Send Notification</button>
-
-              <button type="button" class="btn btn-sm btn-success">Sign in</button>
-
-            </div>    <!--end action buttons-->
-
-          </form>   <!--end form-->
-
-
-        </div>    <!--close panel body-->
-
-      </div>    <!--end panel-->
-
-      <div class="panel panel-danger">
-        <div class="panel-heading">
-          <h3 class="panel-title pull-left">2: Mandy Mandigan - Android Tablet</h3>
-          <div class="panel-title pull-right">1 days 2 hours 0 mins 0 sec</div>
-          <div class="clearfix"></div>
-        </div>
+      <div class="panel-heading">
+        <h3 class="panel-title pull-left">
+          {{loan.clientFirstName}}
+          {{loan.clientLastName}}
+          -
+          {{loan.typeName}}
+        </h3>
+        <div class="panel-title pull-right">
+          {{
+            loan.overdue ?
+            ("Overdue: " +
+            (loan.overdueDays | date: 'd'))
+            :
+            ("Due in: " +
+            (loan.dueInDays | date: 'd'))
+          }} days
+          </div>
+        <div class="clearfix"></div>
       </div>
 
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">3: Joseph Jobs - Projector</h3>
-        </div>
-      </div>
+      <div class="panel-body">   <!--TODO: add ng-show here-->
+        <form>
 
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">4: Ben Nevis - Arduino Uno</h3>
-        </div>
-      </div>
+          <!--Information about the client (TOP)-->
+          <div class="row">
+            <h3 class="col-md-1">Client</h3>
+          </div>
 
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">5: Susan Sprout - Samsung Laptop</h3>
-        </div>
-      </div>
+          <!--CLIENT INFO HERE-->
+          <div class="row">   <!--cliet row-->
 
-    </div>    <!--close panel-group-->
+            <div class="col-xs-12 col-md-6">
+              <div class="form-group">
 
-  </div>    <!--close container-->
-</body>
-</html>
+                <!--client name-->
+                <label for="clientName" class="col-xs-4 control-label">
+                  Name</label>
+                <div class="col-xs-8">
+                  <p>{{loan.clientFirstName}}
+                    {{loan.clientLastName}}
+                  </p>
+                </div>
+
+              </div>    <!--close form-group-->
+            </div>    <!--close col-xs-12 col-md-6-->
+
+            <div class="col-xs-12 col-md-6">
+              <div class="form-group">
+
+                <!--client type i.e. student/staff-->
+                <label for="clientType"
+                class="col-xs-4 control-label">Client Type</label>
+                <div class="col-xs-8">
+                  <p>{{loan.clientType}}</p>
+                </div>
+
+              </div>    <!--close form-group-->
+            </div>    <!--close col-xs-12 col-md-6-->
+
+            <div class="col-xs-12 col-md-6">
+              <div class="form-group">
+
+                <!--client email-->
+                <label for="clientEmail" class="col-xs-4 control-label">
+                  Email</label>
+                <div class="col-xs-8">
+                  <p>{{loan.clientEmail}}</p>
+                </div>
+
+              </div>    <!--close form-group-->
+            </div>    <!--close col-xs-12 col-md-6-->
+
+            <div class="col-xs-12 col-md-6">
+              <div class="form-group">
+
+                <!--client student number if applicable-->
+                <label for="studentNumber" class="col-xs-4 control-label">
+                  Student Number</label>
+                <div class="col-xs-8">
+                  <p>{{loan.clientStudentNo}}</p>
+                </div>
+
+              </div>    <!--close form-group-->
+            </div>    <!--close col-xs-12 col-md-6-->
+
+          </div>    <!--end client row-->
+
+          <!--Information about the device (BOTTOM)-->
+          <div class="row">
+            <h3 class="col-md-1">Device</h3>
+          </div>
+
+          <!--DEVICE INFO HERE-->
+          <div class="row">   <!--device row-->
+
+            <div class="col-xs-12 col-md-6">
+              <div class="form-group">
+
+                <!--device name-->
+                <label for="deviceName" class="col-xs-4 control-label">
+                  Type</label>
+                <div class="col-xs-8">
+                  <p>{{loan.typeName}}</p>
+                </div>
+
+              </div>    <!--close form-group-->
+            </div>    <!--close col-xs-12 col-md-6-->
+
+            <div class="col-xs-12 col-md-6">
+              <div class="form-group">
+
+                <!--category-->
+                <label for="categoryName"
+                class="col-xs-4 control-label">Device Category</label>
+                <div class="col-xs-8">
+                  <p>
+                    {{loan.parentCategoryName}}
+                    /
+                    {{loan.subCategoryName}}
+                    /
+                  </p>
+                </div>
+
+              </div>    <!--close form-group-->
+            </div>    <!--close col-xs-12 col-md-6-->
+
+            <div class="col-xs-12 col-md-6">
+              <div class="form-group">
+
+                <!--deviceID-->
+                <label for="deviceID" class="col-xs-4 control-label">
+                  Device ID</label>
+                <div class="col-xs-8">
+                  <p>{{loan.deviceID}}</p>
+                </div>
+
+              </div>    <!--close form-group-->
+            </div>    <!--close col-xs-12 col-md-6-->
+
+            <div class="col-xs-12 col-md-6">
+              <div class="form-group">
+
+                <!--device serial/IMEI-->
+                <label for="studentNumber" class="col-xs-4 control-label">
+                  Serial Number</label>
+                <div class="col-xs-8">
+                  <p>{{loan.deviceSerial}}</p>
+                </div>
+
+              </div>    <!--close form-group-->
+            </div>    <!--close col-xs-12 col-md-6-->
+
+            <div class="col-xs-12 col-md-6">
+              <div class="form-group">
+
+                <!--device description-->
+                <label for="deviceID" class="col-xs-4 control-label">
+                  Description</label>
+                <div class="col-xs-8">
+                  <p>{{loan.deviceDescription}}</p>
+                </div>
+
+              </div>    <!--close form-group-->
+            </div>    <!--close col-xs-12 col-md-6-->
+
+            <div class="col-xs-12 col-md-6">
+              <div class="form-group">
+
+                <!--notes about the device-->
+                <label for="studentNumber" class="col-xs-4 control-label">
+                  Notes</label>
+                <div class="col-xs-8">
+                  <p>{{loan.deviceNotes}}</p>
+                </div>
+
+              </div>    <!--close form-group-->
+            </div>    <!--close col-xs-12 col-md-6-->
+
+            <div class="col-xs-12 col-md-6">
+              <div class="form-group">
+
+                <!--due date-->
+                <label for="due" class="col-xs-4 control-label">
+                  Due</label>
+                <div class="col-xs-8">
+                  <p>{{loan.due | date: 'dd/MM/yyyy'}}</p>
+                </div>
+
+              </div>    <!--close form-group-->
+            </div>    <!--close col-xs-12 col-md-6-->
+
+          </div>    <!--close device row-->
+
+          <div class="form-group pull-right">   <!--action buttons-->
+
+            <br />
+
+            <button type="button" class="btn btn-sm btn-danger">Send Notification</button>
+
+            <button type="button" class="btn btn-sm btn-success">Sign in</button>
+
+          </div>    <!--end action buttons-->
+
+        </form>   <!--end form-->
+
+
+      </div>    <!--close panel body-->
+
+    </div>    <!--end panel-->
+
+  </div>    <!--close panel-group-->
+
+</div>    <!--close container-->
