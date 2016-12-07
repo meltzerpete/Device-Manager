@@ -11,22 +11,22 @@
       'panel-default'">   <!--start panel-->
 
       <div class="panel-heading">
-        <h3 class="panel-title pull-left">
+        <h3 class="panel-title">
           {{loan.clientFirstName}}
           {{loan.clientLastName}}
           -
           {{loan.typeName}}
+          <span class="pull-right">
+            {{
+              loan.overdue ?
+              ("Overdue: " +
+              (loan.overdueDays | date: 'd'))
+              :
+              ("Due in: " +
+              (loan.dueInDays | date: 'd'))
+            }} days
+          </span>
         </h3>
-        <div class="panel-title pull-right">
-          {{
-            loan.overdue ?
-            ("Overdue: " +
-            (loan.overdueDays | date: 'd'))
-            :
-            ("Due in: " +
-            (loan.dueInDays | date: 'd'))
-          }} days
-          </div>
         <div class="clearfix"></div>
       </div>
 
