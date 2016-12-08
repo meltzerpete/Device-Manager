@@ -15,9 +15,9 @@
           {{loan.clientFirstName}}
           {{loan.clientLastName}}
           -
-          {{loan.typeName}}
-          <span class="pull-right hidden-xs">
-            {{
+          {{loan.typeName}}&nbsp
+          <span class="pull-right">
+            &nbsp{{
               loan.overdue ?
               ("Overdue: " +
               (loan.overdueDays | date: 'd'))
