@@ -1,0 +1,18 @@
+[
+  {
+    "staffID" : 0,
+    "staffFirstName" : "Harry",
+    "staffLastName" : "Jones",
+    "password": "12345678",
+    "isAdmin": true,
+    "staffEmail":"harry.jones@ucl.ac.uk"
+  },
+  {
+    "staffID" : 1,
+    "staffFirstName" : "Sue",
+    "staffLastName" : "McCarthy",
+    "password": "12345678",
+    "isAdmin": false,
+    "staffEmail":"sue.mccarthy@ucl.ac.uk"
+  }
+]
