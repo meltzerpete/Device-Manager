@@ -15,6 +15,9 @@ var type = require("./data/type.json");
 
 var staff = require("./data/staff.json");
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended:false}));
+
 app.use(function(req, res, next) {
 	console.log(`${req.method} request for '${req.url}' -${JSON.stringify(req.body) }`);
 	next();
@@ -49,75 +52,119 @@ app.get("/api/type", function(req, res) {
 });
 
 app.post("/api/clients", function(req, res){
-  skierTerms.push(req.body);
-  res.json(skierTerms);
+  clients.push(req.body);
+  res.json(clients);
 });
 
 app.post("/api/devices", function(req, res){
-  skierTerms.push(req.body);
-  res.json(skierTerms);
+  devices.push(req.body);
+  res.json(devices);
 });
 
 app.post("/api/loan", function(req, res){
-  skierTerms.push(req.body);
-  res.json(skierTerms);
+  loan.push(req.body);
+  res.json(loan);
 });
 
 app.post("api/category", function(req, res){
-  skierTerms.push(req.body);
-  res.json(skierTerms);
+  category.push(req.body);
+  res.json(category);
 });
 
 app.post("/api/type", function(req, res){
-  skierTerms.push(req.body);
-  res.json(skierTerms);
+  type.push(req.body);
+  res.json(type);
 });
 
 app.post("/api/staff", function(req, res){
-  skierTerms.push(req.body);
-  res.json(skierTerms);
+  staff.push(req.body);
+  res.json(staff);
 });
 
-app.delete("/api/clients", function(req, res){
-  skierTerms = skierTerms.filter(function(definition){
-     return definition.term.toLowerCase() !== req.params.term.toLowerCase();
-  });
-  res.json(skierTerms);
+
+
+app.get("/api/category/:id", function(req, res){
+
+  res.json(category.filter(function(id){
+		  return id.term.toLowerCase() === req.params.term.toLowerCase();
+    });
+  );
 });
 
-app.delete("/api/category", function(req, res){
-  skierTerms = skierTerms.filter(function(definition){
-     return definition.term.toLowerCase() !== req.params.term.toLowerCase();
-  });
-  res.json(skierTerms);
+app.get("/api/clients/:id", function(req, res){
+
+  res.json(category.filter(function(id){
+		  return id.term.toLowerCase() === req.params.term.toLowerCase();
+    });
+  );
 });
 
-app.delete("/api/devices", function(req, res){
-  skierTerms = skierTerms.filter(function(definition){
-     return definition.term.toLowerCase() !== req.params.term.toLowerCase();
-  });
-  res.json(skierTerms);
+app.get("/api/loan/:id", function(req, res){
+
+  res.json(category.filter(function(id){
+		  return id.term.toLowerCase() === req.params.term.toLowerCase();
+    });
+  );
 });
 
-app.delete("/api/loan", function(req, res){
-  skierTerms = skierTerms.filter(function(definition){
-     return definition.term.toLowerCase() !== req.params.term.toLowerCase();
-  });
-  res.json(skierTerms);
+app.get("/api/staff/:id", function(req, res){
+
+  res.json(category.filter(function(id){
+		  return id.term.toLowerCase() === req.params.term.toLowerCase();
+    });
+  );
 });
 
-app.delete("/api/staff", function(req, res){
-  skierTerms = skierTerms.filter(function(definition){
-     return definition.term.toLowerCase() !== req.params.term.toLowerCase();
-  });
-  res.json(skierTerms);
+app.get("/api/devices/:id", function(req, res){
+
+  res.json(category.filter(function(id){
+		  return id.term.toLowerCase() === req.params.term.toLowerCase();
+    });
+  );
 });
 
-app.delete("/api/type", function(req, res){
-  skierTerms = skierTerms.filter(function(definition){
-     return definition.term.toLowerCase() !== req.params.term.toLowerCase();
+app.get("/api/type/:id", function(req, res){
+
+  res.json(category.filter(function(id){
+		  return id.term.toLowerCase() === req.params.term.toLowerCase();
+    });
+  );
+});
+
+
+app.delete("/api/category/:id", function(req, res){
+  category = category.filter(function(categoryID){
+     return categoryID.term.toLowerCase() !== req.params.term.toLowerCase();
   });
-  res.json(skierTerms);
+  res.json(category);
+});
+
+app.delete("/api/devices/:id", function(req, res){
+  devices = devices.filter(function(deviceID){
+     return deviceID.term.toLowerCase() !== req.params.term.toLowerCase();
+  });
+  res.json(devices);
+});
+
+app.delete("/api/loan/:id", function(req, res){
+  loan = loan.filter(function(loanID){
+     return loanID.term.toLowerCase() !== req.params.term.toLowerCase();
+  });
+  res.json(loan);
+});
+
+app.delete("/api/staff/:id", function(req, res){
+  staff = staff.filter(function(staffID){
+     return staffID.term.toLowerCase() !== req.params.term.toLowerCase();
+  });
+  res.json(staff);
+});
+
+app.delete("/api/type/:id", function(req, res){
+  type = type.filter(function(typeID){
+     return typeID.term.toLowerCase() !== req.params.term.toLowerCase();
+  });
+  res.json(type);
 });
 
 
