@@ -1,6 +1,6 @@
 var deviceMgr = angular.module('deviceMgr');
 
-deviceMgr.factory('devices', function devicesFactory(){
+deviceMgr.factory('devices', function devicesFactory($http){
 	var devices = [
 		{
 	    deviceID : 0,
@@ -73,9 +73,7 @@ deviceMgr.factory('devices', function devicesFactory(){
 			devices.push(device);
 		},
 
-		get: function() {
-			return devices;
-		},
+		get: $http.get('/api/devices'),
 
 		find: function(deviceID) {
 			index = devices.findIndex( function(x) {

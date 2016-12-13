@@ -87,7 +87,7 @@ app.get("/api/category/:id", function(req, res){
 
   res.json(category.filter(function(id){
 		  return id.term.toLowerCase() === req.params.term.toLowerCase();
-    });
+    })
   );
 });
 
@@ -95,7 +95,7 @@ app.get("/api/clients/:id", function(req, res){
 
   res.json(category.filter(function(id){
 		  return id.term.toLowerCase() === req.params.term.toLowerCase();
-    });
+    })
   );
 });
 
@@ -103,7 +103,7 @@ app.get("/api/loan/:id", function(req, res){
 
   res.json(category.filter(function(id){
 		  return id.term.toLowerCase() === req.params.term.toLowerCase();
-    });
+    })
   );
 });
 
@@ -111,23 +111,23 @@ app.get("/api/staff/:id", function(req, res){
 
   res.json(category.filter(function(id){
 		  return id.term.toLowerCase() === req.params.term.toLowerCase();
-    });
+    })
   );
 });
 
 app.get("/api/devices/:id", function(req, res){
 
-  res.json(category.filter(function(id){
-		  return id.term.toLowerCase() === req.params.term.toLowerCase();
-    });
+  res.json(devices.filter(function(device){
+		  return device.deviceID === parseInt(req.params.id);
+    })
   );
 });
 
 app.get("/api/type/:id", function(req, res){
 
-  res.json(category.filter(function(id){
+  res.json(type.filter(function(id){
 		  return id.term.toLowerCase() === req.params.term.toLowerCase();
-    });
+    })
   );
 });
 

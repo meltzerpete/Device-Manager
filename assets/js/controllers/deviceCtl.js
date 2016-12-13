@@ -2,7 +2,19 @@ var deviceMgr = angular.module('deviceMgr');
 
 //DEVICES CONTROLLER
 deviceMgr.controller('deviceCtl', function($scope, $routeParams, $modal, devices, categories, types) {
-	$scope.devices = devices.get();
+
+	devices.get.success(function(data) {
+    $scope.devices = data;
+		console.log(data);
+		//add derived loan status to each device object
+		$scope.devices.forEach(function (device) {
+			device.loanStatus = $scope.getLoanStatus(device);
+			device.type = $scope.getType(device.deviceID);
+			device.subCategory = $scope.getsubCategory(device.typeID);
+			device.parentCategory = $scope.getParentCategory(device.typeID);
+		});
+  });
+	//$scope.devices = devices.get();
 	$scope.categories = categories.get();
 	$scope.types = types.get();
 
@@ -76,13 +88,7 @@ deviceMgr.controller('deviceCtl', function($scope, $routeParams, $modal, devices
 		$scope.back();
 	};
 
-	//add derived loan status to each device object
-	$scope.devices.forEach(function (device) {
-		device.loanStatus = $scope.getLoanStatus(device);
-		device.type = $scope.getType(device.deviceID);
-		device.subCategory = $scope.getsubCategory(device.typeID);
-		device.parentCategory = $scope.getParentCategory(device.typeID);
-	});
+
 
 	$scope.addCat = function(addedCategory, addedSub, addedType) {
 		if (addedCategory) {
