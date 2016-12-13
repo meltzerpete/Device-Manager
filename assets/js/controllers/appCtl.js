@@ -1,4 +1,4 @@
-var deviceMgr = angular.module('deviceMgr', ['ngRoute', 'ngSanitize', 'mgcrea.ngStrap']);
+var deviceMgr = angular.module('deviceMgr', ['ngRoute', 'ngSanitize', 'mgcrea.ngStrap', 'ngResource']);
 
 //MAIN APP CONTROLLER
 deviceMgr.controller('appCtl', function($scope, $rootScope, $location, $window, staff, loans){
