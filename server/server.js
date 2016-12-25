@@ -29,14 +29,13 @@ app.use(cors());
 
 app.get("/api/devices", function(req, res) {
 	if (req.query.deviceID) {
-
+		//device us specified
 		var d = devices.filter(function(device){
 			  return device.deviceID === parseInt(req.query.deviceID);
 	    });
 		res.json(d[0]);
-
 	} else {
-		console.log("no query");
+		//no device specified - return array of all devices
 		res.json(devices);
 	}
 });
