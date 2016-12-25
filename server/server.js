@@ -28,7 +28,17 @@ app.use(express.static("../"));
 app.use(cors());
 
 app.get("/api/devices", function(req, res) {
-	res.json(devices);
+	if (req.query.deviceID) {
+
+		var d = devices.filter(function(device){
+			  return device.deviceID === parseInt(req.query.deviceID);
+	    });
+		res.json(d[0]);
+
+	} else {
+		console.log("no query");
+		res.json(devices);
+	}
 });
 
 app.get("/api/clients", function(req, res) {

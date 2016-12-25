@@ -1,6 +1,6 @@
 var deviceMgr = angular.module('deviceMgr');
 
-deviceMgr.factory('devices', function devicesFactory($http){
+deviceMgr.factory('devices', function devicesFactory($resource){
 	var devices = [
 		{
 	    deviceID : 0,
@@ -67,26 +67,41 @@ deviceMgr.factory('devices', function devicesFactory($http){
 	    typeID : 4
 	  }
 	];
-	return {
-		addDevice: function(device) {
-			device.deviceID = devices.length;
-			devices.push(device);
-		},
 
-		get: $http.get('/api/devices'),
+	var Resource = $resource('/api/devices/:id',
+		{deviceID: '@id'}, {
+			get: {method: 'GET', isArray: true},
+			update: {method: 'PUT'}
+		});
+		return {
+			get: function() {
+				return Resource.query();
+			},
+			find: function(id) {
+				return Resource.get({deviceID: id});
+			}
+		};
 
-		find: function(deviceID) {
-			index = devices.findIndex( function(x) {
-				return x.deviceID === deviceID;
-			});
-			return devices[index];
-		},
-
-		remove: function(deviceID) {
-			index = devices.findIndex( function(x) {
-				return x.deviceID === deviceID;
-			});
-			devices.splice(index, 1);
-		}
-	};
+	// return {
+	// 	addDevice: function(device) {
+	// 		device.deviceID = devices.length;
+	// 		devices.push(device);
+	// 	},
+	//
+	// 	// get: $http.get('/api/devices'),
+	//
+	// 	find: function(deviceID) {
+	// 		index = devices.findIndex( function(x) {
+	// 			return x.deviceID === deviceID;
+	// 		});
+	// 		return devices[index];
+	// 	},
+	//
+	// 	remove: function(deviceID) {
+	// 		index = devices.findIndex( function(x) {
+	// 			return x.deviceID === deviceID;
+	// 		});
+	// 		devices.splice(index, 1);
+	// 	}
+	// };
 });

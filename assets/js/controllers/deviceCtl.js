@@ -1,22 +1,41 @@
 var deviceMgr = angular.module('deviceMgr');
 
 //DEVICES CONTROLLER
-deviceMgr.controller('deviceCtl', function($scope, $routeParams, $modal, devices, categories, types) {
+deviceMgr.controller('deviceCtl', function($scope, $routeParams,
+	$resource, $modal, devices, categories, types) {
 
-	devices.get.success(function(data) {
-    $scope.devices = data;
-		console.log(data);
-		//add derived loan status to each device object
+	//set actives to null
+	$scope.activeParent = null;
+	$scope.activeSub = null;
+	$scope.activeType = null;
+	$scope.activeDevice = null;
+
+	devices.get().$promise.then(function(data) {
+		//runs when data is returns from API
+
+		$scope.devices = data;
+
+		//add loan status information to devices in scope
 		$scope.devices.forEach(function (device) {
 			device.loanStatus = $scope.getLoanStatus(device);
-			device.type = $scope.getType(device.deviceID);
+			device.type = types.find(device.typeID);
 			device.subCategory = $scope.getsubCategory(device.typeID);
 			device.parentCategory = $scope.getParentCategory(device.typeID);
 		});
-  });
-	//$scope.devices = devices.get();
+
+		//set active device if route parameters specified
+		if ($routeParams.id) {
+			var d = $scope.devices.filter(function(device){
+				return device.deviceID === parseInt($routeParams.id);
+			});
+			$scope.activeDevice = d[0];
+		}
+	});
+
+
 	$scope.categories = categories.get();
 	$scope.types = types.get();
+
 
 	//function to get loan status
 	$scope.getLoanStatus = function(device) {
@@ -28,12 +47,6 @@ deviceMgr.controller('deviceCtl', function($scope, $routeParams, $modal, devices
 			return `Available from: ${device.availableFrom}`;
 		}
 	};
-
-	//set actives to null
-	$scope.activeParent = null;
-	$scope.activeSub = null;
-	$scope.activeType = null;
-	$scope.activeDevice = null;
 
 	//parent category functions
 	$scope.getParentCategory = function(typeID) {
@@ -80,7 +93,7 @@ deviceMgr.controller('deviceCtl', function($scope, $routeParams, $modal, devices
 		$scope.activeDevice = devices.find(deviceID);
 	};
 
-	$scope.activeDevice = devices.find(parseInt($routeParams.id));
+
 
 	$scope.removeDevice = function(deviceID) {
 		$scope.setActiveDevice(deviceID > 0 ? deviceID - 1 : deviceID + 1);
@@ -102,6 +115,10 @@ deviceMgr.controller('deviceCtl', function($scope, $routeParams, $modal, devices
 		}
 	};
 
+
+
+
+	//function to clone device
 	$scope.clone = function(deviceToClone) {
 		var newDevice = {
 			//copy all properties except deviceID
