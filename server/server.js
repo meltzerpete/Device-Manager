@@ -176,6 +176,10 @@ app.delete("/api/type/:id", function(req, res){
   res.json(type);
 });
 
+app.use(function(req, res) {
+  // Use res.sendfile, as it streams instead of reading the file into memory.
+  res.sendFile('index.html', { root: '../' });
+});
 
 app.listen(80);
 
