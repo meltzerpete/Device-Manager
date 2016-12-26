@@ -93,16 +93,15 @@ deviceMgr.controller('deviceCtl', function($scope, $routeParams,
 		$scope.activeDevice = devices.find(deviceID);
 	};
 
-
-
 	$scope.removeDevice = function(deviceID) {
-		$scope.setActiveDevice(deviceID > 0 ? deviceID - 1 : deviceID + 1);
+		//remove from server
 		devices.remove(deviceID);
+		//return to previous page
 		$scope.back();
 	};
 
 
-
+	//function for adding new categories/types
 	$scope.addCat = function(addedCategory, addedSub, addedType) {
 		if (addedCategory) {
 			categories.addParent(addedCategory);
@@ -114,9 +113,6 @@ deviceMgr.controller('deviceCtl', function($scope, $routeParams,
 			types.add(addedType, $scope.activeSub.categoryID);
 		}
 	};
-
-
-
 
 	//function to clone device
 	$scope.clone = function(deviceToClone) {

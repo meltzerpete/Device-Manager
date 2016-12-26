@@ -27,9 +27,19 @@ app.use(express.static("../"));
 
 app.use(cors());
 
+//get requests
+
+app.get("/api/category", function(req, res) {
+	res.json(category);
+});
+
+app.get("/api/clients", function(req, res) {
+	res.json(clients);
+});
+
 app.get("/api/devices", function(req, res) {
 	if (req.query.deviceID) {
-		//device us specified
+		//device is specified - return single device
 		var d = devices.filter(function(device){
 			  return device.deviceID === parseInt(req.query.deviceID);
 	    });
@@ -40,16 +50,8 @@ app.get("/api/devices", function(req, res) {
 	}
 });
 
-app.get("/api/clients", function(req, res) {
-	res.json(clients);
-});
-
 app.get("/api/loan", function(req, res) {
 	res.json(loan);
-});
-
-app.get("/api/category", function(req, res) {
-	res.json(category);
 });
 
 app.get("/api/staff", function(req, res) {
@@ -58,6 +60,13 @@ app.get("/api/staff", function(req, res) {
 
 app.get("/api/type", function(req, res) {
 	res.json(type);
+});
+
+//post requests
+
+app.post("api/category", function(req, res){
+  category.push(req.body);
+  res.json(category);
 });
 
 app.post("/api/clients", function(req, res){
@@ -75,9 +84,9 @@ app.post("/api/loan", function(req, res){
   res.json(loan);
 });
 
-app.post("api/category", function(req, res){
-  category.push(req.body);
-  res.json(category);
+app.post("/api/staff", function(req, res){
+  staff.push(req.body);
+  res.json(staff);
 });
 
 app.post("/api/type", function(req, res){
@@ -85,62 +94,7 @@ app.post("/api/type", function(req, res){
   res.json(type);
 });
 
-app.post("/api/staff", function(req, res){
-  staff.push(req.body);
-  res.json(staff);
-});
-
-
-
-app.get("/api/category/:id", function(req, res){
-
-  res.json(category.filter(function(id){
-		  return id.term.toLowerCase() === req.params.term.toLowerCase();
-    })
-  );
-});
-
-app.get("/api/clients/:id", function(req, res){
-
-  res.json(category.filter(function(id){
-		  return id.term.toLowerCase() === req.params.term.toLowerCase();
-    })
-  );
-});
-
-app.get("/api/loan/:id", function(req, res){
-
-  res.json(category.filter(function(id){
-		  return id.term.toLowerCase() === req.params.term.toLowerCase();
-    })
-  );
-});
-
-app.get("/api/staff/:id", function(req, res){
-
-  res.json(category.filter(function(id){
-		  return id.term.toLowerCase() === req.params.term.toLowerCase();
-    })
-  );
-});
-
-app.get("/api/devices/:id", function(req, res){
-
-  res.json(devices.filter(function(device){
-		  return device.deviceID === parseInt(req.params.id);
-    })
-  );
-});
-
-app.get("/api/type/:id", function(req, res){
-
-  res.json(type.filter(function(id){
-		  return id.term.toLowerCase() === req.params.term.toLowerCase();
-    })
-  );
-});
-
-
+//delete requests
 app.delete("/api/category/:id", function(req, res){
   category = category.filter(function(categoryID){
      return categoryID.term.toLowerCase() !== req.params.term.toLowerCase();
@@ -148,11 +102,11 @@ app.delete("/api/category/:id", function(req, res){
   res.json(category);
 });
 
-app.delete("/api/devices/:id", function(req, res){
-  devices = devices.filter(function(deviceID){
-     return deviceID.term.toLowerCase() !== req.params.term.toLowerCase();
+app.delete("/api/devices", function(req, res){
+  devices = devices.filter(function(device){
+     return device.deviceID !== parseInt(req.query.deviceID);
   });
-  res.json(devices);
+  //res.json(devices);
 });
 
 app.delete("/api/loan/:id", function(req, res){
@@ -176,9 +130,22 @@ app.delete("/api/type/:id", function(req, res){
   res.json(type);
 });
 
+//for error page redirecting if any details page is requested
+app.get("/clientDeviceDetails/:id", function(req, res){
+  res.sendFile('/clientError.html', { root: '../' });
+});
+
+app.get("/clientProfile/:id", function(req, res){
+  res.sendFile('/error.html', { root: '../' });
+});
+
+app.get("/deviceDetails/:id", function(req, res){
+  res.sendFile('/error.html', { root: '../' });
+});
+
+//handle refreshing of all other pages
 app.use(function(req, res) {
-  // Use res.sendfile, as it streams instead of reading the file into memory.
-  res.sendFile('index.html', { root: '../' });
+  res.sendFile('/', { root: '../' });
 });
 
 app.listen(80);
