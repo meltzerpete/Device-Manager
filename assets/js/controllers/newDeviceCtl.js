@@ -6,7 +6,8 @@ deviceMgr.controller('newDeviceCtl', function($scope, $routeParams, devices, cat
 	$scope.categories = categories.get();
 	$scope.types = types.get();
 
-	// $scope.activeDevice = null;
+	//get Resource object and connect it to page model of new device
+	$scope.activeDevice = devices.addDevice();
 
 	$scope.getParentCategory = function(typeID) {
 		return categories.find($scope.getsubCategory(typeID).parentCategoryID);
@@ -22,11 +23,15 @@ deviceMgr.controller('newDeviceCtl', function($scope, $routeParams, devices, cat
 	$scope.activeType.parentCategory = $scope.getParentCategory($scope.activeType.subCategory.categoryID);
 
 	$scope.add = function() {
+		//add derived information
 		$scope.activeDevice.availableFrom = null;
 		$scope.activeDevice.dateOutOfService = null;
 		$scope.activeDevice.typeID = $scope.activeType.typeID;
-		devices.addDevice($scope.activeDevice);
-
+		//send new device to server
+		$scope.activeDevice.$save();
+		//get new instance of addDevice resource
+		$scope.activeDevice = devices.addDevice();
+		//return to provious page
 		$scope.back();
 	};
 

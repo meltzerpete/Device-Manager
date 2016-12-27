@@ -9,11 +9,14 @@ deviceMgr.factory('devices', function devicesFactory($resource){
 			update: {method: 'PUT'}
 		});
 		return {
-			get: function() {
-				return Resource.query();
+			addDevice: function() {
+				return new Resource();
 			},
 			find: function(id) {
 				return Resource.get({deviceID: id});
+			},
+			get: function() {
+				return Resource.query();
 			},
 			remove: function(id) {
 				Resource.remove({deviceID: id});

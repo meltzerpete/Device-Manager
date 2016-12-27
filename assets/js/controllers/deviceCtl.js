@@ -2,7 +2,7 @@ var deviceMgr = angular.module('deviceMgr');
 
 //DEVICES CONTROLLER
 deviceMgr.controller('deviceCtl', function($scope, $routeParams,
-	$resource, $modal, devices, categories, types) {
+	$resource, $modal, $timeout, devices, categories, types) {
 
 	//set actives to null
 	$scope.activeParent = null;
@@ -116,14 +116,16 @@ deviceMgr.controller('deviceCtl', function($scope, $routeParams,
 
 	//function to clone device
 	$scope.clone = function(deviceToClone) {
-		var newDevice = {
+		var obj = devices.addDevice();
+
+		newDevice = {
 			//copy all properties except deviceID
 	    description : deviceToClone.description,
 	    availableFrom : null,
 	    dateOfPurchase : deviceToClone.dateOfPurchase,
-	    dateOutOfService : deviceToClone.dateOutOfService,
+	    dateOutOfService : null,
 	    defaultLoanTime : deviceToClone.defaultLoanTime,
-	    isWorking : deviceToClone.isWorking,
+	    isWorking : true,
 	    notes : deviceToClone.notes,
 	    serial : null,
 	    visible : deviceToClone.visible,
@@ -134,12 +136,48 @@ deviceMgr.controller('deviceCtl', function($scope, $routeParams,
 			subCategory : deviceToClone.subCategory,
 			parentCategory : deviceToClone.parentCategory
 	  };
-		devices.addDevice(newDevice);
+
+		//send to server
+		var copy = Object.assign(obj, newDevice);
+		copy.$save();
+
+		//add to local model
+	//	$scope.devices.push(newDevice);
+
+		devices.get().$promise.then(function(data) {
+			//runs when data is returns from API
+
+			$scope.devices = data;
+
+			//add loan status information to devices in scope
+			$scope.devices.forEach(function (device) {
+				device.loanStatus = $scope.getLoanStatus(device);
+				device.type = types.find(device.typeID);
+				device.subCategory = $scope.getsubCategory(device.typeID);
+				device.parentCategory = $scope.getParentCategory(device.typeID);
+			});
+
+		});
+
 	};
 
 	//function for switching in and out of edit mode
 	$scope.edit = function (value) {
 	$scope.editable = value;
+	};
+
+	//function for updating edited device
+	$scope.update = function() {
+		$timeout(function() {
+			var copy =  angular.copy($scope.activeDevice);
+			delete copy.type;
+			delete copy.loanStatus;
+			delete copy.subCategory;
+			delete copy.parentCategory;
+			console.log(copy);
+			console.log($scope.activeDevice);
+			copy.$update();
+		}, 0);
 	};
 
 });
