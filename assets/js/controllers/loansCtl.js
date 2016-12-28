@@ -5,45 +5,72 @@ var deviceMgr = angular.module('deviceMgr');
 
 		$scope.loans = loans.get();
 
-		//add info about client and device to each request object
-		$scope.loans.forEach(function(loan) {
+		//get data and store locally
+		var localClients;
+		var localDevices;
+		var localTypes;
+		var localCategories;
 
-			var client = clients.find(loan.clientID);
-			var device = devices.find(loan.deviceID);
-			var type = types.find(device.typeID);
-			var subCategory = categories.find(type.categoryID);
-			var parentCategory = categories.find(subCategory.parentCategoryID);
+		localClients = clients.get();
+		localTypes = types.get();
+		localCategories = categories.get();
+		devices.get().$promise.then(function(devicesData) {
 
-			loan.clientFirstName = client.clientFirstName;
-			loan.clientLastName = client.clientLastName;
-			loan.clientType = client.clientType;
-			loan.clientEmail = client.clientEmail;
-			loan.clientStudentNo = client.clientStudentNo;
+			//assign data from get requests to local copy
+			localDevices = devicesData;
 
-			loan.typeName = type.typeName;
-			loan.subCategoryName = subCategory.categoryName;
-			loan.parentCategoryName = parentCategory.categoryName;
-			loan.deviceID = device.deviceID;
-			loan.deviceSerial = device.serial;
-			loan.deviceDescription = device.description;
-			loan.deviceNotes = device.notes;
-			loan.defaultLoanTime = device.defaultLoanTime;
+			//find functions
+			//devices
+			localDevices.find = function(deviceID) {
+				var d = localDevices.filter(function(device) {
+					return device.deviceID === deviceID;
+				});
+				return d[0];
+			};
 
-			//for filterring current and overdue loans
-			if (loan.dateStarted && loan.returned === null) {
-				var today = new Date();
-				loan.current = true;
-				if (today > Date.parse(loan.due)) {
-					loan.overdue = true;
-					loan.overdueDays =
-						today - Date.parse(loan.due) -
-							1000*60*60*24;
-				} else {
-					loan.dueInDays =
-						Date.parse(loan.due) - today;
+			//add info about client and device to each request object
+			$scope.loans.forEach(function(loan) {
+
+				var client = clients.find(loan.clientID);
+				var device = localDevices.find(loan.deviceID);
+				var type = types.find(device.typeID);
+				var subCategory = categories.find(type.categoryID);
+				var parentCategory = categories.find(subCategory.parentCategoryID);
+
+				loan.clientFirstName = client.clientFirstName;
+				loan.clientLastName = client.clientLastName;
+				loan.clientType = client.clientType;
+				loan.clientEmail = client.clientEmail;
+				loan.clientStudentNo = client.clientStudentNo;
+
+				loan.typeName = type.typeName;
+				loan.subCategoryName = subCategory.categoryName;
+				loan.parentCategoryName = parentCategory.categoryName;
+				loan.deviceID = device.deviceID;
+				loan.deviceSerial = device.serial;
+				loan.deviceDescription = device.description;
+				loan.deviceNotes = device.notes;
+				loan.defaultLoanTime = device.defaultLoanTime;
+
+				//for filterring current and overdue loans
+				if (loan.dateStarted && loan.returned === null) {
+					var today = new Date();
+					loan.current = true;
+					if (today > Date.parse(loan.due)) {
+						loan.overdue = true;
+						loan.overdueDays =
+							today - Date.parse(loan.due) -
+								1000*60*60*24;
+					} else {
+						loan.dueInDays =
+							Date.parse(loan.due) - today;
+					}
 				}
-			}
+
+			});
+
 		});
+
 
 		//REQUESTS
 
