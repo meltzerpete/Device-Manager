@@ -3564,7 +3564,7 @@ tbody.collapse.in {
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus {
   text-decoration: none;
-  color: #ebebeb;
+  color: #100f0f;
   background-color: #485563;
 }
 .dropdown-menu > .active > a,
@@ -4914,10 +4914,10 @@ a.label:focus {
 }
 .badge {
   display: inline-block;
-  min-width: 10px;
-  padding: 3px 7px;
+  min-width: 12px;
+  padding: 6px 9px;
   font-size: 12px;
-  font-weight: 300;
+  font-weight: 900;
   color: #ebebeb;
   line-height: 1;
   vertical-align: middle;
@@ -5688,10 +5688,6 @@ button.list-group-item-danger.active:focus {
 .panel-default {
   border-color: transparent;
 }
-.panel-default > .panel-heading {
-  color: #071459;
-  background-color: #071459;
-  border-color: transparent;
 }
 .panel-default > .panel-heading + .panel-collapse > .panel-body {
   border-top-color: transparent;
@@ -6752,7 +6748,7 @@ button.close {
   -webkit-box-shadow: none;
   box-shadow: none;
   border: none;
-  font-size: 12px;
+  font-size: 16px;
 }
 .navbar-default .badge {
   background-color: #fff;
@@ -6985,12 +6981,12 @@ a.list-group-item-danger.active:focus {
   border: none;
 }
 .panel-default > .panel-heading {
-  background-color: #071459;
-  color: #222222;
+  background-color: #21af08;
+  color: #ffffff;
 }
 .panel-danger > .panel-heading{
   background-color: #cc2924;
-  color: #ebebeb
+  color: #ffffff
 }
 .thumbnail {
   background-color: #4e5d6c;
