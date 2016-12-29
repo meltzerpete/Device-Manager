@@ -9,7 +9,7 @@ var clients = require("./data/clients.json");
 
 var categories = require("./data/category.json");
 
-var loan = require("./data/loan.json");
+var loans = require("./data/loan.json");
 
 var types = require("./data/type.json");
 
@@ -70,14 +70,45 @@ app.put("/api/categories", function(req, res){
 
 
 /* CLIENTS API */
-app.get("/api/clients", function(req, res) {
-	res.json(clients);
+app.delete("/api/clients", function(req, res) {
+	clients = clients.filter(function(client) {
+		return client.clientID !== parseInt(req.query.clientID);
+	});
+	//send confirmation
+	res.sendStatus(200);
+});
+
+app.get("/api/categories", function(req, res) {
+	if (req.query.clientID) {
+		//client is specified - return single client
+		var c = clients.filter(function(client) {
+			return client.clientID === parseInt(req.query.categoryID);
+		});
+		res.json(c[0]);
+	} else {
+		//no client specified - return array of all categories
+		res.json(clients);
+	}
 });
 
 app.post("/api/clients", function(req, res){
-  clients.push(req.body);
-  res.json(clients);
+	var client = req.body;
+	client.clientID = clients.length;
+  clients.push(client);
+	//send confirmation
+  res.sendStatus(200);
 });
+
+app.put("/api/categories", function(req, res) {
+	//get matching client by clientID
+	var c = clients.filter(function(client) {
+		return client.clientID === parseInt(req.body.categoryID);
+	});
+	c[0] = Object.assign(c[0], req.body);
+	//send confirmation
+	res.sendStatus(200);
+});
+
 
 /*-- DEVICES API --*/
 app.delete("/api/devices", function(req, res){
@@ -122,20 +153,43 @@ app.put("/api/devices", function(req, res){
 
 
 /* LOANS API */
-app.delete("/api/loan/:id", function(req, res){
-  loan = loan.filter(function(loanID){
-     return loanID.term.toLowerCase() !== req.params.term.toLowerCase();
+app.delete("/api/loans/:id", function(req, res){
+  loans = loans.filter(function(loan){
+     return loan.term.toLowerCase() !== req.params.term.toLowerCase();
   });
-  res.json(loan);
+  //send confirmation
+	res.sendStatus(200);
 });
 
-app.get("/api/loan", function(req, res) {
-	res.json(loan);
+app.get("/api/loans", function(req, res) {
+	if (req.query.loanID) {
+		//loan is specified - return single loan
+		var l = loans.filter(function(loan) {
+			return loan.loanID === parseInt(req.query.loanID);
+		});
+		res.json(l[0]);
+	} else {
+		//no loan specified - return array of all categories
+		res.json(loans);
+	}
 });
 
-app.post("/api/loan", function(req, res){
-  loan.push(req.body);
-  res.json(loan);
+app.post("/api/loans", function(req, res){
+	var loan = req.body;
+	loan.loanID = loans.length;
+	loans.push(loan);
+  //send confirmation
+	res.sendStatus(200);
+});
+
+app.put("api/loans", function(req, res) {
+	//get matching loan by loanID
+	var l = loans.filter(function(loan) {
+		return loan.loanID === parseInt(req.query.loanID);
+	});
+	l[0] = Object.assign(l[0], req.body);
+	//send confirmation
+	res.sendStatus(200);
 });
 
 
@@ -144,16 +198,39 @@ app.delete("/api/staff/:id", function(req, res){
   staff = staff.filter(function(staffID){
      return staffID.term.toLowerCase() !== req.params.term.toLowerCase();
   });
-  res.json(staff);
+  //send confirmation
+	res.sendStatus(200);
 });
 
 app.get("/api/staff", function(req, res) {
-	res.json(staff);
+	if (req.query.staffID) {
+		//staff is specified - return single staff member
+		var s = staff.filter(function(staffMember) {
+			return staffMember.staffID === parseInt(req.query.staffID);
+		});
+		res.json(s[0]);
+	} else {
+		//no staff member specified - return array of all staff
+		res.json(staff);
+	}
 });
 
 app.post("/api/staff", function(req, res){
-  staff.push(req.body);
-  res.json(staff);
+  var staffMember = req.body;
+	staffMember.staffID = staff.length;
+	staff.push(staffMember);
+	//send confirmation
+	res.sendStatus(200);
+});
+
+app.put("/api/staff", function(req, res) {
+	//get matching staff member by staffID
+	var s = staff.filter(function(staffMember) {
+		return staffMember.staffID === parseInt(req.query.staffID);
+	});
+	s[0] = Object.assign(s[0], req.body);
+	//send confirmation
+	res.sendStatus(200);
 });
 
 
