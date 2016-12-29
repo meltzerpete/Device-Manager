@@ -48,7 +48,8 @@
                     <button type="button"
                       class="list-group-item tree3"
                       data-ng-repeat="type in types
-                      | filter: {categoryID: subCategory.categoryID} : true"
+                      | filter: {categoryID: subCategory.categoryID} : true
+                      | orderBy: 'typeName'"
                       data-ng-click="setActiveType(type.typeID)">
                       &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                       <span class="glyphicon glyphicon-play"></span>

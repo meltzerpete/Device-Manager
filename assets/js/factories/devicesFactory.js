@@ -23,26 +23,4 @@ deviceMgr.factory('devices', function devicesFactory($resource){
 			}
 		};
 
-	// return {
-	// 	addDevice: function(device) {
-	// 		device.deviceID = devices.length;
-	// 		devices.push(device);
-	// 	},
-	//
-	// 	// get: $http.get('/api/devices'),
-	//
-	// 	find: function(deviceID) {
-	// 		index = devices.findIndex( function(x) {
-	// 			return x.deviceID === deviceID;
-	// 		});
-	// 		return devices[index];
-	// 	},
-	//
-	// 	remove: function(deviceID) {
-	// 		index = devices.findIndex( function(x) {
-	// 			return x.deviceID === deviceID;
-	// 		});
-	// 		devices.splice(index, 1);
-	// 	}
-	// };
 });

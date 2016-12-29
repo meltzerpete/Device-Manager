@@ -7,11 +7,11 @@ var devices = require("./data/devices.json");
 
 var clients = require("./data/clients.json");
 
-var category = require("./data/category.json");
+var categories = require("./data/category.json");
 
 var loan = require("./data/loan.json");
 
-var type = require("./data/type.json");
+var types = require("./data/type.json");
 
 var staff = require("./data/staff.json");
 
@@ -29,20 +29,43 @@ app.use(cors());
 
 
 /* CATEGORIES API */
-app.delete("/api/category/:id", function(req, res){
-  category = category.filter(function(categoryID){
-     return categoryID.term.toLowerCase() !== req.params.term.toLowerCase();
+app.delete("/api/categories", function(req, res){
+  categories = categories.filter(function(category){
+     return category.categoryID !== parseInt(req.query.categoryID);
   });
-  res.json(category);
+	//send confirmation
+	res.sendStatus(200);
 });
 
-app.get("/api/category", function(req, res) {
-	res.json(category);
+app.get("/api/categories", function(req, res) {
+	if (req.query.categoryID) {
+		//category is specified - return single category
+		var c = categories.filter(function(category){
+			  return category.categoryID === parseInt(req.query.categoryID);
+	    });
+		res.json(c[0]);
+	} else {
+		//no category specified - return array of all categories
+		res.json(categories);
+	}
 });
 
-app.post("api/category", function(req, res){
-  category.push(req.body);
-  res.json(category);
+app.post("/api/categories", function(req, res){
+	var category = req.body;
+	category.categoryID = categories.length;
+  categories.push(category);
+	//send confirmation
+	res.sendStatus(200);
+});
+
+app.put("/api/categories", function(req, res){
+	//get matching category by categoryID
+	var c = categories.filter(function(category){
+			return category.categoryID === parseInt(req.body.categoryID);
+	});
+	c[0] = Object.assign(c[0], req.body);
+	//send confirmation
+	res.sendStatus(200);
 });
 
 
@@ -61,7 +84,6 @@ app.delete("/api/devices", function(req, res){
   devices = devices.filter(function(device){
      return device.deviceID !== parseInt(req.query.deviceID);
   });
-
 	//send confirmation
 	res.sendStatus(200);
 });
@@ -84,19 +106,16 @@ app.post("/api/devices", function(req, res){
 	var device = req.body;
 	device.deviceID = devices.length;
   devices.push(device);
-
 	//send confirmation
 	res.sendStatus(200);
 });
 
 app.put("/api/devices", function(req, res){
-
 	//get matching device by deviceID
 	var d = devices.filter(function(device){
 			return device.deviceID === parseInt(req.body.deviceID);
 	});
 	d[0] = Object.assign(d[0], req.body);
-
 	//send confirmation
 	res.sendStatus(200);
 });
@@ -139,21 +158,45 @@ app.post("/api/staff", function(req, res){
 
 
 /* TYPES API */
-app.delete("/api/type/:id", function(req, res){
-  type = type.filter(function(typeID){
-     return typeID.term.toLowerCase() !== req.params.term.toLowerCase();
+app.delete("/api/types", function(req, res){
+  type = types.filter(function(typeID){
+     return typeID.typeID !== parseInt(req.query.typeID);
   });
-  res.json(type);
+	//send confirmation
+	res.sendStatus(200);
 });
 
-app.get("/api/type", function(req, res) {
-	res.json(type);
+app.get("/api/types", function(req, res) {
+	if (req.query.typeID) {
+		//type is specified - return single type
+		var t = types.filter(function(type){
+			return type.typeID === parseInt(req.query.typeID);
+		});
+		res.json(t[0]);
+	} else {
+		//no type specified - return array of all types
+		res.json(types);
+	}
 });
 
 
-app.post("/api/type", function(req, res){
-  type.push(req.body);
-  res.json(type);
+app.post("/api/types", function(req, res){
+	//console.log(req.body);
+	var type = req.body;
+	type.typeID = types.length;
+  types.push(type);
+	//send confirmation
+	res.sendStatus(200);
+});
+
+app.put("/api/types", function(req, res){
+	//get matching type by deviceID
+	var t = types.filter(function(type){
+			return type.typeID === parseInt(req.body.typeID);
+	});
+	t[0] = Object.assign(t[0], req.body);
+	//send confirmation
+	res.sendStatus(200);
 });
 
 
