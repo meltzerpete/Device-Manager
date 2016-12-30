@@ -60,7 +60,7 @@ deviceMgr.factory('loans', function devicesFactory(){
 	  },
 	  {
 	    loanID : 4,
-	    due : "2016-12-03",
+	    due : "2017-04-03",
 	    dateStarted : "2016-09-01",
 	    extensionRequested: false,
 	    returned: null,

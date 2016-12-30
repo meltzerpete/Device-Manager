@@ -20,10 +20,10 @@
             &nbsp{{
               loan.overdue ?
               ("Overdue: " +
-              (loan.overdueDays | date: 'd'))
+              (loan.overdueDays / 86400000 | roundup))
               :
               ("Due in: " +
-              (loan.dueInDays | date: 'd'))
+              (loan.dueInDays / 86400000 | roundup))
             }} days
           </span>
         </h3>

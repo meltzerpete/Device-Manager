@@ -78,7 +78,7 @@ app.delete("/api/clients", function(req, res) {
 	res.sendStatus(200);
 });
 
-app.get("/api/categories", function(req, res) {
+app.get("/api/clients", function(req, res) {
 	if (req.query.clientID) {
 		//client is specified - return single client
 		var c = clients.filter(function(client) {
@@ -99,7 +99,7 @@ app.post("/api/clients", function(req, res){
   res.sendStatus(200);
 });
 
-app.put("/api/categories", function(req, res) {
+app.put("/api/clients", function(req, res) {
 	//get matching client by clientID
 	var c = clients.filter(function(client) {
 		return client.clientID === parseInt(req.body.categoryID);
@@ -153,7 +153,7 @@ app.put("/api/devices", function(req, res){
 
 
 /* LOANS API */
-app.delete("/api/loans/:id", function(req, res){
+app.delete("/api/loans", function(req, res){
   loans = loans.filter(function(loan){
      return loan.term.toLowerCase() !== req.params.term.toLowerCase();
   });
@@ -194,7 +194,7 @@ app.put("api/loans", function(req, res) {
 
 
 /* STAFF API */
-app.delete("/api/staff/:id", function(req, res){
+app.delete("/api/staff", function(req, res){
   staff = staff.filter(function(staffID){
      return staffID.term.toLowerCase() !== req.params.term.toLowerCase();
   });

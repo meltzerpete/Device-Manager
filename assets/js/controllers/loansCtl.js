@@ -110,4 +110,11 @@ var deviceMgr = angular.module('deviceMgr');
 			var d = new Date();
 			return d.setDate(d.getDate() + loan.defaultLoanTime);
 		};
+})
+
+//filter for rounding up no. of days
+.filter('roundup', function () {
+	return function (value) {
+		return Math.ceil(value);
+	};
 });
