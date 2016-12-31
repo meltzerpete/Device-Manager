@@ -9,10 +9,24 @@ deviceMgr.controller('appCtl', function($scope, $rootScope, $location, $window, 
 
 	//numbers for tabs at top of navbar
 	$rootScope.updateNav = function() {
-		$rootScope.requestsNo = loans.getRequestsNo();
-		$rootScope.approvedNo = loans.getApprovedNo();
-		$rootScope.currentNo = loans.getCurrentNo();
-		//add others here
+		var requests = [];
+		var approved = [];
+		var current = [];
+
+		loans.get().$promise.then(function(loanData) {
+			loanData.forEach(function(loan) {
+				if (loan.approved === null)
+				requests.push(loan);
+				if (loan.approved === true && loan.dateStarted === null)
+				approved.push(loan);
+				if (loan.dateStarted && loan.returned === null)
+				current.push(loan);
+			});
+			$rootScope.requestsNo = requests.length;
+			$rootScope.approvedNo = approved.length;
+			$rootScope.currentNo = current.length;
+		});
+
 	};
 
 	//call the update function when first loaded
@@ -31,6 +45,8 @@ deviceMgr.controller('appCtl', function($scope, $rootScope, $location, $window, 
 
 		var myEl = angular.element( document.querySelector( '#searchInput' ) );
 		myEl.attr('placeholder', $scope.placeholder);
+		//clear any text in search field on page change
+		$scope.search = null;
 
 	});
 
