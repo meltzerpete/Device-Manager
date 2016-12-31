@@ -1,0 +1,32 @@
+<form>
+  <div class="form-group">
+    <div>
+      <p>Please choose a date for the return of the device.</p>
+      <div class="radio">
+        <label>
+          <input type="radio" name="optionsRadios" id="optionsRadios1" value="default"
+            ng-model="radio">
+          Default return date: {{defaultReturn(request) | date: 'dd/MM/yyyy'}}
+        </label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio" name="optionsRadios" id="optionsRadios2" value="requested"
+            ng-model="radio">
+          Requested return date: {{request.length | date: 'dd/MM/yyyy'}}
+        </label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio" name="optionsRadios" id="optionsRadios3" value="other"
+            ng-model="radio">
+          Other:
+        </label>
+        <input type="text" class="form-control" data-ng-model="selectedDate"
+          ng-show="radio === 'other'"
+          name="date" bs-datepicker data-date-format="dd/MM/y"
+          data-min-date="{{parseDate(request.availableFrom)}}">
+      </div>
+    </div>
+  </div>
+</form>

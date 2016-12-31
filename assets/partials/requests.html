@@ -206,10 +206,16 @@
             <br />
 
             <button type="button" class="btn btn-sm btn-danger"
-              data-ng-click="deny(request)">Deny</button>
+              data-ng-click="deny(request.loanID)">Deny</button>
 
             <button type="button" class="btn btn-sm btn-success"
-              data-ng-click="approve(request)">Approve</button>
+              bs-modal="confirmRequestModal"
+              data-scope="$scope"
+              data-title="Confirm request for {{request.typeName}}"
+              data-content-template="/assets/partials/modals/confirmRequestModal.html"
+              data-template-url="/assets/partials/modals/confirmRequestModal.tpl.html">
+              Approve
+            </button>
 
           </div>    <!--end action buttons-->
 

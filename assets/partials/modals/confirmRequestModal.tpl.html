@@ -1,0 +1,15 @@
+<div class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content form-group">
+      <div class="modal-header" ng-show="title">
+        <button type="button" class="close" aria-label="Close" ng-click="$hide()"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" ng-bind="title"></h4>
+      </div>
+      <div class="modal-body" ng-bind="content"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="$hide()">Cancel</button>
+        <button type="submit" class="btn btn-success" ng-click="approve(request.loanID, radio, selectedDate)">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>

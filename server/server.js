@@ -182,10 +182,10 @@ app.post("/api/loans", function(req, res){
 	res.sendStatus(200);
 });
 
-app.put("api/loans", function(req, res) {
+app.put("/api/loans", function(req, res) {
 	//get matching loan by loanID
 	var l = loans.filter(function(loan) {
-		return loan.loanID === parseInt(req.query.loanID);
+		return loan.loanID === parseInt(req.body.loanID);
 	});
 	l[0] = Object.assign(l[0], req.body);
 	//send confirmation
