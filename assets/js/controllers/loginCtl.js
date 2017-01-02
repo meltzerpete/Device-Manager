@@ -19,7 +19,8 @@ deviceMgr.controller('loginCtl', function($scope, $rootScope,
 				var hpass = sha256($scope.username.toLowerCase() +
 					$scope.password);
 
-				if (($scope.username.toLowerCase() ===
+				if (staffMembers[i].enabled &&
+					($scope.username.toLowerCase() ===
 					staffMembers[i].staffEmail.toLowerCase()) &&
 					(hpass === staffMembers[i].password)) {
 

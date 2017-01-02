@@ -171,6 +171,7 @@ var deviceMgr = angular.module('deviceMgr');
 					break;
 				}
 				loan.due = due;
+				loan.staffID = $rootScope.currentUser.staffID;
 
 				//update loan on server
 				loan.$update();

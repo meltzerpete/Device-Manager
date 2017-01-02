@@ -53,7 +53,7 @@
   <base href="/">
 </head>
 
-<body>
+<body ng-style="bodyStyle">
   <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -90,7 +90,7 @@
           </a>
           <ul class="dropdown-menu">
             <li data-ng-class="pageClass('/changepassword')"><a href="/changepassword">Change Password</a></li>
-            <li data-ng-class=""><a href="/">Admin Controls</a></li>
+            <li ng-if="currentUser.isAdmin" data-ng-class=""><a href="/">Admin Controls</a></li>
             <li role="separator" class="divider"></li>
             <li data-ng-class=""><a href="" ng-click="logout()">Logout</a></li>
           </ul>

@@ -57,6 +57,9 @@ deviceMgr.controller('appCtl', function($scope, $rootScope,
 		//clear any text in search field on page change
 		$scope.search = null;
 
+		//set scroll-bars to display where appropriate
+		$scope.bodyStyle = {'overflow-y': 'auto'};
+
 	});
 
 	//Set active links on navbar depending on current view
