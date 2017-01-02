@@ -105,9 +105,9 @@
             <li data-ng-class="pageClass('/client')"><a href="/client">View Client Page (testing only)</a></li>
           </ul>
         </li>
-        <li data-ng-class="pageClass('/requests')"><a href="/requests">Requests <span class="badge">{{requestsNo}}</span><span class="sr-only">(current)</span></a></li>
+        <li data-ng-class="pageClass('/requests')"><a href="/requests">Requests <span class="badge">{{requestsNo}}</span></a></li>
         <li data-ng-class="pageClass('/approved')"><a href="/approved">Approved <span class="badge">{{approvedNo}}</span></a></li>
-        <li data-ng-class="pageClass('/currentLoans')"><a href="/currentLoans">Current <span class="badge">{{currentNo}}</span></a></li>
+        <li data-ng-class="pageClass('/activeLoans')"><a href="/activeLoans">Active <span class="badge">{{currentNo}}</span></a></li>
       </ul>
       <!-- if user is not logged in -->
       <ul ng-if="!currentUser" class="nav navbar-nav">

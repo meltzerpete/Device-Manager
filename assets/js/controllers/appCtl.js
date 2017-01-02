@@ -5,8 +5,10 @@ deviceMgr.controller('appCtl', function($scope, $rootScope,
 	$location, $window, staff, loans){
 
 	//member of staff currently logged in
-	//TODO must change this when log in system implemented
 	if (!$rootScope.currentUser) {
+		//TODO remove me!!
+		$rootScope.currentUser = staff.find(0);
+
 		$location.path('/client');
 	}
 

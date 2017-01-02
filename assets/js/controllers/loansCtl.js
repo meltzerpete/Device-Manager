@@ -88,7 +88,7 @@ var deviceMgr = angular.module('deviceMgr');
 									loan.defaultLoanTime = device.defaultLoanTime;
 
 									//for filterring current and overdue loans
-									if (loan.dateStarted && loan.returned === null) {
+									if (loan.dateStarted && (loan.returned === null)) {
 										var today = new Date();
 										loan.current = true;
 										if (today > Date.parse(loan.due)) {
@@ -127,6 +127,8 @@ var deviceMgr = angular.module('deviceMgr');
 
 				//save changes on server
 				loan.$update();
+
+				//TODO send email
 
 				//update local data model
 				getData();
@@ -182,6 +184,8 @@ var deviceMgr = angular.module('deviceMgr');
 					device.$update();
 				});
 
+				//TODO send email
+
 				//update local data model
 				getData();
 
@@ -206,6 +210,126 @@ var deviceMgr = angular.module('deviceMgr');
 
 		//set default radio button active for modals
 		$scope.radio = "default";
+
+		//set message to send to client
+		$scope.getConfirmMessage = function(loan, radio, selectedDate) {
+			var message = "";
+			message =
+			"Dear " + loan.clientFirstName + "\n\n" +
+			"Your loan request for " + loan.typeName +
+			" has been approved.\n\n";
+			if (loan.due) {
+				message += "It may be collected on: " +
+				loan.due + "\n\n";
+			} else {
+				message += "It is ready for collection now.\n\n";
+			}
+
+			var due;
+
+			switch (radio) {
+
+				case "default":
+				var defaultDate
+					= $scope.defaultReturn(loan);
+				due =  $filter('date')(defaultDate, "dd/MM/yyyy");
+				break;
+
+				case "requested":
+				var requestedDate
+					= loan.length;
+				due = $filter('date')(requestedDate, "dd/MM/yyyy");
+				break;
+
+				case "other":
+				if (selectedDate) {
+					due = selectedDate.getDate() +
+					"/" + (selectedDate.getMonth() + 1) +
+					"/" + selectedDate.getFullYear();
+				} else {
+					return;
+				}
+				break;
+			}
+
+			message += "The device must be return by: " + due;
+
+			return message;
+		};
+
+		//SIGN OUT
+		$scope.signOutConfirm = function(loanID) {
+
+			loans.find(loanID).$promise.then(function(loan) {
+
+				var date = new Date();
+				loan.dateStarted = $filter('date')(date, "yyyy-MM-dd");
+
+				//send changes to server
+				loan.$update();
+
+				//update local data model
+				getData();
+
+				//update badge in navbar
+				$rootScope.updateNav();
+
+			});	//end loans.find()
+
+		};
+
+		$scope.cancelRequest = function(loanID) {
+
+			loans.get().$promise.then(function(allLoans) {
+				loans.find(loanID).$promise.then(function(thisLoan) {
+					devices.find(thisLoan.deviceID).$promise.then(function(device) {
+
+						var deviceHasOtherLoans = false;
+						var date = new Date();
+
+						allLoans.forEach(function (loan) {
+							if (loan.deviceID === thisLoan.deviceID &&
+								loan.loanID != thisLoan.loanID) {
+
+								if (Date.parse(device.availableFrom) >
+									Date.parse(date)) {
+									date = loan.due;
+									deviceHasOtherLoans = true;
+									device.availableFrom = loan.due;
+									device.$update();
+								}
+							}
+						});
+
+						if (!deviceHasOtherLoans) {
+							device.availableFrom = null;
+							device.$update();
+						}
+
+						thisLoan.due = null;
+						thisLoan.approved = false;
+
+						thisLoan.$update();
+						//update local data model
+						getData();
+
+						//update badge in navbar
+						$rootScope.updateNav();
+
+					});	//end devices.find()
+
+				});	//end loans.find()
+
+			});	//end loans.get()
+
+		};	//end cancelRequest function
+
+		//TODO editable
+
+
+
+
+
 })
 
 //filter for rounding up no. of days

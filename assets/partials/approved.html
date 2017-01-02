@@ -192,7 +192,7 @@
                 <label for="due" class="col-xs-4 control-label">
                   Due</label>
                 <div class="col-xs-8">
-                  <p>{{loan.due}} TODO</p>
+                  <p>{{loan.due | date: 'dd/MM/yyyy'}}</p>
                 </div>
 
               </div>  <!--close form-group-->
@@ -204,11 +204,25 @@
 
             <br />
 
-            <button type="button" class="btn btn-sm btn-danger">Remove</button>
+            <button type="button" class="btn btn-sm btn-danger"
+              bs-modal="denyRequestModal"
+              data-scope="$scope"
+              data-title="Remove approved request for {{loan.typeName}}"
+              data-content-template="/assets/partials/modals/cancelRequestModal.html"
+              data-template-url="/assets/partials/modals/cancelRequestModal.tpl.html">
+              Remove
+            </button>
 
             <button type="button" class="btn btn-sm btn-info">Edit</button>
 
-            <button type="button" class="btn btn-sm btn-success">Sign Out</button>
+            <button type="button" class="btn btn-sm btn-success"
+              bs-modal="denyRequestModal"
+              data-scope="$scope"
+              data-title="Sign out {{loan.typeName}}"
+              data-content-template="/assets/partials/modals/signOutConfirmModal.html"
+              data-template-url="/assets/partials/modals/signOutConfirmModal.tpl.html" autofocus="">
+              Sign Out
+            </button>
 
           </div>    <!--end action buttons-->
 

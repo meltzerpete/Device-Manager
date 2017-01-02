@@ -206,7 +206,13 @@
             <br />
 
             <button type="button" class="btn btn-sm btn-danger"
-              data-ng-click="deny(request.loanID)">Deny</button>
+              bs-modal="denyRequestModal"
+              data-scope="$scope"
+              data-title="Deny request for {{request.typeName}}"
+              data-content-template="/assets/partials/modals/denyRequestModal.html"
+              data-template-url="/assets/partials/modals/denyRequestModal.tpl.html">
+              Deny
+            </button>
 
             <button type="button" class="btn btn-sm btn-success"
               bs-modal="confirmRequestModal"

@@ -27,6 +27,9 @@
           name="date" bs-datepicker data-date-format="dd/MM/y"
           data-min-date="{{parseDate(request.availableFrom)}}">
       </div>
+      <p>The following email will be sent to {{request.clientEmail}}:</p>
+      <textarea name="emailText" style="min-width: 100%; min-height: 150px;">{{getConfirmMessage(request, radio, selectedDate)}}
+      </textarea>
     </div>
   </div>
 </form>

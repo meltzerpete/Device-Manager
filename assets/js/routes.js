@@ -34,9 +34,9 @@ deviceMgr.config( function($routeProvider, $locationProvider){
 		controller: 'clientProfileCtl',
 		templateUrl: 'assets/partials/clientProfile.html'
 	})
-	.when('/currentLoans', {
+	.when('/activeLoans', {
 		controller: 'loansCtl',
-		templateUrl: 'assets/partials/currentLoans.html'
+		templateUrl: 'assets/partials/activeLoans.html'
 	})
 	.when('/dashboard', {
 
