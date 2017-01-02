@@ -196,7 +196,7 @@ app.put("/api/loans", function(req, res) {
 /* STAFF API */
 app.delete("/api/staff", function(req, res){
   staff = staff.filter(function(staffID){
-     return staffID.term.toLowerCase() !== req.params.term.toLowerCase();
+     return staffID.term.toLowerCase() !== parseInt(req.query.staffID);
   });
   //send confirmation
 	res.sendStatus(200);
@@ -226,7 +226,7 @@ app.post("/api/staff", function(req, res){
 app.put("/api/staff", function(req, res) {
 	//get matching staff member by staffID
 	var s = staff.filter(function(staffMember) {
-		return staffMember.staffID === parseInt(req.query.staffID);
+		return staffMember.staffID === parseInt(req.body.staffID);
 	});
 	s[0] = Object.assign(s[0], req.body);
 	//send confirmation

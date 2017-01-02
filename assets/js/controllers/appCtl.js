@@ -1,11 +1,20 @@
 var deviceMgr = angular.module('deviceMgr', ['ngRoute', 'ngSanitize', 'mgcrea.ngStrap', 'ngResource']);
 
 //MAIN APP CONTROLLER
-deviceMgr.controller('appCtl', function($scope, $rootScope, $location, $window, staff, loans){
+deviceMgr.controller('appCtl', function($scope, $rootScope,
+	$location, $window, staff, loans){
 
 	//member of staff currently logged in
 	//TODO must change this when log in system implemented
-	$scope.currentUser = staff.find(0);
+	if (!$rootScope.currentUser) {
+		$location.path('/login');
+	}
+
+	//function for logging out
+	$scope.logout = function() {
+		$rootScope.currentUser = null;
+		$location.path('login');
+	};
 
 	//numbers for tabs at top of navbar
 	$rootScope.updateNav = function() {

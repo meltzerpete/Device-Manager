@@ -3,7 +3,7 @@
     "staffID" : 0,
     "staffFirstName" : "Harry",
     "staffLastName" : "Jones",
-    "password": "12345678",
+    "password": "cdbd83d9e95eb13eed2a838858a604ff16b6c40523725bbe91a6be7bbc7d0c8c",
     "isAdmin": true,
     "staffEmail":"harry.jones@ucl.ac.uk"
   },
@@ -11,7 +11,7 @@
     "staffID" : 1,
     "staffFirstName" : "Sue",
     "staffLastName" : "McCarthy",
-    "password": "12345678",
+    "password": "63e20d8f858d3afa1361079b01976ad8713b805cc5a1ef344865e6352cf44bf8",
     "isAdmin": false,
     "staffEmail":"sue.mccarthy@ucl.ac.uk"
   }

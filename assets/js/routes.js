@@ -47,7 +47,7 @@ deviceMgr.config( function($routeProvider, $locationProvider){
 		templateUrl: 'assets/partials/deviceDetails.html'
 	})
 	.when('/login', {
-
+		controller: 'loginCtl',
 		templateUrl: 'assets/partials/loginpage.html'
 	})
 	.when('/manage', {
