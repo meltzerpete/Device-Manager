@@ -54,7 +54,7 @@
 </head>
 
 <body>
-  <nav ng-if="currentUser" class="navbar navbar-default">
+  <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -65,7 +65,8 @@
         <span class="icon-bar"></span>
       </button>
 
-      <a class="navbar-brand" href="/">Device Manager</a>
+      <a ng-if="currentUser" class="navbar-brand" href="/">Device Manager</a>
+      <a ng-if="!currentUser" class="navbar-brand" href="/client">Device Manager</a>
     </div>
 
     <form class="navbar-form navbar-right">
@@ -79,7 +80,8 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="nav-collapse">
-      <ul class="nav navbar-nav">
+      <!-- if user is logged in-->
+      <ul ng-if="currentUser" class="nav navbar-nav">
         <li class="dropdown">
           <a href class="dropdown-toggle" data-toggle="dropdown" role="button"
             aria-haspopup="true" aria-expanded="false">
@@ -106,6 +108,10 @@
         <li data-ng-class="pageClass('/requests')"><a href="/requests">Requests <span class="badge">{{requestsNo}}</span><span class="sr-only">(current)</span></a></li>
         <li data-ng-class="pageClass('/approved')"><a href="/approved">Approved <span class="badge">{{approvedNo}}</span></a></li>
         <li data-ng-class="pageClass('/currentLoans')"><a href="/currentLoans">Current <span class="badge">{{currentNo}}</span></a></li>
+      </ul>
+      <!-- if user is not logged in -->
+      <ul ng-if="!currentUser" class="nav navbar-nav">
+        <li data-ng-class="pageClass('/login')"><a href="/login">Staff Login</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

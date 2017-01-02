@@ -7,7 +7,7 @@ deviceMgr.controller('appCtl', function($scope, $rootScope,
 	//member of staff currently logged in
 	//TODO must change this when log in system implemented
 	if (!$rootScope.currentUser) {
-		$location.path('/login');
+		$location.path('/client');
 	}
 
 	//function for logging out
