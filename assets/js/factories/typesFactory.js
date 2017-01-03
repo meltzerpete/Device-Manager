@@ -4,7 +4,7 @@ deviceMgr.factory('types', function typesFactory($resource){
 
 	var Resource = $resource('/api/types/:id',
 		{typeID: '@id'}, {
-			get: {method: 'GET', isArray: true},
+			get: {method: 'GET', isArray: false},
 			remove: {method: 'DELETE', isArray: false},
 			update: {method: 'PUT'}
 		});

@@ -119,7 +119,7 @@ app.get("/api/clients", function(req, res) {
 	if (req.query.clientID) {
 		//client is specified - return single client
 		var c = clients.filter(function(client) {
-			return client.clientID === parseInt(req.query.categoryID);
+			return client.clientID === parseInt(req.query.clientID);
 		});
 		res.json(c[0]);
 	} else {
@@ -133,7 +133,13 @@ app.post("/api/clients", function(req, res){
 	client.clientID = clients.length;
   clients.push(client);
 	//send confirmation
-  res.sendStatus(200);
+	var i = 0;
+	clients.forEach(function(client) {
+		console.log (i + ": -- : ");
+		console.log(JSON.stringify(client));
+		i++;
+	});
+  res.json(client);
 });
 
 app.put("/api/clients", function(req, res) {

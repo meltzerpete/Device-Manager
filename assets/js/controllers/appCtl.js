@@ -57,7 +57,7 @@ deviceMgr.controller('appCtl', function($scope, $rootScope,
 		var myEl = angular.element( document.querySelector( '#searchInput' ) );
 		myEl.attr('placeholder', $scope.placeholder);
 		//clear any text in search field on page change
-		$scope.search = null;
+		$scope.search = "";
 
 		//set scroll-bars to display where appropriate
 		$scope.bodyStyle = {'overflow-y': 'auto'};

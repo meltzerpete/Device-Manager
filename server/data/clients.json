@@ -16,7 +16,7 @@
     "clientCourse":"MSc CS",
     "clientSupervisor":"Jo Hubbs",
     "clientType":"UCL Postgraduate",
-    "clientStudentNo": 16092222,
+    "clientStudentNo": "16092222",
     "clientEmail":"sue.dayly@ucl.ac.uk"
   },
   {
@@ -36,7 +36,7 @@
     "clientCourse": "BSc Systems Engineering",
     "clientSupervisor": null,
     "clientType":"UCL Undergraduate",
-    "clientStudentNo": 24528878,
+    "clientStudentNo": "24528878",
     "clientEmail":"john.lally@ucl.ac.uk"
   },
   {
@@ -46,7 +46,7 @@
     "clientCourse": "MSc CS",
     "clientSupervisor": null,
     "clientType":"UCL Postgraduate",
-    "clientStudentNo": 129899,
+    "clientStudentNo": "129899",
     "clientEmail":"lauren.wright@ucl.ac.uk"
   }
 ]

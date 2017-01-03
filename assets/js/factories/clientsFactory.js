@@ -4,7 +4,7 @@ deviceMgr.factory('clients', function devicesFactory($resource){
 
 	var Resource = $resource('api/clients/:id',
 		{clientID: '@id'}, {
-			get: {method: 'GET', isArray: true},
+			get: {method: 'GET', isArray: false},
 			remove: {method: 'DELETE', isArray: false},
 			update: {method: 'PUT'}
 	});

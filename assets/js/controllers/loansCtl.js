@@ -61,10 +61,8 @@ deviceMgr.controller('loansCtl', function($scope, $rootScope,
 								return c[0];
 							};
 
-
 							//add info about client and device to each request object
 							$scope.loans.forEach(function(loan) {
-
 								var client = $scope.clients.find(loan.clientID);
 								var device = $scope.devices.find(loan.deviceID);
 								var type = $scope.types.find(device.typeID);
