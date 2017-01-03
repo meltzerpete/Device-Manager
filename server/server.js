@@ -1,6 +1,8 @@
 var express = require("express");
 var cors = require("cors");
 var bodyParser = require ("body-parser");
+var nodemailer = require('nodemailer');
+
 var app = express();
 
 var devices = require("./data/devices.json");
@@ -26,6 +28,41 @@ app.use(function(req, res, next) {
 app.use(express.static("../"));
 
 app.use(cors());
+
+
+/* EMAIL */
+var router = express.Router();
+app.use('/sendEmail', router);
+router.post('/', handleSendEmail);
+
+function handleSendEmail(req, res) {
+	var transporter = nodemailer.createTransport({
+		service: 'Gmail',
+		auth: {
+			user: 'loanstsg@gmail.com',
+			pass: 'loanpass'
+		}
+	});
+
+	console.log(JSON.stringify(req.body));
+
+	var mailOptions = {
+		from: 'loanstsg@gmail.com',
+		to: req.body.address,
+		subject: req.body.subject,
+		text: req.body.message
+	};
+
+	transporter.sendMail (mailOptions, function(error, info) {
+		if (error) {
+			console.log(error);
+			res.json({resMessage: '' + error});
+		} else {
+			console.log('Message sent: ' + info.response);
+			res.json({resMessage: 'Message sent.'});
+		}
+	});
+}
 
 
 /* CATEGORIES API */

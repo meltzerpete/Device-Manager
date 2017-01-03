@@ -2,7 +2,7 @@ var deviceMgr = angular.module('deviceMgr', ['ngRoute', 'ngSanitize', 'mgcrea.ng
 
 //MAIN APP CONTROLLER
 deviceMgr.controller('appCtl', function($scope, $rootScope,
-	$location, $window, staff, loans){
+	$location, $window, $http, staff, loans){
 
 	//member of staff currently logged in
 	if (!$rootScope.currentUser) {
@@ -73,4 +73,30 @@ deviceMgr.controller('appCtl', function($scope, $rootScope,
 	$scope.back = function() {
 		$window.history.back();
 	};
+
+	//global function to send email
+	$rootScope.sendEmail = function(address, subject, message) {
+
+		var data = {
+			//address: address,
+			//address for testing
+			address: 'meltzerpete@gmail.com',
+			subject: subject,
+			message: message
+		};
+
+		$http.post('/sendEmail', JSON.stringify(data)).
+    success(function(data, status, headers, config) {
+        // this callback will be called asynchronously
+        // when the response is available
+      //  alert(data.resMessage);
+      }).
+      error(function(data, status, headers, config) {
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+			//	alert(data.resMessage);
+      });
+
+	};
+
 });
