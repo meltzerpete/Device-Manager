@@ -218,7 +218,8 @@
         </tr>   <!--end repeat row-->
 
 
-        <tr>
+        <tr data-ng-show="(activeType === null) ?
+        false : true">
           <td></td>
           <td></td>
           <td></td>
@@ -227,9 +228,7 @@
           <td>
             <a type="button"
               href="/newDevice/{{activeType.typeID}}"
-              class="btn btn-xs btn-success pull-right"
-              data-ng-show="(activeType === null) ?
-              false : true">
+              class="btn btn-xs btn-success pull-right">
               Add New
             </a>
           </td>
