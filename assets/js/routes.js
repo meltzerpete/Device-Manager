@@ -11,7 +11,7 @@ deviceMgr.config( function($routeProvider, $locationProvider){
 		templateUrl: 'assets/partials/approved.html'
 	})
 	.when('/changepassword', {
-
+		controller: 'staffCtl',
 		templateUrl: 'assets/partials/changepassword.html'
 	})
 	.when('/client', {
