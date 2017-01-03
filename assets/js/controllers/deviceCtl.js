@@ -2,7 +2,7 @@ var deviceMgr = angular.module('deviceMgr');
 
 //DEVICES CONTROLLER
 deviceMgr.controller('deviceCtl', function($scope, $routeParams,
-	$modal, $timeout, devices, categories, types) {
+	$modal, $timeout, $filter, devices, categories, types) {
 
 	//set actives to null
 	$scope.activeParent = null;
@@ -82,7 +82,8 @@ deviceMgr.controller('deviceCtl', function($scope, $routeParams,
 		} else if (device.availableFrom === null) {
 			return "Available now";
 		} else if (device.availableFrom !== null) {
-			return `Available from: ${device.availableFrom}`;
+			var fdate = $filter('date')(device.availableFrom, "dd/MM/yyyy");
+			return `Available from: ${fdate}`;
 		}
 	};
 

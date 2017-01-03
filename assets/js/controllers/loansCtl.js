@@ -339,7 +339,6 @@ deviceMgr.controller('loansCtl', function($scope, $rootScope,
 
 	};	//end cancelRequest function
 
-	//TODO editable
 
 	//SIGN IN
 	$scope.signInConfirm = function(loanID) {
