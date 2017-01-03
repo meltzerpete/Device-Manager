@@ -2,12 +2,8 @@
   <div class="form-group">
     <div>
       <p>The following email will be sent to {{request.clientEmail}}:</p>
-      <textarea name="emailText" style="min-width: 100%; min-height: 150px;">
-Dear {{request.clientFirstName}},
-
-Your loan request for {{request.typeName}} has been declined.
-
-Please contact the TSG department for further information.
+      <textarea ng-model="emailMessage" name="emailText" style="min-width: 100%; min-height: 150px;">
+{{emailMessage = "Dear " + request.clientFirstName + ",\n\nYour loan request for " + request.typeName + " has been declined.\n\nPlease contact the TSG department for further information."}}
       </textarea>
     </div>
   </div>

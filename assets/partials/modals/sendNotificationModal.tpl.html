@@ -7,8 +7,14 @@
       </div>
       <div class="modal-body" ng-bind="content"></div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" ng-click="$hide()">Cancel</button>
-        <button type="submit" class="btn btn-success" ng-click="">Confirm</button>
+        <button type="button" class="btn btn-default"
+          ng-click="$hide()">
+          Cancel
+        </button>
+        <button type="submit" class="btn btn-success"
+          ng-click="sendNotification(loan.clientEmail, emailMessage); $hide();">
+          Confirm
+        </button>
       </div>
     </div>
   </div>

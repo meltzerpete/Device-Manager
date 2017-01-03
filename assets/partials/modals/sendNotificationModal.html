@@ -2,10 +2,8 @@
   <div class="form-group">
     <div>
       <p>The following email will be sent to {{loan.clientEmail}}:</p>
-      <textarea name="emailText" style="min-width: 100%; min-height: 150px;">
-Dear {{loan.clientFirstName}},
-
-</textarea>
+      <textarea ng-model="emailMessage" name="emailText"
+      style="min-width: 100%; min-height: 150px;"></textarea>
     </div>
   </div>
 </form>

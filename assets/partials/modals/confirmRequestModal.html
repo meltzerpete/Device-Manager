@@ -28,7 +28,7 @@
           data-min-date="{{parseDate(request.availableFrom)}}">
       </div>
       <p>The following email will be sent to {{request.clientEmail}}:</p>
-      <textarea name="emailText" style="min-width: 100%; min-height: 150px;">{{getConfirmMessage(request, radio, selectedDate)}}
+      <textarea ng-model="emailMessage" name="emailText" style="min-width: 100%; min-height: 150px;">{{emailMessage = getConfirmMessage(request, radio, selectedDate)}}
       </textarea>
     </div>
   </div>

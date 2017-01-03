@@ -121,14 +121,18 @@ deviceMgr.controller('loansCtl', function($scope, $rootScope,
 	//REQUESTS
 
 	//deny request function
-	$scope.deny = function(requestID) {
+	$scope.deny = function(requestID, emailMessage) {
 		loans.find(requestID).$promise.then(function(loan) {
 			loan.approved = false;
 
 			//save changes on server
 			loan.$update();
 
-			//TODO send email
+			//send email
+			clients.find(loan.clientID).$promise.then(function(client) {
+				$rootScope.sendEmail(client.clientEmail,
+				'Loan request denied', emailMessage);
+			});
 
 			//update local data model
 			getData();
@@ -139,7 +143,7 @@ deviceMgr.controller('loansCtl', function($scope, $rootScope,
 	};
 
 	//approve request function
-	$scope.approve = function(requestID, radio, selectedDate) {
+	$scope.approve = function(requestID, radio, selectedDate, emailMessage) {
 
 		loans.find(requestID).$promise.then(function(loan) {
 
@@ -184,7 +188,11 @@ deviceMgr.controller('loansCtl', function($scope, $rootScope,
 				device.$update();
 			});
 
-			//TODO send email
+			//send email
+			clients.find(loan.clientID).$promise.then(function(client) {
+				$rootScope.sendEmail(client.clientEmail,
+				'Loan request approved', emailMessage);
+			});
 
 			//update local data model
 			getData();
@@ -278,7 +286,7 @@ deviceMgr.controller('loansCtl', function($scope, $rootScope,
 
 	};
 
-	$scope.cancelRequest = function(loanID) {
+	$scope.cancelRequest = function(loanID, emailMessage) {
 
 		loans.get().$promise.then(function(allLoans) {
 			loans.find(loanID).$promise.then(function(thisLoan) {
@@ -310,6 +318,13 @@ deviceMgr.controller('loansCtl', function($scope, $rootScope,
 					thisLoan.approved = false;
 
 					thisLoan.$update();
+
+					//send email
+					clients.find(thisLoan.clientID).$promise.then(function(client) {
+						$rootScope.sendEmail(client.clientEmail,
+						'Loan request cancelled', emailMessage);
+					});
+
 					//update local data model
 					getData();
 
@@ -372,6 +387,11 @@ deviceMgr.controller('loansCtl', function($scope, $rootScope,
 		});	//end loans.get()
 
 	};	//end sign in loan function
+
+	//function for sending a notification
+	$scope.sendNotification = function(clientEmail, emailMessage) {
+		$rootScope.sendEmail(clientEmail, 'Notification', emailMessage);
+	};
 
 })	//end of controller
 
