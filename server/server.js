@@ -145,7 +145,7 @@ app.post("/api/clients", function(req, res){
 app.put("/api/clients", function(req, res) {
 	//get matching client by clientID
 	var c = clients.filter(function(client) {
-		return client.clientID === parseInt(req.body.categoryID);
+		return client.clientID === parseInt(req.body.clientID);
 	});
 	c[0] = Object.assign(c[0], req.body);
 	//send confirmation
