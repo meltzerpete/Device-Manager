@@ -22,43 +22,87 @@ deviceMgr.controller('clientDetailsCtl',
 
 	$scope.makeRequest = function() {
 		//TODO check if email already exists
-		var newClient = clients.add();
-		newClient.clientFirstName = $scope.client.clientFirstName || null;
-		newClient.clientLastName = $scope.client.clientLastName || null;
-		newClient.clientCourse = $scope.client.clientCourse || null;
-		newClient.clientSupervisor = $scope.client.clientSupervisor || null;
-		newClient.clientType = $scope.client.clientType || null;
-		newClient.clientStudentNo = $scope.client.clientStudentNo || null;
-		newClient.clientEmail = $scope.client.clientEmail || null;
-		newClient.$save().then(function(res) {
-			var length = $scope.selectedDate.getFullYear() +
-			"/" + ($scope.selectedDate.getMonth() + 1) +
-			"/" + $scope.selectedDate.getDate();
 
-			var request = {
-				due : null,
-				dateStarted : null,
-				extensionRequested: false,
-				returned: null,
-				onTheFly: false,
-				damageReported: null,
-				approved: null,
-				length: length,
-				deviceID: $scope.device.deviceID,
-				clientID: res.clientID,
-				staffID: null
-			};
+		var fClients;
+		clients.get().$promise.then(function(allClients) {
+			fClients = allClients.filter(function(client) {
+				return $scope.client.clientEmail === client.clientEmail;
+			});
 
-			var newRequest = loans.add();
-			newRequest = Object.assign(newRequest, request);
-			newRequest.$save();
+			if (fClients.length > 0) {
+				//client already exists
+				var length = $scope.selectedDate.getFullYear() +
+				"/" + ($scope.selectedDate.getMonth() + 1) +
+				"/" + $scope.selectedDate.getDate();
 
-			//navigate back to client home page
-			$location.path('/client');
+				var request = {
+					due : null,
+					dateStarted : null,
+					extensionRequested: false,
+					returned: null,
+					onTheFly: false,
+					damageReported: null,
+					approved: null,
+					length: length,
+					deviceID: $scope.device.deviceID,
+					clientID: fClients[0].clientID,
+					staffID: null
+				};
 
-			//only needed for testing purposes
-			$rootScope.updateNav();
-		});
+				var newRequest = loans.add();
+				newRequest = Object.assign(newRequest, request);
+				newRequest.$save();
+
+				//navigate back to client home page
+				$location.path('/client');
+
+				//update navbar badges
+				$rootScope.updateNav();
+
+			} else {
+				//clieant does not yet exist - create new
+				var newClient = clients.add();
+				newClient.clientFirstName = $scope.client.clientFirstName;
+				newClient.clientLastName = $scope.client.clientLastName;
+				newClient.clientCourse = $scope.client.clientCourse;
+				newClient.clientSupervisor = $scope.client.clientSupervisor;
+				newClient.clientType = $scope.client.clientType;
+				newClient.clientStudentNo = $scope.client.clientStudentNo;
+				newClient.clientEmail = $scope.client.clientEmail;
+				newClient.$save().then(function(res) {
+					var length = $scope.selectedDate.getFullYear() +
+					"/" + ($scope.selectedDate.getMonth() + 1) +
+					"/" + $scope.selectedDate.getDate();
+
+					var request = {
+						due : null,
+						dateStarted : null,
+						extensionRequested: false,
+						returned: null,
+						onTheFly: false,
+						damageReported: null,
+						approved: null,
+						length: length,
+						deviceID: $scope.device.deviceID,
+						clientID: res.clientID,
+						staffID: null
+					};
+
+					var newRequest = loans.add();
+					newRequest = Object.assign(newRequest, request);
+					newRequest.$save();
+
+					//navigate back to client home page
+					$location.path('/client');
+
+					//update navbar badges
+					$rootScope.updateNav();
+
+				});	//end newClient.$save()
+
+			}	//end else
+
+		});	//end clients.get()
 
 	};
 

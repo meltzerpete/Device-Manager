@@ -52,9 +52,14 @@
             class="col-sm-2 col-xs-4 control-label">Client Type</label>
             <div class="col-sm-4 col-xs-8">
               <p data-ng-if="!editable">{{activeClient.clientType}}</p>
-              <input class="form-control input-sm" data-ng-if="editable" type="text"
-              data-ng-model="activeClient.clientType"
-              ng-model-options="{ updateOn: 'submit' }" />
+              <select data-ng-if="editable" class="form-control input-sm"
+                data-ng-model="activeClient.clientType"
+                ng-model-options="{ updateOn: 'submit' }">
+                <option>UCL Undergraduate</option>
+                <option>UCL Postgraduate</option>
+                <option>UCL Staff</option>
+                <option>External</option>
+              </select>
             </div>
 
             <!--clientEmail-->
@@ -62,7 +67,7 @@
               Email</label>
             <div class="col-sm-4 col-xs-8">
               <p data-ng-if="!editable">{{activeClient.clientEmail}}</p>
-              <input class="form-control input-sm" data-ng-if="editable" type="text"
+              <input class="form-control input-sm" data-ng-if="editable" type="email"
               data-ng-model="activeClient.clientEmail"
               ng-model-options="{ updateOn: 'submit' }" />
             </div>
