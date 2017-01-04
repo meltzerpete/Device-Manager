@@ -126,7 +126,7 @@
               </a>
             </th>   <!--ParentCategory-->
 
-            <th class="hidden-xs" ng-show="!activeSub">
+            <th ng-show="!activeSub">
               <a data-ng-click="sortfield =
                 (sortfield === 'subCategory') ?
                 '-subCategory' : 'subCategory'">
@@ -134,7 +134,7 @@
               </a>
             </th>   <!--subCategory-->
 
-            <th class="hidden-xs" ng-show="!activeType">
+            <th ng-show="!activeType">
               <a data-ng-click="sortfield =
                 (sortfield === 'type.typeName') ? '-type.typeName' : 'type.typeName'">
                 Type
@@ -149,7 +149,7 @@
               </a>
             </th>   <!--deviceID-->
 
-            <th>
+            <th class="hidden-xs">
               <a data-ng-click="sortfield =
                 (sortfield === 'serial') ?
                 '-serial' : 'serial'">
@@ -190,12 +190,12 @@
 
           <td class="hidden-xs" ng-show="!activeParent">
             {{device.parentCategory.categoryName}}</td>
-          <td class="hidden-xs" ng-show="!activeSub">
+          <td ng-show="!activeSub">
             {{device.subCategory.categoryName}}</td>
-          <td class="hidden-xs" ng-show="!activeType">
+          <td ng-show="!activeType">
             {{device.type.typeName}}</td>
           <td>{{device.deviceID}}</td>
-          <td>{{device.serial}}</td>
+          <td class="hidden-xs">{{device.serial}}</td>
           <td>{{device.loanStatus}}</td>
           <td class="hidden-xs">{{device.description}}</td>
           <td class="hidden-xs">{{device.notes}}</td>
