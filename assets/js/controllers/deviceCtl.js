@@ -55,6 +55,7 @@ deviceMgr.controller('deviceCtl', function($scope, $routeParams,
 						device.type = $scope.types.find(device.typeID);
 						device.subCategory = $scope.getsubCategory(device.typeID);
 						device.parentCategory = $scope.getParentCategory(device.typeID);
+						device.dateOfPurchase = $filter('date')(device.dateOfPurchase, "dd/MM/yyyy");
 					});
 
 					//set active device if route parameters specified
