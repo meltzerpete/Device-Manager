@@ -231,8 +231,8 @@ deviceMgr.controller('deviceCtl', function($scope, $routeParams,
 		return arg ? 'Working' : 'Needs Repair';
 	};
 
-	//function for populating other boolean comboboxes
-	$scope.boolToStrWorking = function(arg) {
+	//function for populating visible combobox
+	$scope.boolToStr = function(arg) {
 		return arg ? 'Yes' : 'No';
 	};
 

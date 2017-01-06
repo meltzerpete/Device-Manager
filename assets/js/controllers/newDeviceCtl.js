@@ -2,10 +2,15 @@ var deviceMgr = angular.module('deviceMgr');
 
 //ADD NEW DEVICE CONTROLLER
 deviceMgr.controller('newDeviceCtl', function($scope, $routeParams,
-	devices, categories, types) {
+	devices, categories, types, $timeout) {
 
 	//get Resource object and connect it to page model of new device
 	$scope.activeDevice = devices.addDevice();
+
+	//set isWorking and visible by default
+	$scope.activeDevice.isWorking = true;
+	$scope.activeDevice.visible = true;
+
 
 	//get data from server and set up local data model for new device
 	devices.get().$promise.then(function(devicesData) {
@@ -78,6 +83,16 @@ deviceMgr.controller('newDeviceCtl', function($scope, $routeParams,
 		$scope.activeDevice = devices.addDevice();
 		//return to previous page
 		$scope.back();
+	};
+
+	//function for populating isWorking combobox
+	$scope.boolToStrWorking = function(arg) {
+		return arg ? 'Working' : 'Needs Repair';
+	};
+
+	//function for populating visible combobox
+	$scope.boolToStr = function(arg) {
+		return arg ? 'Yes' : 'No';
 	};
 
 });

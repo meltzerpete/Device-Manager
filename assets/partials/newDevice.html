@@ -94,7 +94,10 @@
                   <label for="isWorking" class="col-xs-4 control-label">
                     Device Status</label>
                   <div class="col-xs-8">
-                    <input class="form-control input-sm" type="text" data-ng-model="activeDevice.isWorking"  />
+                    <select class="form-control input-sm"
+                      ng-model="activeDevice.isWorking"
+                      data-ng-options="boolToStrWorking(item) for item in [true, false]">
+                    </select>
                   </div>
 
                 </div>    <!--close form-group-->
@@ -126,7 +129,11 @@
                   <label for="visible" class="col-xs-4 control-label">
                     Visible</label>
                   <div class="col-xs-8">
-                    <input class="form-control input-sm" type="text" data-ng-model="activeDevice.visible"  />
+                    <select class="form-control input-sm"
+                      ng-model="activeDevice.visible"
+                      ng-select="Yes"
+                      data-ng-options="boolToStr(item) for item in [true, false]">
+                    </select>
                   </div>
 
                 </div>    <!--close form-group-->
