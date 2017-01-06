@@ -86,7 +86,7 @@ app.get("/api/categories", function(req, res) {
    [parseInt(req.query.categoryID)],function(err,row){
     //   connection.end();
        if (err)  throw err;
-       res.json(row);
+       res.json(row[0]);
    });
  }  else {
     connection.query('SELECT category_id AS categoryID, category_name AS categoryName, category_parentid AS parentCategoryID FROM category ',
@@ -113,9 +113,9 @@ app.post("/api/categories", function(req, res){
 })
 
 app.put("/api/categories", function(req,res){
-
-  connection.query('UPDATE category SET ? WHERE ?',
-[req.body, category_id = req.body.categoryID],
+ var category = req.body;
+  connection.query('UPDATE category SET category_name=?, category_parentid=? WHERE category?',
+[category.categoryName,category.parentCategoryID, category_id = req.body.categoryID],
 function (err,row){
  if (err) throw err;
  console.log(req.body);
@@ -139,12 +139,13 @@ app.delete("/api/clients", function(req, res){
  	if (req.query.clientID) {
  		//client is specified - return single client
 
-    connection.query('SELECT client_id AS clientID, client_firstname AS clientFirstName, client_lastname AS client_lastname, ' +
+    connection.query('SELECT client_id AS clientID, client_firstname AS clientFirstName, client_lastname AS clientLastName, ' +
     'client_course AS clientCourse, client_supervisor AS clientSupervisor, client_type AS clientType, client_studentno AS clientStudentNo, client_email AS clientEmail  FROM client WHERE client_id =?',
   [parseInt(req.query.clientID)],function(err,row){
   //  connection.end();
     if (err)  throw err;
-    res.json(row);
+    res.json(row[0]);
+    console.log(JSON.stringify(row));
   });
  	} else {
  		//no client specified - return array of all categories
@@ -167,9 +168,9 @@ app.delete("/api/clients", function(req, res){
  })
 
  app.put("/api/clients", function(req,res){
-
-   connection.query('UPDATE client SET ? WHERE ?',
- [req.body, client_id = req.body.clientID],
+  var clients = req.body;
+   connection.query('UPDATE client SET client_email=?, client_firstname=?, client_lastname=?, client_course=?, client_type=?, client_studentno=?, client_supervisor=? WHERE ?',
+ [clients.clientEmail,clients.clientFirstName,clients.clientLastName,clients.clientCourse,clients.clientType,clients.clientStudentNo,clients.clientSupervisor, client_id = clients.clientID],
 function (err,row){
   if (err) throw err;
   console.log(req.body);
@@ -198,7 +199,8 @@ function (err,row){
        item.isWorking = !!+item.isWorking;
        item.visible = !!+item.visible;
      });
-     res.json(row);
+     res.json(row[0]);
+     console.log(JSON.stringify(row[0]));
    });
    } else  {
      connection.query('SELECT device_id AS deviceID, device_description AS description, device_availablefrom AS availableFrom, device_dateofpurchase AS dateOfPurchase, device_dateoutofservice AS dateOutOfService, device_defaultloantime AS defaultLoanTime, device_isworking AS isWorking, device_notes AS notes, device_serial AS serial, device_visible AS visible, type_id AS typeID FROM device',
@@ -225,7 +227,7 @@ function (err,row){
 
  app.put("/api/devices", function(req, res){
     var devices = req.body;
-   connection.query('UPDATE device SET (device_availablefrom =?, device_dateofpurchase=?, device_dateoutofservice=?, device_defaultloantime=?, device_description=?, device_isworking=?, device_notes=?, device_serial=?, device_visible=?, type_id=?) WHERE device_id =?',
+   connection.query("UPDATE device SET device_availablefrom =?, device_dateofpurchase=?, device_dateoutofservice=?, device_defaultloantime=?, device_description=?, device_isworking=?, device_notes=?, device_serial=?, device_visible=?, type_id=? WHERE device_id =?",
  [devices.availableFrom,devices.dateOfPurchase,devices.dateOutOfService,devices.defaultLoanTime,devices.description,devices.isWorking,devices.notes,devices.serial,devices.visible,devices.typeID,parseInt(req.body.deviceID)],
 function (err,row){
   if (err) throw err;
@@ -255,7 +257,7 @@ function (err,row){
        item.approved = !!+item.approved;
        item.onTheFly = !!+item.onTheFly;
      });
-     res.json(row);
+     res.json(row[0]);
    });
  } else{
      connection.query('SELECT loan_id AS loanID, loan_due AS due, loan_datestarted AS dateStarted, loan_extensionrequested AS extensionRequested, loan_returned AS returned, loan_onthefly AS onTheFly, loan_damagereported AS damageReported, loan_approved AS approved, loan_length AS length, device_id AS deviceID, client_id AS clientID, signout_staff_id AS staffID FROM loan',
@@ -280,9 +282,9 @@ function (err,row){
  })
 
  app.put("/api/loans", function(req,res){
-
-   connection.query('UPDATE loan SET ? WHERE ?',
- [req.body, loan_id = req.body.loanID],
+   var loans =req.body;
+   connection.query('UPDATE loan SET loan_due,loan_datestarted =?, loan_extensionrequested=?, loan_returned=?, loan_onthefly=?, loan_damagereported=?, loan_approved=?, loan_length=?, device_id=?, client_id=?, signout_staff_id=? WHERE ?',
+ [loans.due, loans.dateStarted, loans.extensionRequested, loans.returned, loans.onTheFly, loans.damageReported, loans.approved, loans.length, loans.deviceID, loans.clientID, loans.staffID, loan_id = loans.loanID],
 function (err,row){
   if (err) throw err;
   console.log(req.body);
@@ -303,17 +305,18 @@ function (err,row){
  });
 
  app.get("/api/staff",function(req,res){
-   if (req.query.loanID){
+   if (req.query.staffID){
      connection.query('SELECT staff_id AS staffID, staff_firstname AS staffFirstName, staff_lastname AS staffLastName, staff_password AS password, staff_isadmin AS isAdmin, staff_email as staffEmail, disabled FROM staff WHERE staff_id=?',
-       [parseInt(req.query.loanID)],function(err,row){
+       [parseInt(req.query.staffID)],function(err,row){
         // connection.end();
          if (err) throw err;
 
          row.forEach(function(item){
            item.isAdmin = !!+item.isAdmin;
            item.disabled = !!+item.disabled;
-         })
-         res.json(row);
+         });
+         res.json(row[0]);
+         console.log("here");
        })
    } else {
       connection.query('SELECT staff_id AS staffID, staff_firstname AS staffFirstName, staff_lastname AS staffLastName, staff_password AS password, staff_isadmin AS isAdmin, staff_email as staffEmail, disabled FROM staff',
@@ -338,9 +341,9 @@ function (err,row){
  })
 
  app.put("/api/staff", function(req,res){
-
-   connection.query('UPDATE staff SET ? WHERE ?',
- [req.body, staff_id = req.body.staffID],
+   var staff = req.body;
+   connection.query('UPDATE staff SET staff_firstname, staff_lastname, staff_password, staff_isadmin, staff_email, disabled WHERE ?',
+ [staff.staffFirstName,staff.staffLastName,staff.password,staff.isAdmin,staff.staffEmail,staff.disabled, staff_id = staff.staffID],
 function (err,row){
   if (err) throw err;
   console.log(req.body);
@@ -388,9 +391,9 @@ function (err,row){
 
 
  app.put("/api/types", function(req,res){
-
-   connection.query('UPDATE type SET ? WHERE ?',
- [req.body, type_id = req.body.typeID],
+  var types = req.body;
+   connection.query('UPDATE type SET type_name = ?,category_id = ? WHERE ?',
+ [types.type_name,types.category_id,type_id = types.typeID],
 function (err,row){
   if (err) throw err;
   console.log(req.body);
