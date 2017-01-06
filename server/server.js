@@ -338,8 +338,8 @@ app.use(function(req, res) {
   res.sendFile('/', { root: '../' });
 });
 
-app.listen(80);
+app.listen(3002);
 
-console.log("Express app running on port 80");
+console.log("Express app running on port 3002");
 
 module.exports = app;
