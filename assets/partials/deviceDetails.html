@@ -100,9 +100,11 @@
                     <p data-ng-if="!editable">
                       {{activeDevice.isWorking ? "Working" : "Needs Repair"}}
                     </p>
-                    <input data-ng-if="editable" class="form-control input-sm"
-                      type="text" data-ng-model="activeDevice.isWorking"
-                      data-ng-model-options="{ updateOn: 'submit' }" />
+                    <select data-ng-if="editable" class="form-control input-sm"
+                      ng-model="activeDevice.isWorking"
+                      data-ng-model-options="{ updateOn: 'submit' }"
+                      data-ng-options="boolToStrWorking(item) for item in [true, false]">
+                    </select>
                   </div>
 
                 </div>    <!--close form-group-->
@@ -137,9 +139,11 @@
                     <p data-ng-if="!editable">
                       {{activeDevice.visible ? "Yes" : "No"}}
                     </p>
-                    <input data-ng-if="editable" class="form-control input-sm"
-                      type="text" data-ng-model="activeDevice.visible"
-                      data-ng-model-options="{ updateOn: 'submit' }" />
+                    <select data-ng-if="editable" class="form-control input-sm"
+                      ng-model="activeDevice.visible"
+                      data-ng-model-options="{ updateOn: 'submit' }"
+                      data-ng-options="boolToStrWorking(item) for item in [true, false]">
+                    </select>
                   </div>
 
                 </div>    <!--close form-group-->
