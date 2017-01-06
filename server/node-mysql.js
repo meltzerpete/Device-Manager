@@ -2,8 +2,8 @@ var mysql = require ('mysql');
 var connection = mysql.createConnection({
   host:'localhost',
   user: 'root',
-  password: 'root',
-  database: 'loan_system2',
+  password: 'password',
+  database: 'loans',
   port: '8889',
   connectionLimit:50
 });
@@ -404,8 +404,8 @@ function (err,row){
    res.sendFile('/', { root: '../' });
  });
 
- app.listen(3500);
+ app.listen(80);
 
- console.log("Express app running on port 3500");
+ console.log("Express app running on port 80");
 
  module.exports = app;
