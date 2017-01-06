@@ -9,7 +9,7 @@
 
   <div>    <!--Information about the client (TOP)-->
 
-    <form data-ng-submit="edit(false)">
+    <form data-ng-submit="edit(false); update(activeClient)">
 
       <div class="row">   <!--client row 1-->
 
@@ -52,9 +52,14 @@
             class="col-sm-2 col-xs-4 control-label">Client Type</label>
             <div class="col-sm-4 col-xs-8">
               <p data-ng-if="!editable">{{activeClient.clientType}}</p>
-              <input class="form-control input-sm" data-ng-if="editable" type="text"
-              data-ng-model="activeClient.clientType"
-              ng-model-options="{ updateOn: 'submit' }" />
+              <select data-ng-if="editable" class="form-control input-sm"
+                data-ng-model="activeClient.clientType"
+                ng-model-options="{ updateOn: 'submit' }">
+                <option>UCL Undergraduate</option>
+                <option>UCL Postgraduate</option>
+                <option>UCL Staff</option>
+                <option>External</option>
+              </select>
             </div>
 
             <!--clientEmail-->
@@ -62,7 +67,7 @@
               Email</label>
             <div class="col-sm-4 col-xs-8">
               <p data-ng-if="!editable">{{activeClient.clientEmail}}</p>
-              <input class="form-control input-sm" data-ng-if="editable" type="text"
+              <input class="form-control input-sm" data-ng-if="editable" type="email"
               data-ng-model="activeClient.clientEmail"
               ng-model-options="{ updateOn: 'submit' }" />
             </div>
@@ -136,6 +141,14 @@
             <button data-ng-if="!editable" type="button"
               class="btn btn-sm btn-info"
               data-ng-click="back()">Back</button>
+            <button data-ng-if="!editable" type="button"
+              class="btn btn-sm btn-default"
+              bs-modal="sendEmailModal"
+              data-scope="$scope"
+              data-title="Send notification to {{activeClient.clientFirstName}} {{activeClient.clientLastName}}"
+              data-content-template="/assets/partials/modals/sendNotificationModal.html"
+              data-template-url="/assets/partials/modals/sendNotificationModal.tpl.html"
+              data-ng-click="sendEmail()">Send Notification</button>
             <button data-ng-if="editable" type="button"
               class="btn btn-sm btn-danger"
               data-ng-click="edit(false)">Cancel</button>
@@ -153,6 +166,12 @@
   </div>    <!--close client div-->
 
   <hr>
+
+  <div class="page-header">
+    <h2>
+      Loan History
+    </h2>
+  </div>
 
   <!--START TABLE-->
 
@@ -173,39 +192,23 @@
         </small> Returned</th>   <!--returned-->
 
         <th><small><span class="glyphicon glyphicon-sort"></span>
-        </small> On Time</th>    <!--returned <= due ?-->
+        </small> Loan Status</th>    <!--returned <= due ?-->
 
         <th>Faults Reported</th>    <!--damageReported-->
 
       </tr>
     </thead>    <!--end table heading-->
 
-    <tr>    <!--first row-->
-      <td><a href="#">176</a></td>
-      <td>Raspberry Pi 2</td>
-      <td class="hidden-xs">02/12/2016</td>
-      <td class="hidden-xs">08/12/2016</td>
-      <td><span class="text-success glyphicon glyphicon-ok"></span></td>
-      <td></td>
-    </tr>   <!--end first row-->
-
-    <tr>    <!--second row-->
-      <td><a href="#">82</a></td>
-      <td>iPad 3</td>
-      <td class="hidden-xs">19/07/16</td>
-      <td class="hidden-xs">01/08/2016</td>
-      <td><span class="text-warning glyphicon glyphicon-remove"></span></td>
-      <td></td>
-    </tr>   <!--end second row-->
-
-    <tr>    <!--third row-->
-      <td><a href="#">245</a></td>
-      <td>Odroid C1</td>
-      <td class="hidden-xs">12/04/16</td>
-      <td class="hidden-xs">18/05/2016</td>
-      <td><span class="text-success glyphicon glyphicon-ok"></span></td>
-      <td>SD reader is loose.</td>
-    </tr>   <!--end third row-->
+    <tbody>
+      <tr ng-repeat="loan in loans">    <!-- row for each loan in user history -->
+        <td><a href="/deviceDetails/{{loan.deviceID}}">{{loan.deviceID}}</a></td>
+        <td>{{loan.typeName}}</td>
+        <td class="hidden-xs">{{loan.dateStarted || "-"}}</td>
+        <td class="hidden-xs">{{loan.returned || "-"}}</td>
+        <td>{{loan.loanStatus}}</td>
+        <td>{{loan.damageReported}}</td>
+      </tr>
+    </tbody>
 
   </table>    <!--end table-->
 

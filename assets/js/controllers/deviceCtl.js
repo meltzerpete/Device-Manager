@@ -226,4 +226,14 @@ deviceMgr.controller('deviceCtl', function($scope, $routeParams,
 	//get data from server when page loads
 	getData();
 
+	//function for populating isWorking combobox
+	$scope.boolToStrWorking = function(arg) {
+		return arg ? 'Working' : 'Needs Repair';
+	};
+
+	//function for populating visible combobox
+	$scope.boolToStr = function(arg) {
+		return arg ? 'Yes' : 'No';
+	};
+
 });

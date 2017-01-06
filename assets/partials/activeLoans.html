@@ -207,15 +207,17 @@
 
             <br />
 
-            <button type="button" class="btn btn-sm btn-warning"
-              bs-modal="denyRequestModal"
+            <button type="button" class="btn btn-sm btn-default"
+              bs-modal="sendEmailModal"
               data-scope="$scope"
-              data-title="Sign in {{loan.typeName}}"
+              data-title="Send notification to {{loan.clientFirstName}} {{loan.clientLastName}}"
               data-content-template="/assets/partials/modals/sendNotificationModal.html"
-              data-template-url="/assets/partials/modals/sendNotificationModal.tpl.html" autofocus="">Send Notification</button>
+              data-template-url="/assets/partials/modals/sendNotificationModal.tpl.html" autofocus="">
+              Send Notification
+            </button>
 
             <button type="button" class="btn btn-sm btn-success"
-              bs-modal="denyRequestModal"
+              bs-modal="signInModal"
               data-scope="$scope"
               data-title="Sign in {{loan.typeName}}"
               data-content-template="/assets/partials/modals/signInConfirmModal.html"
