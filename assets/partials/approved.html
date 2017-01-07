@@ -1,6 +1,6 @@
 <div class="container">
 
-  <div class="panel-group">
+  <div class="panel-group" ng-model="multiplePanels.activePanels" data-allow-multiple="true" role="tablist" aria-multiselectable="true" bs-collapse data-start-collapsed="true">
 
     <div class="panel panel-danger">   <!--start panel-->
 
@@ -18,14 +18,19 @@
       | filter: {dateStarted: null}"
       class="panel panel-default">   <!--start panel-->
 
+
       <div class="panel-heading">
+        <a bs-collapse-toggle>
         <h3 class="panel-title">
           {{loan.clientFirstName}}
           {{loan.clientLastName}}
           -
           {{loan.typeName}}
         </h3>
+      </a>
       </div>
+
+      <div class="panel-collapse" role="tabpanel" bs-collapse-target>
 
       <div class="panel-body">   <!--TODO: add ng-show here-->
         <form>
@@ -227,7 +232,7 @@
         </form>   <!--end form-->
 
       </div>    <!--end panel body-->
-
+</div>
     </div>    <!--end panel-->
 
   </div>    <!--close panel-group-->
