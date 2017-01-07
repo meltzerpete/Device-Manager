@@ -1,6 +1,6 @@
 <div class="container">
 
-  <div class="panel-group">
+  <div class="panel-group" ng-model="multiplePanels.activePanels" data-allow-multiple="true" role="tablist" aria-multiselectable="true" bs-collapse data-start-collapsed="true">
 
     <div data-ng-repeat="request in loans
       | filter: {approved: null}
@@ -8,14 +8,18 @@
       class="panel panel-default">   <!--start panel-->
 
       <div class="panel-heading">
+        <a bs-collapse-toggle>
         <h3 class="panel-title">
+
           {{request.clientFirstName}}
           {{request.clientLastName}}
           -
           {{request.typeName}}
-        </h3>
-      </div>
 
+        </h3>
+      </a>
+      </div>
+<div class="panel-collapse" role="tabpanel" bs-collapse-target>
       <div class="panel-body">   <!--TODO: add ng-show here-->
         <form>
 
@@ -231,8 +235,10 @@
 
       </div>    <!--close panel body-->
 
-    </div>    <!--end panel-->
+    </div>
 
-  </div>    <!--close panel-group-->
+  </div>    <!--end panel-->
+
+</div>    <!--close panel-group-->
 
 </div>    <!--close container-->
