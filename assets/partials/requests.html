@@ -3,7 +3,8 @@
   <div class="panel-group">
 
     <div data-ng-repeat="request in loans
-      | filter: {approved: null}"
+      | filter: {approved: null}
+      | filter: search"
       class="panel panel-default">   <!--start panel-->
 
       <div class="panel-heading">

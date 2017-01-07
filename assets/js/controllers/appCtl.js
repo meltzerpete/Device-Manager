@@ -48,10 +48,20 @@ deviceMgr.controller('appCtl', function($scope, $rootScope,
 
 		$scope.placeholder = "Search";
 
-		if ($location.path() == '/clientSearch') {
+		switch ($location.path()) {
+			case '/clientSearch':
 			$scope.placeholder = "Search Clients";
-		} else if ($location.path() == '/manage') {
+			break;
+
+			case '/manage':
 			$scope.placeholder = "Search Devices";
+			break;
+
+			case '/requests':
+			case '/approved':
+			case '/activeLoans':
+			$scope.placeholder = "Search Loans";
+			break;
 		}
 
 		var myEl = angular.element( document.querySelector( '#searchInput' ) );
