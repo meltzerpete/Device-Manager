@@ -4,7 +4,8 @@
 
     <div data-ng-repeat="loan in loans
       | filter: {current: true}
-      | orderBy: 'due'"
+      | orderBy: 'due'
+      | filter: search"
       class="panel"
       data-ng-class="
       loan.overdue ? 'panel-danger' :

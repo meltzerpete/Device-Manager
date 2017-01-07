@@ -19,6 +19,10 @@ html {
 }
 body {
   margin: 0;
+  background-image: url('../img/UCLnew.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 article,
 aside,

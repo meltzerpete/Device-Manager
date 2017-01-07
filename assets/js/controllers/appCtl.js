@@ -54,6 +54,7 @@ deviceMgr.controller('appCtl', function($scope, $rootScope,
 			break;
 
 			case '/manage':
+			case '/client':
 			$scope.placeholder = "Search Devices";
 			break;
 

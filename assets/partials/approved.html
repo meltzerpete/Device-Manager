@@ -15,7 +15,8 @@
 
     <div data-ng-repeat="loan in loans
       | filter: {approved: true}
-      | filter: {dateStarted: null}"
+      | filter: {dateStarted: null}
+      | filter: search"
       class="panel panel-default">   <!--start panel-->
 
 
