@@ -61,6 +61,8 @@ deviceMgr.controller('appCtl', function($scope, $rootScope,
 			case '/requests':
 			case '/approved':
 			case '/activeLoans':
+			case '/denied':
+			case '/previous':
 			$scope.placeholder = "Search Loans";
 			break;
 		}
