@@ -1,0 +1,220 @@
+<div class="container">
+
+  <div class="panel-group" ng-model="multiplePanels.activePanels" data-allow-multiple="true" role="tablist" aria-multiselectable="true" bs-collapse data-start-collapsed="true">
+
+    <div data-ng-repeat="request in loans
+      | filter: {approved: null}"
+      class="panel panel-default">   <!--start panel-->
+
+      <div class="panel-heading">
+        <a bs-collapse-toggle>
+        <h3 class="panel-title">
+
+          {{request.clientFirstName}}
+          {{request.clientLastName}}
+          -
+          {{request.typeName}}
+
+        </h3>
+      </a>
+      </div>
+<div class="panel-collapse" role="tabpanel" bs-collapse-target>
+      <div class="panel-body">   <!--TODO: add ng-show here-->
+        <form>
+
+          <!--Information about the client (TOP)-->
+          <div class="row">
+            <h3 class="col-md-1">Client</h3>
+          </div>
+
+          <!--CLIENT INFO HERE-->
+          <div class="row">   <!--cliet row-->
+
+            <div class="col-xs-12 col-md-6">
+              <div class="form-group">
+
+                <!--client name-->
+                <label for="clientName" class="col-xs-4 control-label">
+                  Name</label>
+                <div class="col-xs-8">
+                  <p>{{request.clientFirstName}}
+                    {{request.clientLastName}}
+                  </p>
+                </div>
+
+              </div>    <!--close form-group-->
+            </div>    <!--close col-xs-12 col-md-6-->
+
+            <div class="col-xs-12 col-md-6">
+              <div class="form-group">
+
+                <!--client type i.e. student/staff-->
+                <label for="clientType"
+                class="col-xs-4 control-label">Client Type</label>
+                <div class="col-xs-8">
+                  <p>{{request.clientType}}</p>
+                </div>
+
+              </div>    <!--close form-group-->
+            </div>    <!--close col-xs-12 col-md-6-->
+
+            <div class="col-xs-12 col-md-6">
+              <div class="form-group">
+
+                <!--client email-->
+                <label for="clientEmail" class="col-xs-4 control-label">
+                  Email</label>
+                <div class="col-xs-8">
+                  <p>{{request.clientEmail}}</p>
+                </div>
+
+              </div>    <!--close form-group-->
+            </div>    <!--close col-xs-12 col-md-6-->
+
+            <div class="col-xs-12 col-md-6">
+              <div class="form-group">
+
+                <!--client student number if applicable-->
+                <label for="studentNumber" class="col-xs-4 control-label">
+                  Student Number</label>
+                <div class="col-xs-8">
+                  <p>{{request.clientStudentNo}}</p>
+                </div>
+
+              </div>    <!--close form-group-->
+            </div>    <!--close col-xs-12 col-md-6-->
+
+          </div>    <!--end client row-->
+
+          <!--Information about the device (BOTTOM)-->
+          <div class="row">
+            <h3 class="col-md-1">Device</h3>
+          </div>
+
+          <!--DEVICE INFO HERE-->
+          <div class="row">   <!--device row-->
+
+            <div class="col-xs-12 col-md-6">
+              <div class="form-group">
+
+                <!--device name-->
+                <label for="deviceName" class="col-xs-4 control-label">
+                  Type</label>
+                <div class="col-xs-8">
+                  <p>{{request.typeName}}</p>
+                </div>
+
+              </div>    <!--close form-group-->
+            </div>    <!--close col-xs-12 col-md-6-->
+
+            <div class="col-xs-12 col-md-6">
+              <div class="form-group">
+
+                <!--category-->
+                <label for="categoryName"
+                class="col-xs-4 control-label">Device Category</label>
+                <div class="col-xs-8">
+                  <p>
+                    {{request.parentCategoryName}}
+                    /
+                    {{request.subCategoryName}}
+                    /
+                  </p>
+                </div>
+
+              </div>    <!--close form-group-->
+            </div>    <!--close col-xs-12 col-md-6-->
+
+            <div class="col-xs-12 col-md-6">
+              <div class="form-group">
+
+                <!--deviceID-->
+                <label for="deviceID" class="col-xs-4 control-label">
+                  Device ID</label>
+                <div class="col-xs-8">
+                  <p>{{request.deviceID}}</p>
+                </div>
+
+              </div>    <!--close form-group-->
+            </div>    <!--close col-xs-12 col-md-6-->
+
+            <div class="col-xs-12 col-md-6">
+              <div class="form-group">
+
+                <!--device serial/IMEI-->
+                <label for="studentNumber" class="col-xs-4 control-label">
+                  Serial Number</label>
+                <div class="col-xs-8">
+                  <p>{{request.deviceSerial}}</p>
+                </div>
+
+              </div>    <!--close form-group-->
+            </div>    <!--close col-xs-12 col-md-6-->
+
+            <div class="col-xs-12 col-md-6">
+              <div class="form-group">
+
+                <!--device description-->
+                <label for="deviceID" class="col-xs-4 control-label">
+                  Description</label>
+                <div class="col-xs-8">
+                  <p>{{request.deviceDescription}}</p>
+                </div>
+
+              </div>    <!--close form-group-->
+            </div>    <!--close col-xs-12 col-md-6-->
+
+            <div class="col-xs-12 col-md-6">
+              <div class="form-group">
+
+                <!--notes about the device-->
+                <label for="studentNumber" class="col-xs-4 control-label">
+                  Notes</label>
+                <div class="col-xs-8">
+                  <p>{{request.deviceNotes}}</p>
+                </div>
+
+              </div>    <!--close form-group-->
+            </div>    <!--close col-xs-12 col-md-6-->
+
+            <div class="col-xs-12 col-md-6">
+              <div class="form-group">
+
+                <!--due date-->
+                <label for="due" class="col-xs-4 control-label">
+                  Requested Return</label>
+                <div class="col-xs-8">
+                  <p>{{request.length | date: 'dd/MM/yyyy'}}</p>
+                </div>
+
+              </div>    <!--close form-group-->
+            </div>    <!--close col-xs-12 col-md-6-->
+
+            <div class="col-xs-12 col-md-6">
+              <div class="form-group">
+
+                <!--due date-->
+                <label for="due" class="col-xs-4 control-label">
+                  Default Return</label>
+                <div class="col-xs-8">
+                  <p>{{defaultReturn(request) | date: 'dd/MM/yyyy'}}</p>
+                </div>
+
+              </div>    <!--close form-group-->
+            </div>    <!--close col-xs-12 col-md-6-->
+
+          </div>    <!--close device row-->
+
+
+        </form>   <!--end form-->
+
+
+      </div>    <!--close panel body-->
+
+    </div>
+
+  </div>    <!--end panel-->
+
+</div>    <!--close panel-group-->
+
+</div>    <!--close container-->
