@@ -5728,6 +5728,7 @@ button.list-group-item-danger.active:focus {
   color: #ebebeb;
   background-color: #5cb85c;
   border-color: transparent;
+  background-image: linear-gradient(to bottom, #5cb85c 0, #21af08 100%);
 }
 .panel-success > .panel-heading + .panel-collapse > .panel-body {
   border-top-color: transparent;
@@ -6985,14 +6986,14 @@ a.list-group-item-danger.active:focus {
   border: none;
 }
 .panel-default > .panel-heading {
-  background-color: #21af08;
+  background-color: #617f9c;
   color: #ffffff;
-  background-image: linear-gradient(to bottom, #5cb85c 0, #21af08 100%);
+  background-image: linear-gradient(to bottom, #617f9c 0, #34475a 100%);
 }
 .panel-danger > .panel-heading{
-  background-color: #cc2924;
+  background-color: #c12e2a;
   color: #ffffff;
-  background-image: linear-gradient(to bottom, #d9534f 0, #cc2924 100%);
+  background-image: linear-gradient(to bottom, #d4615d 0, #c12e2a 100%);
 }
 .thumbnail {
   background-color: #4e5d6c;
