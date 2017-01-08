@@ -26,7 +26,7 @@ app.use(function(req, res, next) {
 	next();
 });
 
-app.use(express.static("../"));
+app.use(express.static("../public/"));
 
 app.use(cors());
 
@@ -397,15 +397,28 @@ function (err,row){
 function (err,row){
   if (err) throw err;
   console.log(req.body);
-})
- })
+});
+ });
+
+ //for error page redirecting if any details page is requested
+ app.get("/clientDeviceDetails/:id", function(req, res){
+   res.sendFile('/clientError.html', { root: '../public/' });
+ });
+
+ app.get("/clientProfile/:id", function(req, res){
+   res.sendFile('/error.html', { root: '../public/' });
+ });
+
+ app.get("/deviceDetails/:id", function(req, res){
+   res.sendFile('/error.html', { root: '../public/' });
+ });
 
  app.use(function(req, res) {
-   res.sendFile('/', { root: '../' });
+   res.sendFile('/', { root: '../public/' });
  });
 
  app.listen(80);
 
- console.log("Express app running on port 80");
+ console.log("Server running on port 80");
 
  module.exports = app;
