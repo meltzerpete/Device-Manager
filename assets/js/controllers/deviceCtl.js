@@ -66,6 +66,8 @@ deviceMgr.controller('deviceCtl', function($scope, $routeParams,
 						$scope.activeDevice = d[0];
 					}
 
+					console.log(devicesData);
+
 				});	//end of categories.get() function
 
 			}); //end of types.get() function
