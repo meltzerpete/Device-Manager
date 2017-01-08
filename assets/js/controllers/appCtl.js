@@ -7,7 +7,7 @@ deviceMgr.controller('appCtl', function($scope, $rootScope,
 	//member of staff currently logged in
 	if (!$rootScope.currentUser) {
 		//TODO remove me!!
-		$rootScope.currentUser = staff.find(0);
+		$rootScope.currentUser = staff.find(2);
 
 		$location.path('/client');
 	}

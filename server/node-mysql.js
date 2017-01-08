@@ -4,7 +4,7 @@ var connection = mysql.createConnection({
   user: 'root',
   password: 'password',
   database: 'loans',
-  port: '8889',
+  port: '3306',
   connectionLimit:50
 });
 
@@ -368,7 +368,7 @@ function (err,row){
       [parseInt(req.query.typeID)],function(err,row){
       //  connection.end();
         if (err) throw err;
-        res.json(row);
+        res.json(row[0]);
       })
    } else {
      connection.query('SELECT type_id AS typeID, type_name AS typeName, category_id AS categoryID FROM type',
@@ -383,7 +383,7 @@ function (err,row){
 
  app.post("/api/types",function(req,res){
    var types = req.body;
-   connection.query('INSERT INTO types(type_name, category_id) VALUES (?,?)',
+   connection.query('INSERT INTO type (type_name, category_id) VALUES (?,?)',
  [types.typeName,types.categoryID],function(err,row){
    if (err) throw err;
  })
