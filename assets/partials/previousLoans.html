@@ -3,8 +3,6 @@
   <div class="panel-group" ng-model="multiplePanels.activePanels" data-allow-multiple="true" role="tablist" aria-multiselectable="true" bs-collapse data-start-collapsed="true">
 
     <div data-ng-repeat="loan in loans
-      | filter: {approved: true}
-      | filter: {dateStarted: null}
       | filter: search"
       class="panel panel-default">   <!--start panel-->
 
@@ -195,29 +193,6 @@
 
           </div>    <!--end device row-->
 
-          <div class="form-group pull-right">   <!--action buttons-->
-
-            <br />
-
-            <button type="button" class="btn btn-sm btn-danger"
-              bs-modal="denyRequestModal"
-              data-scope="$scope"
-              data-title="Remove approved request for {{loan.typeName}}"
-              data-content-template="/assets/partials/modals/cancelRequestModal.html"
-              data-template-url="/assets/partials/modals/cancelRequestModal.tpl.html">
-              Remove
-            </button>
-
-            <button type="button" class="btn btn-sm btn-success"
-              bs-modal="denyRequestModal"
-              data-scope="$scope"
-              data-title="Sign out {{loan.typeName}}"
-              data-content-template="/assets/partials/modals/signOutConfirmModal.html"
-              data-template-url="/assets/partials/modals/signOutConfirmModal.tpl.html" autofocus="">
-              Sign Out
-            </button>
-
-          </div>    <!--end action buttons-->
 
         </form>   <!--end form-->
 

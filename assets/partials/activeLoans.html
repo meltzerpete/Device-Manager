@@ -4,13 +4,15 @@
 
     <div data-ng-repeat="loan in loans
       | filter: {current: true}
-      | orderBy: 'due'"
+      | orderBy: 'due'
+      | filter: search"
       class="panel"
       data-ng-class="
       loan.overdue ? 'panel-danger' :
-      'panel-default'">   <!--start panel-->
+      'panel-success'" ng-model="multiplePanels.activePanels" data-allow-multiple="true" role="tablist" aria-multiselectable="true" bs-collapse data-start-collapsed="true">   <!--start panel-->
 
       <div class="panel-heading">
+        <a bs-collapse-toggle>
         <h3 class="panel-title">
           {{loan.clientFirstName}}
           {{loan.clientLastName}}
@@ -27,9 +29,11 @@
             }} days
           </span>
         </h3>
+      </a>
         <div class="clearfix"></div>
       </div>
 
+<div class="panel-collapse" role="tabpanel" bs-collapse-target>
       <div class="panel-body">   <!--TODO: add ng-show here-->
         <form>
 
@@ -231,6 +235,8 @@
 
 
       </div>    <!--close panel body-->
+
+</div>
 
     </div>    <!--end panel-->
 

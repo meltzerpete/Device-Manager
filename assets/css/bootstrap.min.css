@@ -19,6 +19,10 @@ html {
 }
 body {
   margin: 0;
+  background-image: url('../img/UCLnew.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 article,
 aside,
@@ -1101,12 +1105,12 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #df691a;
+  color: #ffffff;
   text-decoration: none;
 }
 a:hover,
 a:focus {
-  color: #df691a;
+  color: #fffffd;
   text-decoration: underline;
 }
 a:focus {
@@ -6983,10 +6987,12 @@ a.list-group-item-danger.active:focus {
 .panel-default > .panel-heading {
   background-color: #21af08;
   color: #ffffff;
+  background-image: linear-gradient(to bottom, #5cb85c 0, #21af08 100%);
 }
 .panel-danger > .panel-heading{
   background-color: #cc2924;
-  color: #ffffff
+  color: #ffffff;
+  background-image: linear-gradient(to bottom, #d9534f 0, #cc2924 100%);
 }
 .thumbnail {
   background-color: #4e5d6c;
