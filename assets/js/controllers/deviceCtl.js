@@ -50,7 +50,7 @@ deviceMgr.controller('deviceCtl', function($scope, $routeParams,
 
 					//add loan status information to devices in scope
 					$scope.devices.forEach(function (device) {
-						//console.log(device);
+
 						device.loanStatus = $scope.getLoanStatus(device);
 						device.type = $scope.types.find(device.typeID);
 						device.subCategory = $scope.getsubCategory(device.typeID);
@@ -65,8 +65,6 @@ deviceMgr.controller('deviceCtl', function($scope, $routeParams,
 						});
 						$scope.activeDevice = d[0];
 					}
-
-					console.log(devicesData);
 
 				});	//end of categories.get() function
 
@@ -220,8 +218,6 @@ deviceMgr.controller('deviceCtl', function($scope, $routeParams,
 			delete copy.loanStatus;
 			delete copy.subCategory;
 			delete copy.parentCategory;
-			console.log(copy);
-			console.log($scope.activeDevice);
 			copy.$update();
 		}, 0);
 	};
