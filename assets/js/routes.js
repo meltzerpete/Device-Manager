@@ -42,6 +42,10 @@ deviceMgr.config( function($routeProvider, $locationProvider){
 
 		templateUrl: 'assets/partials/dashboard.html'
 	})
+	.when('/denied', {
+		controller : 'loansCtl',
+		templateUrl: 'assets/partials/deniedRequests.html'
+	})
 	.when('/deviceDetails/:id', {
 		controller: 'deviceCtl',
 		templateUrl: 'assets/partials/deviceDetails.html'
@@ -57,6 +61,10 @@ deviceMgr.config( function($routeProvider, $locationProvider){
 	.when('/newDevice/:id', {
 		controller : 'newDeviceCtl',
 		templateUrl: 'assets/partials/newDevice.html'
+	})
+	.when('/previous', {
+		controller : 'loansCtl',
+		templateUrl: 'assets/partials/previousLoans.html'
 	})
 	.when('/requests', {
 		controller: 'loansCtl',
