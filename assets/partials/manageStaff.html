@@ -1,0 +1,87 @@
+<div class="container">
+  <!--your code goes in this container tag-->
+  <!--START TABLE-->
+  <div class="page-header">
+    <h3>Search Clients</h3>
+  </div>
+
+  <div class="row">
+
+    <div class="col-md-9">
+
+      <table class="table table-condensed table-hover">
+
+        <thead>   <!--table heading-->
+          <tr>
+            <th>
+              <a>
+                ID
+              </a>
+            </th>   <!--deviceID-->
+
+            <th>
+              <a>
+                First Name
+              </a>
+            </th>   <!--clientFirstName-->
+
+            <th>
+              <a>
+                Last Name
+              </a>
+            </th>   <!--clientLastName-->
+
+            <th>
+              <a>
+                Admin
+              </a>
+            </th>    <!--clientType-->
+
+            <th class="hidden-xs">Email Address</th>    <!--clientEmail-->
+
+            <th>
+              <a>
+                Disabled
+              </a>
+            </th>
+
+            <th>
+              <a></a>
+            </th>
+
+          </tr>
+        </thead>    <!--close table heading-->
+
+        <tr>    <!--first row-->
+          <td>pete</td>
+          <td>{{staff.StaffFistName}}</td>
+          <td>{{staff.StaffLastName}}</td>
+          <td>{{staff.isAdmin}}</td>
+          <td class="hidden-xs">{{client.clientEmail}}</td>
+          <td><span class="glyphicon glyphicon-check"></span></td>
+          <td>
+            <span class="pull-right text-right">
+              <a type="button"
+                class="btn btn-xs btn-info btn-block"
+                style="margin-bottom: 2px; margin-top: 2px;"
+                data-ng-click="clone(device)">Edit</a>
+              <a type="button"
+                href="/deviceDetails/{{device.deviceID}}"
+                style="margin-bottom: 2px; margin-top: 2px;"
+                class="btn btn-xs btn-warning btn-block"
+                data-ng-click="">
+                Reset
+              </a>
+            </span>
+
+          </td>
+        </tr>   <!--end row-->
+
+
+      </table>
+
+    </div>    <!--close col-md-9-->
+
+  </div>    <!--close row-->
+
+</div>    <!--close container-->
