@@ -166,6 +166,8 @@
               </a>
             </th>
 
+            <th>Working</th>
+
             <th class="hidden-xs">Description</th>
 
             <th class="hidden-xs">Notes</th>
@@ -197,6 +199,14 @@
           <td>{{device.deviceID}}</td>
           <td class="hidden-xs">{{device.serial}}</td>
           <td>{{device.loanStatus}}</td>
+          <td>
+            <span ng-if="device.isWorking">
+              <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+            </span>
+            <span ng-if="!device.isWorking">
+              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            </span>
+          </td>
           <td class="hidden-xs">{{device.description}}</td>
           <td class="hidden-xs">{{device.notes}}</td>
           <td>
