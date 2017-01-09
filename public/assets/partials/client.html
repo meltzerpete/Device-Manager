@@ -146,6 +146,8 @@
 
         <!--repeat row-->
         <tr data-ng-repeat="device in devices
+          | filter: {visible: true}
+          | filter: {isWorking: true}
           | filter: search
           | orderBy: sortfield"
           data-ng-show="(activeParent === null) ?
