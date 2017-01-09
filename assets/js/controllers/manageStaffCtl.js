@@ -1,6 +1,6 @@
 var deviceMgr = angular.module('deviceMgr');
 
-//CLIENT SEARCH CONTROLLER
+//MANAGE STAFF CONTROLLER
 deviceMgr.controller('manageStaffCtl',
 		function($scope, staff) {
 
@@ -21,6 +21,7 @@ deviceMgr.controller('manageStaffCtl',
 				if ($scope.new) {
 					//create new entry
 					$scope.new = false;
+					staffMember.password = sha256(staffMember.staffEmail.toLowerCase() + "password");
 					staffMember.$save();
 					getData();
 				} else {
