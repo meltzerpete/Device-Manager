@@ -41,6 +41,7 @@
   <script type="text/javascript" src="assets/js/controllers/clientSearchCtl.js"></script>
   <script type="text/javascript" src="assets/js/controllers/loansCtl.js"></script>
   <script type="text/javascript" src="assets/js/controllers/loginCtl.js"></script>
+  <script type="text/javascript" src="assets/js/controllers/manageStaffCtl.js"></script>
   <script type="text/javascript" src="assets/js/controllers/staffCtl.js"></script>
 
   <script type="text/javascript" src="assets/js/routes.js"></script>
@@ -91,7 +92,7 @@
           </a>
           <ul class="dropdown-menu">
             <li data-ng-class="pageClass('/changepassword')"><a href="/changepassword">Change Password</a></li>
-            <li ng-if="currentUser.isAdmin" data-ng-class=""><a href="/">Admin Controls</a></li>
+            <li ng-if="currentUser.isAdmin" data-ng-class="pageClass('/manageStaff')"><a href="/manageStaff">Admin Controls</a></li>
             <li role="separator" class="divider"></li>
             <li data-ng-class=""><a href="" ng-click="logout()">Logout</a></li>
           </ul>
@@ -101,7 +102,6 @@
           <ul class="dropdown-menu">
             <li data-ng-class="pageClass('/clientSearch')"><a href="/clientSearch">Users</a></li>
             <li data-ng-class="pageClass('/manage')"><a href="/manage">Devices</a></li>
-            <li data-ng-class=""><a href="/">Groups</a></li>
             <li role="seperator" class="divider"></li>
             <li data-ng-class="pageClass('/client')"><a href="/client">View Client Page (testing only)</a></li>
           </ul>

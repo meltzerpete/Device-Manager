@@ -2,86 +2,154 @@
   <!--your code goes in this container tag-->
   <!--START TABLE-->
   <div class="page-header">
-    <h3>Search Clients</h3>
+    <h3>Manage Staff Users</h3>
   </div>
 
-  <div class="row">
+  <form class="form">
 
-    <div class="col-md-9">
+    <div class="row">
 
-      <table class="table table-condensed table-hover">
+      <div class="col-md-12">
 
-        <thead>   <!--table heading-->
-          <tr>
-            <th>
-              <a>
-                ID
+        <table class="table table-condensed table-hover">
+
+          <thead>   <!--table heading-->
+            <tr>
+              <th>
+                <a>
+                  ID
+                </a>
+              </th>   <!--deviceID-->
+
+              <th>
+                <a>
+                  First Name
+                </a>
+              </th>   <!--clientFirstName-->
+
+              <th>
+                <a>
+                  Last Name
+                </a>
+              </th>   <!--clientLastName-->
+
+              <th>
+                <a>
+                  Admin
+                </a>
+              </th>    <!--clientType-->
+
+              <th class="hidden-xs">Email Address</th>    <!--clientEmail-->
+
+              <th>
+                <a>
+                  Disabled
+                </a>
+              </th>
+
+              <th>
+                <a></a>
+              </th>
+
+            </tr>
+          </thead>    <!--close table heading-->
+
+          <tr data-ng-repeat="staffMember in staff">    <!--first row-->
+            <td>{{staffMember.staffID}}</td>
+
+            <td ng-if="!(staffMember.staffID===editable)">{{staffMember.staffFirstName}}</td>
+            <td ng-if="staffMember.staffID===editable"><input type="text" ng-model="staffMember.staffFirstName"/></td>
+
+            <td ng-if="!(staffMember.staffID===editable)">{{staffMember.staffLastName}}</td>
+            <td ng-if="staffMember.staffID===editable"><input type="text" ng-model="staffMember.staffLastName"/></td>
+
+            <td>
+              <span ng-if="!(staffMember.staffID===editable)">
+                <span ng-if="staffMember.isAdmin">
+                  <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                </span>
+                <span ng-if="!staffMember.isAdmin">
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </span>
+              </span>
+              <input ng-if="staffMember.staffID===editable" type="checkbox" ng-model="staffMember.isAdmin"/>
+            </td>
+
+            <td ng-if="!(staffMember.staffID===editable)" class="hidden-xs">{{staffMember.staffEmail}}</td>
+            <td ng-if="staffMember.staffID===editable"><input type="email" ng-model="staffMember.staffEmail"/></td>
+
+
+            <td>
+              <span ng-if="!(staffMember.staffID===editable)">
+                <span ng-if="staffMember.disabled">
+                  <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                </span>
+                <span ng-if="!staffMember.disabled">
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </span>
+              </span>
+              <input ng-if="staffMember.staffID===editable" type="checkbox" ng-model="staffMember.disabled"/>
+            </td>
+            <td>
+              <span ng-if="!(staffMember.staffID===editable)" class="pull-right text-right">
+                <a type="button"
+                  class="btn btn-xs btn-info btn-block"
+                  style="margin-bottom: 2px; margin-top: 2px;"
+                  ng-click="edit(staffMember)">
+                  Edit
+                </a>
+                <a type="button"
+                  style="margin-bottom: 2px; margin-top: 2px;"
+                  class="btn btn-xs btn-warning btn-block"
+                  ng-click="resetPassword(staffMember)">
+                  Reset Password
+                </a>
+              </span>
+
+              <span ng-if="staffMember.staffID===editable" class="pull-right text-right">
+                <a type="button"
+                  class="btn btn-xs btn-success btn-block"
+                  style="margin-bottom: 2px; margin-top: 2px;"
+                  ng-click="edit(staffMember)">
+                  Save
+                </a>
+                <a type="button"
+                  style="margin-bottom: 2px; margin-top: 2px;"
+                  class="btn btn-xs btn-danger btn-block"
+                  ng-click="cancel()">
+                  Cancel
+                </a>
+              </span>
+
+            </td>
+          </tr>   <!--end row-->
+
+          <tr data-ng-show="(activeType === null) ?
+          false : true">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+              <a ng-if="!new"
+                type="button"
+                class="btn btn-xs btn-success pull-right"
+                ng-click="newStaff()">
+                Add New
               </a>
-            </th>   <!--deviceID-->
-
-            <th>
-              <a>
-                First Name
-              </a>
-            </th>   <!--clientFirstName-->
-
-            <th>
-              <a>
-                Last Name
-              </a>
-            </th>   <!--clientLastName-->
-
-            <th>
-              <a>
-                Admin
-              </a>
-            </th>    <!--clientType-->
-
-            <th class="hidden-xs">Email Address</th>    <!--clientEmail-->
-
-            <th>
-              <a>
-                Disabled
-              </a>
-            </th>
-
-            <th>
-              <a></a>
-            </th>
+            </td>
 
           </tr>
-        </thead>    <!--close table heading-->
 
-        <tr>    <!--first row-->
-          <td>pete</td>
-          <td>{{staff.StaffFistName}}</td>
-          <td>{{staff.StaffLastName}}</td>
-          <td>{{staff.isAdmin}}</td>
-          <td class="hidden-xs">{{client.clientEmail}}</td>
-          <td><span class="glyphicon glyphicon-check"></span></td>
-          <td>
-            <span class="pull-right text-right">
-              <a type="button"
-                class="btn btn-xs btn-info btn-block"
-                style="margin-bottom: 2px; margin-top: 2px;"
-                data-ng-click="clone(device)">Edit</a>
-              <a type="button"
-                href="/deviceDetails/{{device.deviceID}}"
-                style="margin-bottom: 2px; margin-top: 2px;"
-                class="btn btn-xs btn-warning btn-block"
-                data-ng-click="">
-                Reset
-              </a>
-            </span>
+        </table>
 
-          </td>
-        </tr>   <!--end row-->
+      </div>    <!--close col-md-9-->
 
+    </div>    <!--close row-->
 
-      </table>
+  </form>
 
-    </div>    <!--close col-md-9-->
-
-  </div>    <!--close row-->
 
 </div>    <!--close container-->

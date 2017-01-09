@@ -59,6 +59,7 @@ deviceMgr.config( function($routeProvider, $locationProvider){
 		templateUrl: 'assets/partials/manage.html'
 	})
 	.when('/manageStaff', {
+		controller: 'manageStaffCtl',
 		templateUrl: 'assets/partials/manageStaff.html'
 	})
 	.when('/newDevice/:id', {
