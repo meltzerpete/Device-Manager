@@ -280,6 +280,7 @@ res.sendStatus(200);
             item.approved = !!+item.approved;
             item.onTheFly = !!+item.onTheFly;
           });
+          console.log(row);
           res.json(row);
        });
  }
