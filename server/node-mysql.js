@@ -114,8 +114,8 @@ app.post("/api/categories", function(req, res){
 
 app.put("/api/categories", function(req,res){
  var category = req.body;
-  connection.query('UPDATE category SET category_name=?, category_parentid=? WHERE category?',
-[category.categoryName,category.parentCategoryID, category_id = req.body.categoryID],
+  connection.query('UPDATE category SET category_name=?, category_parentid=? WHERE category_id = ?',
+[category.categoryName,category.parentCategoryID, req.body.categoryID],
 function (err,row){
  if (err) throw err;
  res.json(row[0]);
@@ -171,8 +171,8 @@ app.delete("/api/clients", function(req, res){
 
  app.put("/api/clients", function(req,res){
   var clients = req.body;
-   connection.query('UPDATE client SET client_email=?, client_firstname=?, client_lastname=?, client_course=?, client_type=?, client_studentno=?, client_supervisor=? WHERE ?',
- [clients.clientEmail,clients.clientFirstName,clients.clientLastName,clients.clientCourse,clients.clientType,clients.clientStudentNo,clients.clientSupervisor, client_id = clients.clientID],
+   connection.query('UPDATE client SET client_email=?, client_firstname=?, client_lastname=?, client_course=?, client_type=?, client_studentno=?, client_supervisor=? WHERE client_id = ?',
+ [clients.clientEmail,clients.clientFirstName,clients.clientLastName,clients.clientCourse,clients.clientType,clients.clientStudentNo,clients.clientSupervisor, clients.clientID],
 function (err,row){
   if (err) throw err;
   res.json(row[0]);
@@ -305,8 +305,8 @@ function (err,row){
 
  app.put("/api/loans", function(req,res){
    var loans =req.body;
-   connection.query('UPDATE loan SET loan_due,loan_datestarted =?, loan_extensionrequested=?, loan_returned=?, loan_onthefly=?, loan_damagereported=?, loan_approved=?, loan_length=?, device_id=?, client_id=?, signout_staff_id=? WHERE ?',
- [loans.due, loans.dateStarted, loans.extensionRequested, loans.returned, loans.onTheFly, loans.damageReported, loans.approved, loans.length, loans.deviceID, loans.clientID, loans.staffID, loan_id = loans.loanID],
+   connection.query('UPDATE loan SET loan_due,loan_datestarted =?, loan_extensionrequested=?, loan_returned=?, loan_onthefly=?, loan_damagereported=?, loan_approved=?, loan_length=?, device_id=?, client_id=?, signout_staff_id=? WHERE loan_id = ?',
+ [loans.due, loans.dateStarted, loans.extensionRequested, loans.returned, loans.onTheFly, loans.damageReported, loans.approved, loans.length, loans.deviceID, loans.clientID, loans.staffID, loans.loanID],
 function (err,row){
   if (err) throw err;
   res.json(row[0]);
@@ -426,8 +426,8 @@ function (err,row){
 
  app.put("/api/types", function(req,res){
   var types = req.body;
-   connection.query('UPDATE type SET type_name = ?,category_id = ? WHERE ?',
- [types.type_name,types.category_id,type_id = types.typeID],
+   connection.query('UPDATE type SET type_name = ?,category_id = ? WHERE type_id = ?',
+ [types.type_name,types.category_id,types.typeID],
 function (err,row){
   if (err) throw err;
   res.json(row[0]);
