@@ -107,10 +107,10 @@ app.post("/api/categories", function(req, res){
 [category.categoryName,category.parentCategoryID],function(err,row){
   if (err) throw err;
 
-})
+});
 	//send confirmation
 	res.sendStatus(200);
-})
+});
 
 app.put("/api/categories", function(req,res){
  var category = req.body;
@@ -119,8 +119,10 @@ app.put("/api/categories", function(req,res){
 function (err,row){
  if (err) throw err;
  console.log(req.body);
-})
-})
+});
+//send confirmation
+res.sendStatus(200);
+});
 
 
 app.delete("/api/clients", function(req, res){
@@ -157,15 +159,17 @@ app.delete("/api/clients", function(req, res){
       res.json(row);
     });
  	}
- })
+});
 
  app.post("/api/clients", function(req, res){
   var clients = req.body;
   connection.query('INSERT INTO client(client_email, client_firstname, client_lastname, client_course, client_type, client_studentno, client_supervisor) VALUES(?,?,?,?,?,?,?)',
   [clients.clientEmail,clients.clientFirstName,clients.clientLastName,clients.clientCourse,clients.clientType,clients.clientStudentNo,clients.clientSupervisor],function(err,row){
     if (err) throw err;
-  })
- })
+  });
+  //send confirmation
+ 	res.sendStatus(200);
+});
 
  app.put("/api/clients", function(req,res){
   var clients = req.body;
@@ -174,8 +178,10 @@ app.delete("/api/clients", function(req, res){
 function (err,row){
   if (err) throw err;
   console.log(req.body);
-  })
- })
+});
+  //send confirmation
+ 	res.sendStatus(200);
+});
 
  app.delete("/api/devices", function(req, res){
    //database
@@ -214,7 +220,7 @@ function (err,row){
           res.json(row);
         });
    }
- })
+ });
 
  app.post("/api/devices", function(req, res){
    var devices = req.body;
@@ -222,8 +228,10 @@ function (err,row){
    [devices.availableFrom,devices.dateOfPurchase,devices.dateOutOfService,devices.defaultLoanTime,devices.description,devices.isWorking,devices.notes,devices.serial,devices.visible,devices.typeID],
    function (err,row){
      if (err) throw err;
-   })
- })
+   });
+   //send confirmation
+    res.sendStatus(200);
+ });
 
  app.put("/api/devices", function(req, res){
     var devices = req.body;
@@ -233,7 +241,9 @@ function (err,row){
   if (err) throw err;
   console.log(req.body);
 })
- })
+//send confirmation
+res.sendStatus(200);
+})
 
  app.delete("/api/loans", function(req, res){
    //database
@@ -278,8 +288,10 @@ function (err,row){
    connection.query('INSERT INTO loan(loan_due,loan_datestarted, loan_extensionrequested, loan_returned, loan_onthefly, loan_damagereported, loan_approved, loan_length, device_id, client_id, signout_staff_id) VALUES(?,?,?,?,?,?,?,?,?,?,?)',
  [loans.due, loans.dateStarted, loans.extensionRequested, loans.returned, loans.onTheFly, loans.damageReported, loans.approved, loans.length, loans.deviceID, loans.clientID, loans.staffID],function(err,row){
    if (err) throw err;
-   })
- })
+ });
+ //send confirmation
+ res.sendStatus(200);
+ });
 
  app.put("/api/loans", function(req,res){
    var loans =req.body;
@@ -288,8 +300,10 @@ function (err,row){
 function (err,row){
   if (err) throw err;
   console.log(req.body);
-})
- })
+});
+//send confirmation
+res.sendStatus(200);
+});
 
 
  app.delete("/api/staff", function(req, res){
@@ -317,7 +331,7 @@ function (err,row){
          });
          res.json(row[0]);
          console.log("here");
-       })
+       });
    } else {
       connection.query('SELECT staff_id AS staffID, staff_firstname AS staffFirstName, staff_lastname AS staffLastName, staff_password AS password, staff_isadmin AS isAdmin, staff_email as staffEmail, disabled FROM staff',
      function (err,row){
@@ -326,19 +340,21 @@ function (err,row){
        row.forEach(function(item){
          item.isAdmin = !!+item.isAdmin;
          item.disabled = !!+item.disabled;
-       })
+       });
        res.json(row);
-     })
+     });
    }
- })
+ });
 
  app.post("/api/staff",function(req,res){
    var staff = req.body;
    connection.query('INSERT INTO staff(staff_firstname, staff_lastname, staff_password, staff_isadmin, staff_email, disabled) VALUES (?,?,?,?,?,?)',
 [staff.staffFirstName,staff.staffLastName,staff.password,staff.isAdmin,staff.staffEmail,staff.disabled],function(err,row){
    if (err) throw err;
-    })
- })
+ });
+ //send confirmation
+  res.sendStatus(200);
+ });
 
  app.put("/api/staff", function(req,res){
    var staff = req.body;
@@ -347,8 +363,10 @@ function (err,row){
 function (err,row){
   if (err) throw err;
   console.log(req.body);
-})
- })
+});
+//send confirmation
+res.sendStatus(200);
+});
 
  app.delete("/api/types", function(req, res){
    //database
@@ -369,25 +387,27 @@ function (err,row){
       //  connection.end();
         if (err) throw err;
         res.json(row[0]);
-      })
+      });
    } else {
      connection.query('SELECT type_id AS typeID, type_name AS typeName, category_id AS categoryID FROM type',
       function(err,row){
       //  connection.end();
         if (err) throw err;
         res.json(row);
-      })
+      });
 
    }
- })
+ });
 
  app.post("/api/types",function(req,res){
    var types = req.body;
    connection.query('INSERT INTO type (type_name, category_id) VALUES (?,?)',
  [types.typeName,types.categoryID],function(err,row){
    if (err) throw err;
- })
- })
+ });
+ //send confirmation
+  res.sendStatus(200);
+ });
 
 
  app.put("/api/types", function(req,res){
@@ -398,6 +418,8 @@ function (err,row){
   if (err) throw err;
   console.log(req.body);
 });
+//send confirmation
+res.sendStatus(200);
  });
 
  //for error page redirecting if any details page is requested
