@@ -161,10 +161,10 @@ app.delete("/api/clients", function(req, res){
 
  app.post("/api/clients", function(req, res){
   var clients = req.body;
-  connection.query('INSERT INTO client(client_email, client_firstname, client_lastname, client_course, client_type, client_studentno, client_supervisor) VALUES(?,?,?,?,?,?,?)'),
+  connection.query('INSERT INTO client(client_email, client_firstname, client_lastname, client_course, client_type, client_studentno, client_supervisor) VALUES(?,?,?,?,?,?,?)',
   [clients.clientEmail,clients.clientFirstName,clients.clientLastName,clients.clientCourse,clients.clientType,clients.clientStudentNo,clients.clientSupervisor],function(err,row){
     if (err) throw err;
-  }
+  })
  })
 
  app.put("/api/clients", function(req,res){
@@ -259,7 +259,7 @@ function (err,row){
      });
      res.json(row[0]);
    });
- } else{
+ } else {
      connection.query('SELECT loan_id AS loanID, loan_due AS due, loan_datestarted AS dateStarted, loan_extensionrequested AS extensionRequested, loan_returned AS returned, loan_onthefly AS onTheFly, loan_damagereported AS damageReported, loan_approved AS approved, loan_length AS length, device_id AS deviceID, client_id AS clientID, signout_staff_id AS staffID FROM loan',
        function (err,row){
           if (err) throw err;
