@@ -73,10 +73,10 @@ app.delete("/api/categories", function(req, res){
    [parseInt(req.query.categoryID)],function(err,result,fields){
   //   connection.end();
      if (err) throw err;
-
+     //send confirmation
+   	res.sendStatus(200);
     });
-	//send confirmation
-	res.sendStatus(200);
+
 });
 
 app.get("/api/categories", function(req, res) {
@@ -106,10 +106,10 @@ app.post("/api/categories", function(req, res){
   connection.query('INSERT INTO category(category_name, category_parentid) VALUES (?,?)',
 [category.categoryName,category.parentCategoryID],function(err,row){
   if (err) throw err;
-
+  //send confirmation
+	res.json(row[0]);
 });
-	//send confirmation
-	res.sendStatus(200);
+
 });
 
 app.put("/api/categories", function(req,res){
@@ -118,10 +118,8 @@ app.put("/api/categories", function(req,res){
 [category.categoryName,category.parentCategoryID, category_id = req.body.categoryID],
 function (err,row){
  if (err) throw err;
- console.log(req.body);
+ res.json(row[0]);
 });
-//send confirmation
-res.sendStatus(200);
 });
 
 
@@ -131,10 +129,10 @@ app.delete("/api/clients", function(req, res){
    [parseInt(req.query.clientID)],function(err,result,fields){
   //   connection.end();
      if (err) throw err;
-
+     //send confirmation
+   	res.sendStatus(200);
     });
-	//send confirmation
-	res.sendStatus(200);
+
 });
 
  app.get("/api/clients", function(req, res) {
@@ -147,7 +145,6 @@ app.delete("/api/clients", function(req, res){
   //  connection.end();
     if (err)  throw err;
     res.json(row[0]);
-    console.log(JSON.stringify(row));
   });
  	} else {
  		//no client specified - return array of all categories
@@ -167,7 +164,6 @@ app.delete("/api/clients", function(req, res){
   [clients.clientEmail,clients.clientFirstName,clients.clientLastName,clients.clientCourse,clients.clientType,clients.clientStudentNo,clients.clientSupervisor],function(err,row){
     if (err) throw err;
     //send confirmation
-    console.log("Response is: " + JSON.stringify(row[0]));
    	res.json(row[0]);
   });
 
@@ -179,10 +175,8 @@ app.delete("/api/clients", function(req, res){
  [clients.clientEmail,clients.clientFirstName,clients.clientLastName,clients.clientCourse,clients.clientType,clients.clientStudentNo,clients.clientSupervisor, client_id = clients.clientID],
 function (err,row){
   if (err) throw err;
-  console.log(req.body);
+  res.json(row[0]);
 });
-  //send confirmation
- 	res.sendStatus(200);
 });
 
  app.delete("/api/devices", function(req, res){
@@ -191,10 +185,10 @@ function (err,row){
     [parseInt(req.query.deviceID)],function(err,result,fields){
    //   connection.end();
       if (err) throw err;
-
+      //send confirmation
+     	res.sendStatus(200);
      });
- 	//send confirmation
- 	res.sendStatus(200);
+
  });
 
  app.get("/api/devices", function(req, res){
@@ -204,11 +198,15 @@ function (err,row){
   //   connection.end();
      if (err) throw err;
      row.forEach(function(item){
-       item.isWorking = !!+item.isWorking;
-       item.visible = !!+item.visible;
+      //  item.isWorking = !!+item.isWorking;
+       if (item.isWorking === 1) item.isWorking = true;
+       else if (item.isWorking === 0) item.isWorking = false;
+      //  item.visible = !!+item.visible;
+      if (item.visible === 1) item.visible = true;
+      else if (item.visible === 0) item.visible = false;
      });
      res.json(row[0]);
-     console.log(JSON.stringify(row[0]));
+
    });
    } else  {
      connection.query('SELECT device_id AS deviceID, device_description AS description, device_availablefrom AS availableFrom, device_dateofpurchase AS dateOfPurchase, device_dateoutofservice AS dateOutOfService, device_defaultloantime AS defaultLoanTime, device_isworking AS isWorking, device_notes AS notes, device_serial AS serial, device_visible AS visible, type_id AS typeID FROM device',
@@ -216,8 +214,12 @@ function (err,row){
         //  connection.end();
           if (err) throw err;
           row.forEach(function(item){
-            item.isWorking = !!+item.isWorking;
-            item.visible = !!+item.visible;
+            //  item.isWorking = !!+item.isWorking;
+             if (item.isWorking === 1) item.isWorking = true;
+             else if (item.isWorking === 0) item.isWorking = false;
+            //  item.visible = !!+item.visible;
+            if (item.visible === 1) item.visible = true;
+            else if (item.visible === 0) item.visible = false;
           });
           res.json(row);
         });
@@ -231,8 +233,7 @@ function (err,row){
    function (err,row){
      if (err) throw err;
    });
-   //send confirmation
-    res.sendStatus(200);
+   res.json(row[0]);
  });
 
  app.put("/api/devices", function(req, res){
@@ -241,11 +242,10 @@ function (err,row){
  [devices.availableFrom,devices.dateOfPurchase,devices.dateOutOfService,devices.defaultLoanTime,devices.description,devices.isWorking,devices.notes,devices.serial,devices.visible,devices.typeID,parseInt(req.body.deviceID)],
 function (err,row){
   if (err) throw err;
-  console.log(req.body);
-})
-//send confirmation
-res.sendStatus(200);
-})
+  res.json(row[0]);
+});
+
+});
 
  app.delete("/api/loans", function(req, res){
    //database
@@ -253,10 +253,10 @@ res.sendStatus(200);
     [parseInt(req.query.loanID)],function(err,result,fields){
    //   connection.end();
       if (err) throw err;
-
+      //send confirmation
+     	res.sendStatus(200);
      });
- 	//send confirmation
- 	res.sendStatus(200);
+
  });
 
  app.get("/api/loans",function(req,res){
@@ -266,8 +266,12 @@ res.sendStatus(200);
      //connection.end();
      if (err) throw err;
      row.forEach(function(item) {
-       item.approved = !!+item.approved;
-       item.onTheFly = !!+item.onTheFly;
+      //  item.approved = !!+item.approved;
+      if (item.approved === 1) item.approved = true;
+      else if (item.approved === 0) item.approved = false;
+      //  item.onTheFly = !!+item.onTheFly;
+      if (item.onTheFly === 1) item.onTheFly = true;
+      else if (item.onTheFly === 0) item.onTheFly = false;
      });
      res.json(row[0]);
    });
@@ -277,10 +281,13 @@ res.sendStatus(200);
           if (err) throw err;
 
           row.forEach(function(item) {
-            item.approved = !!+item.approved;
-            item.onTheFly = !!+item.onTheFly;
+            //  item.approved = !!+item.approved;
+            if (item.approved === 1) item.approved = true;
+            else if (item.approved === 0) item.approved = false;
+            //  item.onTheFly = !!+item.onTheFly;
+            if (item.onTheFly === 1) item.onTheFly = true;
+            else if (item.onTheFly === 0) item.onTheFly = false;
           });
-          console.log(row);
           res.json(row);
        });
  }
@@ -291,9 +298,9 @@ res.sendStatus(200);
    connection.query('INSERT INTO loan(loan_due,loan_datestarted, loan_extensionrequested, loan_returned, loan_onthefly, loan_damagereported, loan_approved, loan_length, device_id, client_id, signout_staff_id) VALUES(?,?,?,?,?,?,?,?,?,?,?)',
  [loans.due, loans.dateStarted, loans.extensionRequested, loans.returned, loans.onTheFly, loans.damageReported, loans.approved, loans.length, loans.deviceID, loans.clientID, loans.staffID],function(err,row){
    if (err) throw err;
+   res.json(row[0]);
  });
- //send confirmation
- res.sendStatus(200);
+
  });
 
  app.put("/api/loans", function(req,res){
@@ -302,10 +309,9 @@ res.sendStatus(200);
  [loans.due, loans.dateStarted, loans.extensionRequested, loans.returned, loans.onTheFly, loans.damageReported, loans.approved, loans.length, loans.deviceID, loans.clientID, loans.staffID, loan_id = loans.loanID],
 function (err,row){
   if (err) throw err;
-  console.log(req.body);
+  res.json(row[0]);
 });
-//send confirmation
-res.sendStatus(200);
+
 });
 
 
@@ -315,10 +321,10 @@ res.sendStatus(200);
     [parseInt(req.query.staffID)],function(err,result,fields){
    //   connection.end();
       if (err) throw err;
-
+      //send confirmation
+     	res.sendStatus(200);
      });
- 	//send confirmation
- 	res.sendStatus(200);
+
  });
 
  app.get("/api/staff",function(req,res){
@@ -329,11 +335,14 @@ res.sendStatus(200);
          if (err) throw err;
 
          row.forEach(function(item){
-           item.isAdmin = !!+item.isAdmin;
-           item.disabled = !!+item.disabled;
+          //  item.isAdmin = !!+item.isAdmin;
+          if (item.isAdmin === 1) item.isAdmin = true;
+          else if (item.isAdmin === 0) item.isAdmin = false;
+          //  item.disabled = !!+item.disabled;
+          if (item.disabled === 1) item.disabled = true;
+          else if (item.disabled === 0) item.disabled = false;
          });
          res.json(row[0]);
-         console.log("here");
        });
    } else {
       connection.query('SELECT staff_id AS staffID, staff_firstname AS staffFirstName, staff_lastname AS staffLastName, staff_password AS password, staff_isadmin AS isAdmin, staff_email as staffEmail, disabled FROM staff',
@@ -341,8 +350,12 @@ res.sendStatus(200);
     //   connection.end();
        if (err) throw err;
        row.forEach(function(item){
-         item.isAdmin = !!+item.isAdmin;
-         item.disabled = !!+item.disabled;
+         //  item.isAdmin = !!+item.isAdmin;
+         if (item.isAdmin === 1) item.isAdmin = true;
+         else if (item.isAdmin === 0) item.isAdmin = false;
+         //  item.disabled = !!+item.disabled;
+         if (item.disabled === 1) item.disabled = true;
+         else if (item.disabled === 0) item.disabled = false;
        });
        res.json(row);
      });
@@ -354,9 +367,8 @@ res.sendStatus(200);
    connection.query('INSERT INTO staff(staff_firstname, staff_lastname, staff_password, staff_isadmin, staff_email, disabled) VALUES (?,?,?,?,?,?)',
 [staff.staffFirstName,staff.staffLastName,staff.password,staff.isAdmin,staff.staffEmail,staff.disabled],function(err,row){
    if (err) throw err;
+   res.json(row[0]);
  });
- //send confirmation
-  res.sendStatus(200);
  });
 
  app.put("/api/staff", function(req,res){
@@ -365,10 +377,9 @@ res.sendStatus(200);
  [staff.staffFirstName,staff.staffLastName,staff.password,staff.isAdmin,staff.staffEmail, staff.disabled, parseInt(staff.staffID)],
 function (err,row){
   if (err) throw err;
-  console.log(req.body);
+  res.json(row[0]);
 });
-//send confirmation
-res.sendStatus(200);
+
 });
 
  app.delete("/api/types", function(req, res){
@@ -377,10 +388,10 @@ res.sendStatus(200);
     [parseInt(req.query.typeID)],function(err,result,fields){
    //   connection.end();
       if (err) throw err;
-
+      //send confirmation
+     	res.sendStatus(200);
      });
- 	//send confirmation
- 	res.sendStatus(200);
+
  });
 
  app.get("/api/types",function(req,res){
@@ -407,9 +418,9 @@ res.sendStatus(200);
    connection.query('INSERT INTO type (type_name, category_id) VALUES (?,?)',
  [types.typeName,types.categoryID],function(err,row){
    if (err) throw err;
+   res.json(row[0]);
  });
- //send confirmation
-  res.sendStatus(200);
+
  });
 
 
@@ -419,10 +430,9 @@ res.sendStatus(200);
  [types.type_name,types.category_id,type_id = types.typeID],
 function (err,row){
   if (err) throw err;
-  console.log(req.body);
+  res.json(row[0]);
 });
-//send confirmation
-res.sendStatus(200);
+
  });
 
  //for error page redirecting if any details page is requested
