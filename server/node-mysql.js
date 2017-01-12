@@ -168,7 +168,8 @@ app.delete("/api/clients", function(req, res){
     if (err) throw err;
   });
   //send confirmation
- 	res.sendStatus(200);
+  console.log("Response is: " + JSON.stringify(row[0]));
+ 	res.json(row[0]);
 });
 
  app.put("/api/clients", function(req,res){
