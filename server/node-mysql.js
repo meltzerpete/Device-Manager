@@ -342,8 +342,8 @@ function (err,row){
 
  app.put("/api/staff", function(req,res){
    var staff = req.body;
-   connection.query('UPDATE staff SET staff_firstname, staff_lastname, staff_password, staff_isadmin, staff_email, disabled WHERE ?',
- [staff.staffFirstName,staff.staffLastName,staff.password,staff.isAdmin,staff.staffEmail,staff.disabled, staff_id = staff.staffID],
+   connection.query('UPDATE staff SET staff_firstname=?, staff_lastname=?, staff_password=?, staff_isadmin=?, staff_email=?, disabled WHERE ?',
+ [staff.staffFirstName,staff.staffLastName,staff.password,staff.isAdmin,staff.staffEmail, staff_id = parseInt(staff.staffID)],
 function (err,row){
   if (err) throw err;
   console.log(req.body);
