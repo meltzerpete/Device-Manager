@@ -305,7 +305,7 @@ function (err,row){
 
  app.put("/api/loans", function(req,res){
    var loans =req.body;
-   connection.query('UPDATE loan SET loan_due,loan_datestarted =?, loan_extensionrequested=?, loan_returned=?, loan_onthefly=?, loan_damagereported=?, loan_approved=?, loan_length=?, device_id=?, client_id=?, signout_staff_id=? WHERE loan_id = ?',
+   connection.query('UPDATE loan SET loan_due=?,loan_datestarted =?, loan_extensionrequested=?, loan_returned=?, loan_onthefly=?, loan_damagereported=?, loan_approved=?, loan_length=?, device_id=?, client_id=?, signout_staff_id=? WHERE loan_id = ?',
  [loans.due, loans.dateStarted, loans.extensionRequested, loans.returned, loans.onTheFly, loans.damageReported, loans.approved, loans.length, loans.deviceID, loans.clientID, loans.staffID, loans.loanID],
 function (err,row){
   if (err) throw err;
