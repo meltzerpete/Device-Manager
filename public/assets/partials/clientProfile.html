@@ -123,13 +123,6 @@
             </div>
 
             <!--clientCourse if applicable-->
-            <label for="studentNumber" class="col-sm-2 col-xs-4 control-label">
-              Group(s)</label>
-            <div class="col-sm-4 col-xs-8">
-              <dl style="list-style-type:none">
-                <li>TODO!!!</li>
-              </dl>
-            </div>
 
           </div>    <!--close form group-->
         </div>    <!--close column span for xs-->
@@ -203,8 +196,8 @@
       <tr ng-repeat="loan in loans">    <!-- row for each loan in user history -->
         <td><a href="/deviceDetails/{{loan.deviceID}}">{{loan.deviceID}}</a></td>
         <td>{{loan.typeName}}</td>
-        <td class="hidden-xs">{{loan.dateStarted || "-"}}</td>
-        <td class="hidden-xs">{{loan.returned || "-"}}</td>
+        <td class="hidden-xs">{{loan.dateStarted || date: 'dd/MM/yyyy'}}</td>
+        <td class="hidden-xs">{{loan.returned || date: 'dd/MM/yyyy'}}</td>
         <td>{{loan.loanStatus}}</td>
         <td>{{loan.damageReported}}</td>
       </tr>
