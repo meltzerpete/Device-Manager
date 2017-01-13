@@ -148,7 +148,7 @@ app.delete("/api/clients", function(req, res){
   });
  	} else {
  		//no client specified - return array of all categories
-    connection.query('SELECT client_id AS clientID, client_firstname AS clientFirstName, client_lastname AS client_lastname, ' +
+    connection.query('SELECT client_id AS clientID, client_firstname AS clientFirstName, client_lastname AS client_clientLastName, ' +
     'client_course AS clientCourse, client_supervisor AS clientSupervisor, client_type AS clientType, client_studentno AS clientStudentNo, client_email AS clientEmail  FROM client',
     function(err,row){
     //  connection.end();
