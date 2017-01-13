@@ -163,9 +163,8 @@ app.delete("/api/clients", function(req, res){
   connection.query('INSERT INTO client(client_email, client_firstname, client_lastname, client_course, client_type, client_studentno, client_supervisor) VALUES(?,?,?,?,?,?,?)',
   [clients.clientEmail,clients.clientFirstName,clients.clientLastName,clients.clientCourse,clients.clientType,clients.clientStudentNo,clients.clientSupervisor],function(err,row){
     if (err) throw err;
-    console.log(row[0]);
     //send confirmation
-   	res.json(row[0]);
+   	res.json(row.insertID);
   });
 
 });
