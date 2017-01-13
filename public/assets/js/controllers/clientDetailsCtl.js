@@ -74,33 +74,39 @@ deviceMgr.controller('clientDetailsCtl',
 					var length = $scope.selectedDate.getFullYear() +
 					"/" + ($scope.selectedDate.getMonth() + 1) +
 					"/" + $scope.selectedDate.getDate();
-					console.log("res: ------ :");
-					console.log(res);
-					console.log(res.clientID);
-					console.log(res.insertId);
-					var request = {
-						due : null,
-						dateStarted : null,
-						extensionRequested: false,
-						returned: null,
-						onTheFly: false,
-						damageReported: null,
-						approved: null,
-						length: length,
-						deviceID: $scope.device.deviceID,
-						clientID: res.insertId,
-						staffID: null
-					};
 
-					var newRequest = loans.add();
-					newRequest = Object.assign(newRequest, request);
-					newRequest.$save();
+					clients.get().$promise.then(function(clientLatest) {
+						var rID;
+						clientLatest.forEach(function(c) {
+							rID = c.clientID;
+						});
 
-					//navigate back to client home page
-					$location.path('/client');
+						var request = {
+							due : null,
+							dateStarted : null,
+							extensionRequested: false,
+							returned: null,
+							onTheFly: false,
+							damageReported: null,
+							approved: null,
+							length: length,
+							deviceID: $scope.device.deviceID,
+							clientID: rID,
+							staffID: null
+						};
 
-					//update navbar badges
-					$rootScope.updateNav();
+						var newRequest = loans.add();
+						newRequest = Object.assign(newRequest, request);
+						newRequest.$save();
+
+						//navigate back to client home page
+						$location.path('/client');
+
+						//update navbar badges
+						$rootScope.updateNav();
+
+					}); //end clients.get()
+
 
 				});	//end newClient.$save()
 
