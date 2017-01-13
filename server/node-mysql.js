@@ -139,7 +139,7 @@ app.delete("/api/clients", function(req, res){
  	if (req.query.clientID) {
  		//client is specified - return single client
 
-    connection.query('SELECT client_id AS clientID, client_firstname AS clientFirstName, client_lastname AS clientLastName, ' +
+    connection.query('SELECT client_id AS clientID, client_firstname AS clientFirstName, client_lastname AS client_clientLastName, ' +
     'client_course AS clientCourse, client_supervisor AS clientSupervisor, client_type AS clientType, client_studentno AS clientStudentNo, client_email AS clientEmail  FROM client WHERE client_id =?',
   [parseInt(req.query.clientID)],function(err,row){
   //  connection.end();
