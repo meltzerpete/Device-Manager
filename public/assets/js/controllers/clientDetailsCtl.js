@@ -74,8 +74,10 @@ deviceMgr.controller('clientDetailsCtl',
 					var length = $scope.selectedDate.getFullYear() +
 					"/" + ($scope.selectedDate.getMonth() + 1) +
 					"/" + $scope.selectedDate.getDate();
+					console.log("res: ------ :");
 					console.log(res);
 					console.log(res.clientID);
+					console.log(res.insertId);
 					var request = {
 						due : null,
 						dateStarted : null,
@@ -86,7 +88,7 @@ deviceMgr.controller('clientDetailsCtl',
 						approved: null,
 						length: length,
 						deviceID: $scope.device.deviceID,
-						clientID: res.insertID,
+						clientID: res.insertId,
 						staffID: null
 					};
 

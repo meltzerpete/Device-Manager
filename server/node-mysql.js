@@ -164,7 +164,8 @@ app.delete("/api/clients", function(req, res){
   [clients.clientEmail,clients.clientFirstName,clients.clientLastName,clients.clientCourse,clients.clientType,clients.clientStudentNo,clients.clientSupervisor],function(err,row){
     if (err) throw err;
     //send confirmation
-   	res.json(row.insertID);
+    console.log(row);
+   	res.json(row.insertId);
   });
 
 });
