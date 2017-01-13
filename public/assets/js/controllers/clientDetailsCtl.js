@@ -30,6 +30,7 @@ deviceMgr.controller('clientDetailsCtl',
 			});
 
 			if (fClients.length > 0) {
+				console.log(fClients);
 				//client already exists
 				var length = $scope.selectedDate.getFullYear() +
 				"/" + ($scope.selectedDate.getMonth() + 1) +
@@ -73,7 +74,8 @@ deviceMgr.controller('clientDetailsCtl',
 					var length = $scope.selectedDate.getFullYear() +
 					"/" + ($scope.selectedDate.getMonth() + 1) +
 					"/" + $scope.selectedDate.getDate();
-
+					console.log(res);
+					console.log(res.clientID);
 					var request = {
 						due : null,
 						dateStarted : null,
