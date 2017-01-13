@@ -165,7 +165,7 @@ app.delete("/api/clients", function(req, res){
     if (err) throw err;
     //send confirmation
     console.log(row);
-   	res.json(row.insertId);
+   	res.json(row);
   });
 
 });
