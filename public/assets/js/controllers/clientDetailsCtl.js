@@ -86,7 +86,7 @@ deviceMgr.controller('clientDetailsCtl',
 						approved: null,
 						length: length,
 						deviceID: $scope.device.deviceID,
-						clientID: res,
+						clientID: res.insertID,
 						staffID: null
 					};
 
