@@ -196,8 +196,8 @@
       <tr ng-repeat="loan in loans">    <!-- row for each loan in user history -->
         <td><a href="/deviceDetails/{{loan.deviceID}}">{{loan.deviceID}}</a></td>
         <td>{{loan.typeName}}</td>
-        <td class="hidden-xs">{{loan.dateStarted || date: 'dd/MM/yyyy'}}</td>
-        <td class="hidden-xs">{{loan.returned || date: 'dd/MM/yyyy'}}</td>
+        <td class="hidden-xs">{{loan.dateStarted | date: 'dd/MM/yyyy'}}</td>
+        <td class="hidden-xs">{{loan.returned | date: 'dd/MM/yyyy'}}</td>
         <td>{{loan.loanStatus}}</td>
         <td>{{loan.damageReported}}</td>
       </tr>
