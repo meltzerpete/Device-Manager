@@ -1,0 +1,125 @@
+GC02
+|   .DS_Store
+|   .htaccess
+|   tree.txt
+|
++---gantt
+|       gantt_chart.gan
+|       gantt_chart.png
+|
++---public    //all publicly accessible files
+|   |   clientError.html    //two error files for redirecting routes if error occurs
+|   |   error.html
+|   |   index.html          //main index page which includes navbar and loads all views/controllers
+|   |
+|   +---assets
+|   |   +---css
+|   |   |       angular-motion.min.css
+|   |   |       bootstrap-theme.min.css
+|   |   |       bootstrap.min.css     //over-written with our theme
+|   |   |
+|   |   +---data    //mock data used in testing and building the app - not used in final app
+|   |   |       category.js
+|   |   |       client.js
+|   |   |       device.js
+|   |   |       loan_system2.sql
+|   |   |       staff.js
+|   |   |       type.js
+|   |   |
+|   |   +---fonts   //required fonts
+|   |   |       ...
+|   |   |
+|   |   +---img
+|   |   |       UCLnew.jpg      //background image
+|   |   |
+|   |   +---js
+|   |   |   |   angular-animate.min.js    //required dependencies
+|   |   |   |   angular-route.min.js
+|   |   |   |   angular-sanitize.min.js
+|   |   |   |   angular-strap.min.js
+|   |   |   |   angular-strap.tpl.min.js
+|   |   |   |   angular.min.js
+|   |   |   |   bootstrap.min.js
+|   |   |   |   jquery.min.js
+|   |   |   |   routes.js       //defines all routes and their associated controllers
+|   |   |   |
+|   |   |   +---controllers     //all controllers for the front-end
+|   |   |   |       appCtl.js
+|   |   |   |       clientDetailsCtl.js
+|   |   |   |       clientProfileCtl.js
+|   |   |   |       clientSearchCtl.js
+|   |   |   |       deviceCtl.js
+|   |   |   |       loansCtl.js
+|   |   |   |       loginCtl.js
+|   |   |   |       manageStaffCtl.js
+|   |   |   |       newDeviceCtl.js
+|   |   |   |       staffCtl.js
+|   |   |   |
+|   |   |   \---factories     //define all API connections for front-end that are used in the controllers
+|   |   |           categoriesFactory.js
+|   |   |           clientsFactory.js
+|   |   |           devicesFactory.js
+|   |   |           loansFactory.js
+|   |   |           staffFactory.js
+|   |   |           typesFactory.js
+|   |   |
+|   |   \---partials        //all HTML files that are swapped into the main index
+|   |       |   activeLoans.html
+|   |       |   approved.html
+|   |       |   changepassword.html
+|   |       |   client.html
+|   |       |   clientDetails.html
+|   |       |   clientDeviceDetails.html
+|   |       |   clientProfile.html
+|   |       |   clientSearch.html
+|   |       |   dashboard.html
+|   |       |   deniedRequests.html
+|   |       |   deviceDetails.html
+|   |       |   loginpage.html
+|   |       |   manage.html
+|   |       |   manageStaff.html
+|   |       |   newDevice.html
+|   |       |   previousLoans.html
+|   |       |   requests.html
+|   |       |
+|   |       \---modals     //popup template and bodies
+|   |               addCategoryModal.html
+|   |               addSubModal.html
+|   |               addTypeModal.html
+|   |               cancelRequestModal.html
+|   |               cancelRequestModal.tpl.html
+|   |               categoriesModal.tpl.html
+|   |               confirmRequestModal.html
+|   |               confirmRequestModal.tpl.html
+|   |               denyRequestModal.html
+|   |               denyRequestModal.tpl.html
+|   |               sendNotificationModal.html
+|   |               sendNotificationModal.tpl.html
+|   |               signInConfirmModal.html
+|   |               signInConfirmModal.tpl.html
+|   |               signOutConfirmModal.html
+|   |               signOutConfirmModal.tpl.html
+|   |
+|   \---bower_components    //front-end dependencies
+|       +---angular
+|       |       ...
+|       |
+|       +---angular-resource
+|       |       ...
+|       |
+|       \---js-sha256
+|           |   ...
+|
+\---server
+    |   server.js   //node server file - must be run on server
+    |
+    +---data      //mock data used in development - not used in final app
+    |       category.json
+    |       clients.json
+    |       devices.json
+    |       loan.json
+    |       staff.json
+    |       type.json
+    |
+    \---node_modules    //node dependencies
+        ...

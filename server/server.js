@@ -1,3 +1,15 @@
+var mysql = require ('mysql');
+var connection = mysql.createConnection({
+  host:'localhost',
+  user: 'root',
+  password: 'password',
+  database: 'loans',
+  port: '3306',
+  connectionLimit:50
+});
+
+connection.connect();
+
 var express = require("express");
 var cors = require("cors");
 var bodyParser = require ("body-parser");
@@ -5,17 +17,6 @@ var nodemailer = require('nodemailer');
 
 var app = express();
 
-var devices = require("./data/devices.json");
-
-var clients = require("./data/clients.json");
-
-var categories = require("./data/category.json");
-
-var loans = require("./data/loan.json");
-
-var types = require("./data/type.json");
-
-var staff = require("./data/staff.json");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended:false}));
@@ -67,279 +68,393 @@ function handleSendEmail(req, res) {
 
 /* CATEGORIES API */
 app.delete("/api/categories", function(req, res){
-  categories = categories.filter(function(category){
-     return category.categoryID !== parseInt(req.query.categoryID);
-  });
-	//send confirmation
-	res.sendStatus(200);
+  //database
+   connection.query('DELETE from category where category_id =?',
+   [parseInt(req.query.categoryID)],function(err,result,fields){
+  //   connection.end();
+     if (err) throw err;
+     //send confirmation
+   	res.sendStatus(200);
+    });
+
 });
 
 app.get("/api/categories", function(req, res) {
-	if (req.query.categoryID) {
-		//category is specified - return single category
-		var c = categories.filter(function(category){
-			  return category.categoryID === parseInt(req.query.categoryID);
-	    });
-		res.json(c[0]);
-	} else {
-		//no category specified - return array of all categories
-		res.json(categories);
-	}
-});
+
+  if (req.query.categoryID){
+     connection.query('SELECT category_id AS categoryID, category_name AS categoryName, category_parentid AS parentCategoryID FROM category where category_id = ?',
+   [parseInt(req.query.categoryID)],function(err,row){
+    //   connection.end();
+       if (err)  throw err;
+       res.json(row[0]);
+   });
+ }  else {
+    connection.query('SELECT category_id AS categoryID, category_name AS categoryName, category_parentid AS parentCategoryID FROM category ',
+  function(err,row){
+  //  connection.end();
+    if (err)  throw err;
+    res.json(row);
+  });
+ }
+
+ });
+
 
 app.post("/api/categories", function(req, res){
-	var category = req.body;
-	category.categoryID = categories.length;
-  categories.push(category);
-	//send confirmation
-	res.sendStatus(200);
-});
+  var category = req.body;
 
-app.put("/api/categories", function(req, res){
-	//get matching category by categoryID
-	var c = categories.filter(function(category){
-			return category.categoryID === parseInt(req.body.categoryID);
-	});
-	c[0] = Object.assign(c[0], req.body);
-	//send confirmation
-	res.sendStatus(200);
-});
-
-
-/* CLIENTS API */
-app.delete("/api/clients", function(req, res) {
-	clients = clients.filter(function(client) {
-		return client.clientID !== parseInt(req.query.clientID);
-	});
-	//send confirmation
-	res.sendStatus(200);
-});
-
-app.get("/api/clients", function(req, res) {
-	if (req.query.clientID) {
-		//client is specified - return single client
-		var c = clients.filter(function(client) {
-			return client.clientID === parseInt(req.query.clientID);
-		});
-		res.json(c[0]);
-	} else {
-		//no client specified - return array of all categories
-		res.json(clients);
-	}
-});
-
-app.post("/api/clients", function(req, res){
-	var client = req.body;
-	client.clientID = clients.length;
-  clients.push(client);
-	//send confirmation
-	var i = 0;
-	clients.forEach(function(client) {
-		console.log (i + ": -- : ");
-		console.log(JSON.stringify(client));
-		i++;
-	});
-  res.json(client);
-});
-
-app.put("/api/clients", function(req, res) {
-	//get matching client by clientID
-	var c = clients.filter(function(client) {
-		return client.clientID === parseInt(req.body.clientID);
-	});
-	c[0] = Object.assign(c[0], req.body);
-	//send confirmation
-	res.sendStatus(200);
-});
-
-
-/*-- DEVICES API --*/
-app.delete("/api/devices", function(req, res){
-  devices = devices.filter(function(device){
-     return device.deviceID !== parseInt(req.query.deviceID);
-  });
-	//send confirmation
-	res.sendStatus(200);
-});
-
-app.get("/api/devices", function(req, res) {
-	if (req.query.deviceID) {
-		//device is specified - return single device
-		var d = devices.filter(function(device){
-			  return device.deviceID === parseInt(req.query.deviceID);
-	    });
-		res.json(d[0]);
-	} else {
-		//no device specified - return array of all devices
-		res.json(devices);
-	}
-});
-
-app.post("/api/devices", function(req, res){
-	//console.log(req.body);
-	var device = req.body;
-	device.deviceID = devices.length;
-  devices.push(device);
-	//send confirmation
-	res.sendStatus(200);
-});
-
-app.put("/api/devices", function(req, res){
-	//get matching device by deviceID
-	var d = devices.filter(function(device){
-			return device.deviceID === parseInt(req.body.deviceID);
-	});
-	d[0] = Object.assign(d[0], req.body);
-	//send confirmation
-	res.sendStatus(200);
-});
-
-
-/* LOANS API */
-app.delete("/api/loans", function(req, res){
-  loans = loans.filter(function(loan){
-     return loan.term.toLowerCase() !== req.params.term.toLowerCase();
-  });
+  connection.query('INSERT INTO category(category_name, category_parentid) VALUES (?,?)',
+[category.categoryName,category.parentCategoryID],function(err,row){
+  if (err) throw err;
   //send confirmation
-	res.sendStatus(200);
+	res.json(row[0]);
 });
 
-app.get("/api/loans", function(req, res) {
-	if (req.query.loanID) {
-		//loan is specified - return single loan
-		var l = loans.filter(function(loan) {
-			return loan.loanID === parseInt(req.query.loanID);
-		});
-		res.json(l[0]);
-	} else {
-		//no loan specified - return array of all categories
-		res.json(loans);
-	}
 });
 
-app.post("/api/loans", function(req, res){
-	var loan = req.body;
-	loan.loanID = loans.length;
-	loans.push(loan);
-  //send confirmation
-	res.sendStatus(200);
+app.put("/api/categories", function(req,res){
+ var category = req.body;
+  connection.query('UPDATE category SET category_name=?, category_parentid=? WHERE category_id = ?',
+[category.categoryName,category.parentCategoryID, req.body.categoryID],
+function (err,row){
+ if (err) throw err;
+ res.json(row[0]);
 });
-
-app.put("/api/loans", function(req, res) {
-	//get matching loan by loanID
-	var l = loans.filter(function(loan) {
-		return loan.loanID === parseInt(req.body.loanID);
-	});
-	l[0] = Object.assign(l[0], req.body);
-	//send confirmation
-	res.sendStatus(200);
 });
 
 
-/* STAFF API */
-app.delete("/api/staff", function(req, res){
-  staff = staff.filter(function(staffID){
-     return staffID.term.toLowerCase() !== parseInt(req.query.staffID);
+app.delete("/api/clients", function(req, res){
+  //database
+   connection.query('DELETE from client where client_id =?',
+   [parseInt(req.query.clientID)],function(err,result,fields){
+  //   connection.end();
+     if (err) throw err;
+     //send confirmation
+   	res.sendStatus(200);
+    });
+
+});
+
+ app.get("/api/clients", function(req, res) {
+ 	if (req.query.clientID) {
+ 		//client is specified - return single client
+
+    connection.query('SELECT client_id AS clientID, client_firstname AS clientFirstName, client_lastname AS clientLastName, ' +
+    'client_course AS clientCourse, client_supervisor AS clientSupervisor, client_type AS clientType, client_studentno AS clientStudentNo, client_email AS clientEmail  FROM client WHERE client_id =?',
+  [parseInt(req.query.clientID)],function(err,row){
+  //  connection.end();
+    if (err)  throw err;
+    res.json(row[0]);
   });
-  //send confirmation
-	res.sendStatus(200);
+ 	} else {
+ 		//no client specified - return array of all categories
+    connection.query('SELECT client_id AS clientID, client_firstname AS clientFirstName, client_lastname AS clientLastName, ' +
+    'client_course AS clientCourse, client_supervisor AS clientSupervisor, client_type AS clientType, client_studentno AS clientStudentNo, client_email AS clientEmail  FROM client',
+    function(err,row){
+    //  connection.end();
+      if (err) throw err;
+      res.json(row);
+    });
+ 	}
 });
 
-app.get("/api/staff", function(req, res) {
-	if (req.query.staffID) {
-		//staff is specified - return single staff member
-		var s = staff.filter(function(staffMember) {
-			return staffMember.staffID === parseInt(req.query.staffID);
-		});
-		res.json(s[0]);
-	} else {
-		//no staff member specified - return array of all staff
-		res.json(staff);
-	}
-});
-
-app.post("/api/staff", function(req, res){
-  var staffMember = req.body;
-	staffMember.staffID = staff.length;
-	staff.push(staffMember);
-	//send confirmation
-	res.sendStatus(200);
-});
-
-app.put("/api/staff", function(req, res) {
-	//get matching staff member by staffID
-	var s = staff.filter(function(staffMember) {
-		return staffMember.staffID === parseInt(req.body.staffID);
-	});
-	s[0] = Object.assign(s[0], req.body);
-	//send confirmation
-	res.sendStatus(200);
-});
-
-
-/* TYPES API */
-app.delete("/api/types", function(req, res){
-  type = types.filter(function(typeID){
-     return typeID.typeID !== parseInt(req.query.typeID);
+ app.post("/api/clients", function(req, res){
+  var clients = req.body;
+  connection.query('INSERT INTO client(client_email, client_firstname, client_lastname, client_course, client_type, client_studentno, client_supervisor) VALUES(?,?,?,?,?,?,?)',
+  [clients.clientEmail,clients.clientFirstName,clients.clientLastName,clients.clientCourse,clients.clientType,clients.clientStudentNo,clients.clientSupervisor],function(err,row){
+    if (err) throw err;
+    //send confirmation
+    console.log(row);
+   	res.json(row);
   });
-	//send confirmation
-	res.sendStatus(200);
+
 });
 
-app.get("/api/types", function(req, res) {
-	if (req.query.typeID) {
-		//type is specified - return single type
-		var t = types.filter(function(type){
-			return type.typeID === parseInt(req.query.typeID);
-		});
-		res.json(t[0]);
-	} else {
-		//no type specified - return array of all types
-		res.json(types);
-	}
+ app.put("/api/clients", function(req,res){
+  var clients = req.body;
+   connection.query('UPDATE client SET client_email=?, client_firstname=?, client_lastname=?, client_course=?, client_type=?, client_studentno=?, client_supervisor=? WHERE client_id = ?',
+ [clients.clientEmail,clients.clientFirstName,clients.clientLastName,clients.clientCourse,clients.clientType,clients.clientStudentNo,clients.clientSupervisor, clients.clientID],
+function (err,row){
+  if (err) throw err;
+  res.json(row[0]);
+});
+});
+
+ app.delete("/api/devices", function(req, res){
+   //database
+    connection.query('DELETE from device where device =?',
+    [parseInt(req.query.deviceID)],function(err,result,fields){
+   //   connection.end();
+      if (err) throw err;
+      //send confirmation
+     	res.sendStatus(200);
+     });
+
+ });
+
+ app.get("/api/devices", function(req, res){
+   if (req.query.deviceID){
+     connection.query('SELECT device_id AS deviceID, device_description AS description, device_availablefrom AS availableFrom, device_dateofpurchase AS dateOfPurchase, device_dateoutofservice AS dateOutOfService, device_defaultloantime AS defaultLoanTime, device_isworking AS isWorking, device_notes AS notes, device_serial AS serial, device_visible AS visible, type_id AS typeID FROM device WHERE device_id=?',
+   [parseInt(req.query.deviceID)],function(err,row){
+  //   connection.end();
+     if (err) throw err;
+     row.forEach(function(item){
+      //  item.isWorking = !!+item.isWorking;
+       if (item.isWorking === 1) item.isWorking = true;
+       else if (item.isWorking === 0) item.isWorking = false;
+      //  item.visible = !!+item.visible;
+      if (item.visible === 1) item.visible = true;
+      else if (item.visible === 0) item.visible = false;
+     });
+     res.json(row[0]);
+
+   });
+   } else  {
+     connection.query('SELECT device_id AS deviceID, device_description AS description, device_availablefrom AS availableFrom, device_dateofpurchase AS dateOfPurchase, device_dateoutofservice AS dateOutOfService, device_defaultloantime AS defaultLoanTime, device_isworking AS isWorking, device_notes AS notes, device_serial AS serial, device_visible AS visible, type_id AS typeID FROM device',
+        function (err,row){
+        //  connection.end();
+          if (err) throw err;
+          row.forEach(function(item){
+            //  item.isWorking = !!+item.isWorking;
+             if (item.isWorking === 1) item.isWorking = true;
+             else if (item.isWorking === 0) item.isWorking = false;
+            //  item.visible = !!+item.visible;
+            if (item.visible === 1) item.visible = true;
+            else if (item.visible === 0) item.visible = false;
+          });
+          res.json(row);
+        });
+   }
+ });
+
+ app.post("/api/devices", function(req, res){
+   var devices = req.body;
+   connection.query('INSERT INTO device(device_availablefrom, device_dateofpurchase, device_dateoutofservice, device_defaultloantime, device_description, device_isworking, device_notes, device_serial, device_visible, type_id) VALUES (?,?,?,?,?,?,?,?,?,?)',
+   [devices.availableFrom,devices.dateOfPurchase,devices.dateOutOfService,devices.defaultLoanTime,devices.description,devices.isWorking,devices.notes,devices.serial,devices.visible,devices.typeID],
+   function (err,row){
+     if (err) throw err;
+   });
+   res.json(row[0]);
+ });
+
+ app.put("/api/devices", function(req, res){
+    var devices = req.body;
+   connection.query("UPDATE device SET device_availablefrom =?, device_dateofpurchase=?, device_dateoutofservice=?, device_defaultloantime=?, device_description=?, device_isworking=?, device_notes=?, device_serial=?, device_visible=?, type_id=? WHERE device_id =?",
+ [devices.availableFrom,devices.dateOfPurchase,devices.dateOutOfService,devices.defaultLoanTime,devices.description,devices.isWorking,devices.notes,devices.serial,devices.visible,devices.typeID,parseInt(req.body.deviceID)],
+function (err,row){
+  if (err) throw err;
+  res.json(row[0]);
+});
+
+});
+
+ app.delete("/api/loans", function(req, res){
+   //database
+    connection.query('DELETE from loan where loan_id =?',
+    [parseInt(req.query.loanID)],function(err,result,fields){
+   //   connection.end();
+      if (err) throw err;
+      //send confirmation
+     	res.sendStatus(200);
+     });
+
+ });
+
+ app.get("/api/loans",function(req,res){
+   if (req.query.loanID){
+     connection.query('SELECT loan_id AS loanID, loan_due AS due, loan_datestarted AS dateStarted, loan_extensionrequested AS extensionRequested, loan_returned AS returned, loan_onthefly AS onTheFly, loan_damagereported AS damageReported, loan_approved AS approved, loan_length AS length, device_id AS deviceID, client_id AS clientID, signout_staff_id AS staffID FROM loan WHERE loan_id=?',
+   [parseInt(req.query.loanID)],function(err,row){
+     //connection.end();
+     if (err) throw err;
+     row.forEach(function(item) {
+      //  item.approved = !!+item.approved;
+      if (item.approved === 1) item.approved = true;
+      else if (item.approved === 0) item.approved = false;
+      //  item.onTheFly = !!+item.onTheFly;
+      if (item.onTheFly === 1) item.onTheFly = true;
+      else if (item.onTheFly === 0) item.onTheFly = false;
+     });
+     res.json(row[0]);
+   });
+ } else {
+     connection.query('SELECT loan_id AS loanID, loan_due AS due, loan_datestarted AS dateStarted, loan_extensionrequested AS extensionRequested, loan_returned AS returned, loan_onthefly AS onTheFly, loan_damagereported AS damageReported, loan_approved AS approved, loan_length AS length, device_id AS deviceID, client_id AS clientID, signout_staff_id AS staffID FROM loan',
+       function (err,row){
+          if (err) throw err;
+
+          row.forEach(function(item) {
+            //  item.approved = !!+item.approved;
+            if (item.approved === 1) item.approved = true;
+            else if (item.approved === 0) item.approved = false;
+            //  item.onTheFly = !!+item.onTheFly;
+            if (item.onTheFly === 1) item.onTheFly = true;
+            else if (item.onTheFly === 0) item.onTheFly = false;
+          });
+          res.json(row);
+       });
+ }
+ });
+
+ app.post("/api/loans",function(req,res){
+   var loans = req.body;
+   connection.query('INSERT INTO loan(loan_due,loan_datestarted, loan_extensionrequested, loan_returned, loan_onthefly, loan_damagereported, loan_approved, loan_length, device_id, client_id, signout_staff_id) VALUES(?,?,?,?,?,?,?,?,?,?,?)',
+ [loans.due, loans.dateStarted, loans.extensionRequested, loans.returned, loans.onTheFly, loans.damageReported, loans.approved, loans.length, loans.deviceID, loans.clientID, loans.staffID],function(err,row){
+   if (err) throw err;
+   res.json(row[0]);
+ });
+
+ });
+
+ app.put("/api/loans", function(req,res){
+   var loans =req.body;
+   connection.query('UPDATE loan SET loan_due=?,loan_datestarted =?, loan_extensionrequested=?, loan_returned=?, loan_onthefly=?, loan_damagereported=?, loan_approved=?, loan_length=?, device_id=?, client_id=?, signout_staff_id=? WHERE loan_id = ?',
+ [loans.due, loans.dateStarted, loans.extensionRequested, loans.returned, loans.onTheFly, loans.damageReported, loans.approved, loans.length, loans.deviceID, loans.clientID, loans.staffID, loans.loanID],
+function (err,row){
+  if (err) throw err;
+  res.json(row[0]);
+});
+
 });
 
 
-app.post("/api/types", function(req, res){
-	//console.log(req.body);
-	var type = req.body;
-	type.typeID = types.length;
-  types.push(type);
-	//send confirmation
-	res.sendStatus(200);
+ app.delete("/api/staff", function(req, res){
+   //database
+    connection.query('DELETE from staff where staff_id=?',
+    [parseInt(req.query.staffID)],function(err,result,fields){
+   //   connection.end();
+      if (err) throw err;
+      //send confirmation
+     	res.sendStatus(200);
+     });
+
+ });
+
+ app.get("/api/staff",function(req,res){
+   if (req.query.staffID){
+     connection.query('SELECT staff_id AS staffID, staff_firstname AS staffFirstName, staff_lastname AS staffLastName, staff_password AS password, staff_isadmin AS isAdmin, staff_email as staffEmail, disabled FROM staff WHERE staff_id=?',
+       [parseInt(req.query.staffID)],function(err,row){
+        // connection.end();
+         if (err) throw err;
+
+         row.forEach(function(item){
+          //  item.isAdmin = !!+item.isAdmin;
+          if (item.isAdmin === 1) item.isAdmin = true;
+          else if (item.isAdmin === 0) item.isAdmin = false;
+          //  item.disabled = !!+item.disabled;
+          if (item.disabled === 1) item.disabled = true;
+          else if (item.disabled === 0) item.disabled = false;
+         });
+         res.json(row[0]);
+       });
+   } else {
+      connection.query('SELECT staff_id AS staffID, staff_firstname AS staffFirstName, staff_lastname AS staffLastName, staff_password AS password, staff_isadmin AS isAdmin, staff_email as staffEmail, disabled FROM staff',
+     function (err,row){
+    //   connection.end();
+       if (err) throw err;
+       row.forEach(function(item){
+         //  item.isAdmin = !!+item.isAdmin;
+         if (item.isAdmin === 1) item.isAdmin = true;
+         else if (item.isAdmin === 0) item.isAdmin = false;
+         //  item.disabled = !!+item.disabled;
+         if (item.disabled === 1) item.disabled = true;
+         else if (item.disabled === 0) item.disabled = false;
+       });
+       res.json(row);
+     });
+   }
+ });
+
+ app.post("/api/staff",function(req,res){
+   var staff = req.body;
+   connection.query('INSERT INTO staff(staff_firstname, staff_lastname, staff_password, staff_isadmin, staff_email, disabled) VALUES (?,?,?,?,?,?)',
+[staff.staffFirstName,staff.staffLastName,staff.password,staff.isAdmin,staff.staffEmail,staff.disabled],function(err,row){
+   if (err) throw err;
+   res.json(row[0]);
+ });
+ });
+
+ app.put("/api/staff", function(req,res){
+   var staff = req.body;
+   connection.query('UPDATE staff SET staff_firstname=?, staff_lastname=?, staff_password=?, staff_isadmin=?, staff_email=?, disabled=? WHERE staff_id = ?',
+ [staff.staffFirstName,staff.staffLastName,staff.password,staff.isAdmin,staff.staffEmail, staff.disabled, parseInt(staff.staffID)],
+function (err,row){
+  if (err) throw err;
+  res.json(row[0]);
 });
 
-app.put("/api/types", function(req, res){
-	//get matching type by deviceID
-	var t = types.filter(function(type){
-			return type.typeID === parseInt(req.body.typeID);
-	});
-	t[0] = Object.assign(t[0], req.body);
-	//send confirmation
-	res.sendStatus(200);
 });
 
+ app.delete("/api/types", function(req, res){
+   //database
+    connection.query('DELETE from type where type_id =?',
+    [parseInt(req.query.typeID)],function(err,result,fields){
+   //   connection.end();
+      if (err) throw err;
+      //send confirmation
+     	res.sendStatus(200);
+     });
 
-//for error page redirecting if any details page is requested
-app.get("/clientDeviceDetails/:id", function(req, res){
-  res.sendFile('/clientError.html', { root: '../public/' });
+ });
+
+ app.get("/api/types",function(req,res){
+   if (req.query.typeID){
+     connection.query('SELECT type_id AS typeID, type_name AS typeName, category_id AS categoryID FROM type WHERE type_id=?',
+      [parseInt(req.query.typeID)],function(err,row){
+      //  connection.end();
+        if (err) throw err;
+        res.json(row[0]);
+      });
+   } else {
+     connection.query('SELECT type_id AS typeID, type_name AS typeName, category_id AS categoryID FROM type',
+      function(err,row){
+      //  connection.end();
+        if (err) throw err;
+        res.json(row);
+      });
+
+   }
+ });
+
+ app.post("/api/types",function(req,res){
+   var types = req.body;
+   connection.query('INSERT INTO type (type_name, category_id) VALUES (?,?)',
+ [types.typeName,types.categoryID],function(err,row){
+   if (err) throw err;
+   res.json(row[0]);
+ });
+
+ });
+
+
+ app.put("/api/types", function(req,res){
+  var types = req.body;
+   connection.query('UPDATE type SET type_name = ?,category_id = ? WHERE type_id = ?',
+ [types.type_name,types.category_id,types.typeID],
+function (err,row){
+  if (err) throw err;
+  res.json(row[0]);
 });
 
-app.get("/clientProfile/:id", function(req, res){
-  res.sendFile('/error.html', { root: '../public/' });
-});
+ });
 
-app.get("/deviceDetails/:id", function(req, res){
-  res.sendFile('/error.html', { root: '../public/' });
-});
+ //for error page redirecting if any details page is requested
+ app.get("/clientDeviceDetails/:id", function(req, res){
+   res.sendFile('/clientError.html', { root: '../public/' });
+ });
 
-//handle refreshing of all other pages
-app.use(function(req, res) {
-  res.sendFile('/', { root: '../public/' });
-});
+ app.get("/clientProfile/:id", function(req, res){
+   res.sendFile('/error.html', { root: '../public/' });
+ });
 
-app.listen(80);
+ app.get("/deviceDetails/:id", function(req, res){
+   res.sendFile('/error.html', { root: '../public/' });
+ });
 
-console.log("Express app running on port 80");
+ app.use(function(req, res) {
+   res.sendFile('/', { root: '../public/' });
+ });
 
-module.exports = app;
+ app.listen(80);
+
+ console.log("Server running on port 80");
+
+ module.exports = app;
