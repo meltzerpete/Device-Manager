@@ -138,7 +138,7 @@ CREATE TABLE `loan` (
 CREATE TABLE `staff` (
   `staff_id` int(11) NOT NULL,
   `staff_isadmin` tinyint(1) DEFAULT NULL,
-  `staff_password` varchar(20) NOT NULL,
+  `staff_password` varchar(64) NOT NULL,
   `staff_email` varchar(50) NOT NULL,
   `staff_firstname` varchar(20) NOT NULL,
   `staff_lastname` varchar(20) NOT NULL,
