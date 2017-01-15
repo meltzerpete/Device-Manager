@@ -26,7 +26,7 @@ deviceMgr.controller('loginCtl', function($scope, $rootScope,
 					($scope.username.toLowerCase() ===
 					staffMembers[i].staffEmail.toLowerCase()) &&
 					(hpass === staffMembers[i].password)) {
-
+						console.log("verified");
 					//validation passed - log in user
 					$rootScope.currentUser = staffMembers[i];
 					$location.path('/');
