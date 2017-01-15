@@ -6,8 +6,8 @@ deviceMgr.controller('appCtl', function($scope, $rootScope,
 
 	//member of staff currently logged in
 	if (!$rootScope.currentUser) {
-		//TODO remove me!!
-		$rootScope.currentUser = staff.find(2);
+		//next line used for testing without needing to log in
+		//$rootScope.currentUser = staff.find(2);
 
 		$location.path('/client');
 	}
@@ -93,7 +93,7 @@ deviceMgr.controller('appCtl', function($scope, $rootScope,
 		var data = {
 			//address: address,
 			//address for testing
-			address: 'meltzerpete@gmail.com',
+			address: address,
 			subject: subject,
 			message: message
 		};
