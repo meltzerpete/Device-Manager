@@ -58,11 +58,11 @@ deviceMgr.controller('appCtl', function($scope, $rootScope,
 			$scope.placeholder = "Search Devices";
 			break;
 
-			case '/requests':
-			case '/approved':
-			case '/activeLoans':
-			case '/denied':
-			case '/previous':
+			case '/manageStaff':
+			$scope.placeholder = "Search Staff";
+			break;
+
+			default:
 			$scope.placeholder = "Search Loans";
 			break;
 		}

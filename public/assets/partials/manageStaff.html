@@ -54,7 +54,7 @@
             </tr>
           </thead>    <!--close table heading-->
 
-          <tr data-ng-repeat="staffMember in staff">    <!--first row-->
+          <tr data-ng-repeat="staffMember in staff | filter: search">    <!--first row-->
             <td>{{staffMember.staffID}}</td>
 
             <td ng-if="!(staffMember.staffID===editable)">{{staffMember.staffFirstName}}</td>
